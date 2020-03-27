@@ -3,7 +3,7 @@ import { Card } from 'antd';
 
 export default ({launchTitle, net}) => (
   <div className="site-card-border-less-wrapper">
-    <Card title={launchTitle} bordered={false} style={{ width: 500 }}>
+    <Card title={launchTitle} bordered={false} style={{ width: 500, margin: '30px' }}>
       <p>Time: {net}</p>
     </Card>
   </div>

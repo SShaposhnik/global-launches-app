@@ -1,12 +1,38 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 import { Layout, Menu } from 'antd';
 
 import Card from '../LaunchCatalog/component/Card'
 
 const { Header, Content, Footer } = Layout;
 
+const url = 'https://launchlibrary.net/1.4/launch/next/'
+const launchCount = 1000
+
 class LayoutContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: null,
+        };
+      }
+
+    componentDidMount() {
+    fetch(url+launchCount)
+        .then(response => response.json())
+        .then(data => this.setState({ data }));
+    }
+
     render() {
+        let launchCards = null
+        if (this.state.data) {
+            launchCards = this.state.data.launches.map(el => (
+                <Card
+                    launchTitle={el.name}
+                    net={el.net}
+                />
+            ))
+        }
+
         return (
             <Layout className="layout">
                 <Header>
@@ -23,10 +49,7 @@ class LayoutContainer extends Component {
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
                 <div className="site-layout-content">Content</div>
-                <Card
-                    launchTitle='Launch'
-                    net='12:50'
-                />
+                    {launchCards}
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
