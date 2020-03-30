@@ -5,7 +5,7 @@ import {Spin} from "antd";
 
 const { Header, Content, Footer } = Layout;
 const url = 'https://launchlibrary.net/1.4/launch/next/'
-const launchCount = 4
+const launchCount = 60
 
 
 class LayoutContainer extends Component {
