@@ -45,7 +45,7 @@ class LaunchCard extends  Component {
             <div className="site-card-border-less-wrapper">
                 <Card title={launchTitle} style={{width: '100%', margin: 'center'}}>
                     <p>Time:: {net}</p>
-                    <p>Countdown: {days} : {hours} : {minutes} : {seconds}</p>
+                    <p>{days}d : {hours}h : {minutes}m : {seconds}s</p>
                     <strong>{time_up}</strong>
                 </Card>
             </div>

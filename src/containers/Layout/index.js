@@ -2,22 +2,12 @@ import React, {Component} from 'react'
 import {Layout, Menu} from 'antd';
 import LaunchCard from "../LaunchCatalog/component/Card";
 import {Spin} from "antd";
+import MapChart from '../LaunchCatalog/component/MapChart'
 
 const { Header, Content, Footer } = Layout;
 const url = 'https://launchlibrary.net/1.4/launch/next/'
-const launchCount = 51
+const launchCount = 3
 
-// asjfajsfojasgpa
-// ag
-
-// sa
-// ga
-// SpeechGrammarag
-// a
-
-// asg
-// a
-// SpeechGrammarg
 
 class LayoutContainer extends Component {
     constructor(props) {
@@ -54,8 +44,9 @@ class LayoutContainer extends Component {
                     <Menu.Item key="3">nav 3</Menu.Item>
                 </Menu>
                 </Header>
+                <MapChart/>
                 <Content style={{ padding: '0 50px' , display: 'flex', flexDirection: 'column'}}>
-                <div className="site-layout-content"></div>
+                <div className="site-layout-content"> </div>
                     { !this.state.data ?
                         <Spin tip="Подождите!"/>
                         : launchCards
