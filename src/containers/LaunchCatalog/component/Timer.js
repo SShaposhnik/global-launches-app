@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import {Card} from 'antd';
 
 
-class LaunchCard extends Component {
+class Timer extends Component {
     constructor(props) {
         super(props);
         this.count = this.count.bind(this)
@@ -31,30 +30,21 @@ class LaunchCard extends Component {
     }
 
     componentDidMount() {
-        const deadline = new Date(this.props.net).getTime();
+        const deadline = new Date(this.props.timeTillLaunch).getTime();
         setInterval(this.count, 1000)
         this.setState({...this.state, deadline: deadline})
         
     }
 
     render() {
-        const { launchTitle, net , countryCode, pads,longitude,latitude} = this.props
         const { days, seconds, hours, minutes, time_up } = this.state
         return (
             <div className="site-card-border-less-wrapper">
-                <Card title={launchTitle} style={{margin: 'center'}}>
-                    <p>Дата: {net}</p>
                     <p>{days}d : {hours}h : {minutes}m : {seconds}s</p>
-                    <p>Код страны: {countryCode}</p>
-                    <p>Местоположение запуска: {pads}</p>
-                    <p>longitude {longitude}</p>
-                     <p>latitude {latitude}</p>
-
                     <strong>{time_up}</strong>
-                </Card>
             </div>
         )
     }
 }
 
-export default LaunchCard
+export default Timer
