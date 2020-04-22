@@ -4,7 +4,6 @@ import {
   Geographies,
   Geography,
   Marker,
-  ZoomableGroup
 } from "react-simple-maps";
 
 const geoUrl =
@@ -27,11 +26,9 @@ const MapChart = ({launches}) => {
   return (
     <ComposableMap
       projection="geoMercator"
-      width="1200"
-      height="600"
-      
+      width="1500"
+      height="800"
     >
-      <ZoomableGroup zoom={1}>
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies
@@ -45,20 +42,19 @@ const MapChart = ({launches}) => {
             ))
         }
       </Geographies>
-      {markers.map(({ name, status, coordinates, markerOffset }) => (
-        <Marker on key={name} coordinates={coordinates}>
-          <circle r={1}  stroke="#fff"/>
+      {markers.map(({name, status, coordinates, markerOffset }) => (
+        <Marker on coordinates={coordinates}>
+          <circle r={4} fill="green" stroke="#fff" strokeWidth={1}/>
           <text
             textAnchor="middle"
             
             y={markerOffset}
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
           >
-            {name}
+            {/* {name} */}
           </text>
         </Marker>
       ))}
-      </ZoomableGroup>
     </ComposableMap>
   );
 };
