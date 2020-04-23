@@ -20,7 +20,7 @@ export default ({launches}) => {
         timer: el.location.pads.map(els => (els.name))
     }))
     return (
-        <Table dataSource={oldLaunch} pagination={{ pageSize: 20}} size="small">
+        <Table dataSource={oldLaunch} pagination={{ pageSize: 5}} size="small">
             <Column title="Название запуска"  dataIndex="name" />
             <Column title="Дата запуска "  dataIndex="net" />
             <Column title="Статус"  dataIndex="status" />

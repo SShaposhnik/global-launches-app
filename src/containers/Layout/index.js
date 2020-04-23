@@ -13,19 +13,21 @@ const { Search } = Input
 const { Header, Content, Footer } = Layout;
 const antIcon = <SmileOutlined style={{ fontSize: 240 }} spin/>;
 const url = 'https://launchlibrary.net/1.4/launch/next/'
-
+const { RangePicker } = DatePicker;
 
 const limit = 100
-const launchCount = 5
+const launchCount = 3
 
 const startDate = moment('2001-1-1').format('YYYY-MM-DD')
 const endDate = moment().format('YYYY-MM-DD')
 
-const ss = null
 
+let oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+startDate+'&enddate='+endDate+'&limit='+limit+'&fields=name,net,location,status'
 
-const oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+startDate+'&enddate='+endDate+'&limit='+limit+'&fields=name,net,location,status'
-console.log(oldurl);
+function disabledDate(current) {
+    // Can not select days before today and today
+    return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
+  }
 
 
 class LayoutContainer extends Component {
@@ -36,9 +38,11 @@ class LayoutContainer extends Component {
           launchOldData: null,
           launchButtonIsDisabled: false,
           launchButtonInputValue: null,
+          launchDateInputValue: null, 
         }
 
         this.launchButtonOnChange = this.launchButtonOnChange.bind(this)
+        this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
     }
     
     fetchLaunches (url, launchCount) {
@@ -70,11 +74,12 @@ class LayoutContainer extends Component {
         this.setState({launchButtonIsDisabled: buttonStatus})
     }
 
-    launchDataButtonOnChange(e){
-        let {value} = e.target
+    launchDateButtonOnChange(date, dateString){
+        oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+dateString[0]+'&enddate='+dateString[1]+'&limit='+limit+'&fields=name,net,location,status'
+        this.fetchOldLaunches(oldurl)
+        // console.log(oldurl);
         
     }
-
 
     render() {
         return (
@@ -88,9 +93,9 @@ class LayoutContainer extends Component {
                 </Menu> */}
                 </Header>
                 <Content className="content">
-                    <ButtonStyledWrapper>
+                    {/* <ButtonStyledWrapper>
                         <Search
-                            placeholder="number of launches(default 5)"
+                            placeholder="number of launches(default 3)"
                             enterButton="Загрузить"
                             size="large"
                             onSearch={launchCount => this.fetchLaunches(url, launchCount)}
@@ -98,30 +103,29 @@ class LayoutContainer extends Component {
                             loading={this.state.launchButtonIsDisabled}
                             allowClear={true}
                         />  
-                    </ButtonStyledWrapper>
+                    </ButtonStyledWrapper> */}
                     <TableOldStyledWrapper>
                         {/* { !this.state.launchData
                             ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
                             : <LaunchTable launches={this.state.launchData.launches} />
                         } */}
-                    <DatePicker className="datePicker"
-                        // defaultValue={[moment(today.getFullYear()+"-01-01"), moment(today)]}
+                    <RangePicker className="datePicker"
+                        //  defaultValue={[moment('2014-1-1').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]}
                         // disabled={[false, true]}
-                        //    onOk={startDate => this.}
-                        //    onChange={startDate => startDate = dateString}
+                           onChange={this.launchDateButtonOnChange}
+                           disabledDate={disabledDate}
                         
                     />
-                    
                         { !this.state.launchOldData
                             ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
                             : <LaunchOldTable launches={this.state.launchOldData.launches} />
                         }
                     </TableOldStyledWrapper>
                         
-                    {/* { !this.state.launchOldData
+                    { !this.state.launchOldData
                         ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
                         : <MapChart launches={this.state.launchOldData.launches} />
-                    } */}
+                    }
                 </Content>
                 <Footer>Design © 2020</Footer>
             </Layout>
