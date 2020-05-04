@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Table} from 'antd'
+import React from 'react'
+import {Table, } from 'antd'
 import Timer from './Timer'
 
 const { Column, ColumnGroup} = Table;
@@ -22,12 +22,9 @@ export default ({launches}) => {
         status: launchStatus[el.status],
         timer: <Timer timeTillLaunch={el.net} />
     }))
-
-    
-
     return (
-        <Table dataSource={launchesWithTimer} pagination={{ pageSize: 5}} size="small">
-            <ColumnGroup title="Name">
+        <Table  dataSource={launchesWithTimer} pagination={{ position: ['bottomCenter']}} size="small" >
+            <ColumnGroup title="">
                 <Column title="Название рокеты"     dataIndex="rocketName" />
                 <Column title="Название миссии"    dataIndex="missionsName" />
             </ColumnGroup>

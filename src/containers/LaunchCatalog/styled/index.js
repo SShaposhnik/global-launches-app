@@ -6,11 +6,11 @@ export const ButtonStyledWrapper = styled.div`
   margin: 10px;
 `
 
-export const TableOldStyledWrapper = styled.div`
-  margin: 10px;
-  width: 80%;
-  height: 20%;
-`
+// export const TableOldStyledWrapper = styled.div`
+//   margin: 10px;
+//   width: 80%;
+//   height: 20%;
+// `
 
 export const FlexContainer = styled.div`
   height: 100%:

@@ -2,12 +2,11 @@ import React, {Component} from 'react'
 import {Layout, Menu, Spin, Input, DatePicker} from 'antd'
 import MapChart from '../LaunchCatalog/component/MapChart'
 import { SmileOutlined } from '@ant-design/icons'
+import OldTable from '../LaunchCatalog/component/TableOld'
 import LaunchTable from "../LaunchCatalog/component/Table"
-import LaunchOldTable from "../LaunchCatalog/component/TableOld"
-import { ButtonStyledWrapper, TableOldStyledWrapper, FlexContainer, ContentWrapper } from '../LaunchCatalog/styled'
 import { isNormalInteger } from '../LaunchCatalog/component/utils'
 import './index.css'
-import moment from 'moment';
+import moment from 'moment'
 
 const { Search } = Input
 const { Header, Content, Footer } = Layout;
@@ -18,9 +17,8 @@ const { RangePicker } = DatePicker;
 const limit = 100
 const launchCount = 3
 
-const startDate = moment('2001-1-1').format('YYYY-MM-DD')
-const endDate = moment().format('YYYY-MM-DD')
-
+const startDate = moment('2020-1-1').format('YYYY-MM-DD')
+const endDate = moment('2020-2-10').format('YYYY-MM-DD')
 
 let oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+startDate+'&enddate='+endDate+'&limit='+limit+'&fields=name,net,location,status'
 
@@ -32,7 +30,7 @@ function disabledDate(current) {
 
 class LayoutContainer extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
           launchData: null,
           launchOldData: null,
@@ -77,7 +75,6 @@ class LayoutContainer extends Component {
     launchDateButtonOnChange(date, dateString){
         oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+dateString[0]+'&enddate='+dateString[1]+'&limit='+limit+'&fields=name,net,location,status'
         this.fetchOldLaunches(oldurl)
-        // console.log(oldurl);
         
     }
 
@@ -86,11 +83,11 @@ class LayoutContainer extends Component {
             <Layout className="layout">
                 <Header>
                 <div className="logo" />
-                {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1">menu 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
-                    <Menu.Item key="3">nav 3</Menu.Item>
-                </Menu> */}
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} className="menu">
+                    <Menu.Item key="1">Статистика</Menu.Item>
+                    <Menu.Item key="2">Запуски</Menu.Item>
+                    {/* <Menu.Item key="3">nav 3</Menu.Item> */}
+                </Menu>
                 </Header>
                 <Content className="content">
                     {/* <ButtonStyledWrapper>
@@ -104,30 +101,31 @@ class LayoutContainer extends Component {
                             allowClear={true}
                         />  
                     </ButtonStyledWrapper> */}
-                    <TableOldStyledWrapper>
+                    
                         {/* { !this.state.launchData
                             ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
                             : <LaunchTable launches={this.state.launchData.launches} />
                         } */}
                     <RangePicker className="datePicker"
-                        //  defaultValue={[moment('2014-1-1').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]}
-                        // disabled={[false, true]}
                            onChange={this.launchDateButtonOnChange}
-                           disabledDate={disabledDate}
-                        
+                           disabledDate={disabledDate}    
                     />
+
                         { !this.state.launchOldData
                             ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
-                            : <LaunchOldTable launches={this.state.launchOldData.launches} />
+                            : <OldTable launches={this.state.launchOldData.launches}/>
                         }
-                    </TableOldStyledWrapper>
                         
-                    { !this.state.launchOldData
+
+
+                    {/* { !this.state.launchOldData
                         ? <Spin tip="Подождите!" indicator={antIcon} className="spin"/>
-                        : <MapChart launches={this.state.launchOldData.launches} />
-                    }
+                        : <MapChart launches={this.state.launchOldData.launches}/>
+                    } */}
+                    
+                    
                 </Content>
-                <Footer>Design © 2020</Footer>
+                <Footer className="footer">Design © 2020</Footer>
             </Layout>
         )
     }
