@@ -1,6 +1,6 @@
 import React from 'react'
-import {Table, } from 'antd'
-import Timer from './Timer'
+import {Table} from 'antd'
+import moment from 'moment'
 
 const { Column, ColumnGroup} = Table;
 
@@ -14,9 +14,6 @@ const launchStatus = {
     7: 'Во время запуска произошел частичный сбой',
 }
 
-
-
-
 const columns = [
     {
         title: 'Название запуска',
@@ -28,38 +25,24 @@ const columns = [
         dataIndex: 'net',
         width: 200,
       },
-    //   {
-    //     title: 'Статус запуска',
-    //     dataIndex: 'status',
-    //     width: 200,
-    //   },
       {
         title: 'Космодром',
         dataIndex: 'pads',
         width: 300,
       },
-      {
-        title: 'Таймер',
-        dataIndex: 'timer',
-        width: 200,
-      },
 ]
-
 
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
-        rocketName: el.rocket.name,
-        missionsName: el.missions.map(els => (els.name)),
         RocketAndMissionName: el.name,
-        pads: el.location.pads.map(p => (p.name)),
-        net: el.net,
+        net: moment(el.net).format('MMMM-YYYY'),
         status: launchStatus[el.status],
-        timer: <Timer timeTillLaunch={el.net} />
+        pads: el.location.pads.map(els => (els.name))
     }))
     return (
         <Table  
             dataSource={launchesWithTimer} 
-            pagination={false}
+            pagination={{ pageSize: 10 , position: ['bottomCenter']}} 
             size="small" 
             columns={columns}
         />

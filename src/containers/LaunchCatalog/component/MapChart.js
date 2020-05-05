@@ -10,7 +10,6 @@ const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const markerOffset = -10
-let test = "green"
 
 const launchStatus = {
   1: 'Запланированы точные дата и время запуска',
@@ -24,23 +23,22 @@ const launchStatus = {
 
 
 const MapChart = ({launches}) => {
-  console.log(launches)
   const markers = launches.map( el => ({
     id: el.id,
-    name: el.name,
+    RocketAndMissionName: el.name,
+    rocketName: el.rocket,
     status: el.statusNumber,
     markerOffset: markerOffset, 
-    coordinates: [el.longitude, el.latitude]
+    coordinates: [el.longitude, el.latitude],
   }))
   
-  // console.log(markers[0].id);
   
   
   return (
     <ComposableMap
       projection="geoMercator"
       width="1800"
-      height="600"
+      height="1000"
       className="mapChart"
     >
   
@@ -60,7 +58,7 @@ const MapChart = ({launches}) => {
       
       
 
-      {markers.map(({id, name, status, coordinates, markerOffset }) => (
+      {markers.map(({rocketName, status, coordinates, markerOffset }) => (
         <Marker on coordinates={coordinates}>
           <circle r={4} fill={launchStatus[status]} stroke="#fff" strokeWidth={1}/>
           
@@ -69,11 +67,10 @@ const MapChart = ({launches}) => {
             y={markerOffset}
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
           >
-            {name}
+            {rocketName}
           </text>
         </Marker>
       ))}
-      
     </ComposableMap>
   )
 }
