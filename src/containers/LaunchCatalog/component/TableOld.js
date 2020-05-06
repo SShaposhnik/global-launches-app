@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
-import {Table} from 'antd'
+import {Table, Divider, Button, Tooltip} from 'antd'
 import MapChart from './MapChart'
-import { Pagination } from 'antd';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import '../styled/RadioStyle.css'
+import '../styled/tablestyle.css'
+import { SmileOutlined,LoadingOutlined } from '@ant-design/icons'
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin/>
 
 const {Column} = Table;
 const launchStatus = {
@@ -13,7 +18,6 @@ const launchStatus = {
     6: 'В полете',
     7: 'Произошел сбой',
 }
-
 
 const columns = [
     {
@@ -44,13 +48,31 @@ class OldTable extends Component {
         this.state = {
             markersLaunches: null
         }
+
+
+        this.scrollToTop = this.scrollToTop.bind(this);
     }
 
-    onTableChange(selectedRowKeys, selectedRows) {
-        const launch = this.props.launches.find(el => el.key === selectedRows[0].id)
-        this.setState({markersLaunches: launch})
-        console.log(selectedRows[0], this.state.markersLaunches);
-    }
+
+    scrollToTop() {
+        scroll.scrollToTop();
+      }
+
+    scrollToMap() {
+        scroller.scrollTo('scroll-to-Map', {
+          duration: 800,
+          delay: 100,
+          smooth: 'easeInOutQuart',
+        })
+      }
+      scrollToTable() {
+        scroller.scrollTo('scroll-to-Table', {
+          duration: 800,
+          delay: 100,
+          smooth: 'easeInOutQuart'
+        })
+      }
+
 
     render () {
 
@@ -64,30 +86,52 @@ class OldTable extends Component {
             pads: el.location.pads.map(els => (els.name)), 
             longitude: el.location.pads.map(els => (els.longitude)),
             latitude: el.location.pads.map(els => (els.latitude)),
+            PadsMapURL: el.location.pads.map(url => (url.mapURL)),
+            PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
+            RocketWikiURL: el.rocket.wikiURL,
+
         }))
 
         return (
             <>
+                {/* <Pagination total={123} className="index"/> */}
+
+                {/* <div className="table">Animated CSS Gradient Border ></div> */}
+            <Element name="scroll-to-Table" className="element">
             <Table 
-                rowSelection=
-                {{
+                rowSelection={{
                     type: 'radio', 
                     onChange: (selectedRowKeys, selectedRows) => {
                         this.setState({markersLaunches: selectedRows})
                     },
+                    onSelect: (this.scrollToMap),
                 }}
-                
+
                 dataSource={oldLaunch} 
-                pagination={{ pageSize: 10, position: ['bottomCenter'], }} 
+
+                pagination={{ 
+                  position: ['bottomCenter'], 
+                  defaultCurrent:1, 
+                  simple:"true", 
+                  pageSizeOptions:"false",
+                }} 
+
                 size="small" 
                 columns={columns}
-                // scroll={{ x: 1500 }}
+                className="table"
+                
             />
+            </Element>
+        <Element name="scroll-to-Map" className="element">
+            {this.state.markersLaunches
+                ? <div className="noClick"> <MapChart launches={this.state.markersLaunches}/></div>
+                : <p></p>
+            }
+        </Element>
+        
+        <a onClick={this.scrollToTable} >To element!</a> <br></br>
+        <a onClick={this.scrollToTop}>To the top!</a><br></br>
 
-        {this.state.markersLaunches
-            ? <MapChart launches={this.state.markersLaunches} />
-            : null
-        }
         </>
         )
     }

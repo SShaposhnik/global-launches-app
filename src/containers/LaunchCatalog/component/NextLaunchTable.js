@@ -1,7 +1,9 @@
 import React from 'react'
-import {Table} from 'antd'
+import {Table, Pagination} from 'antd'
 import moment from 'moment'
+import { LoadingOutlined } from '@ant-design/icons';
 
+const antIcon = <LoadingOutlined style={{ fontSize: 240 }} spin />;
 const { Column, ColumnGroup} = Table;
 
 const launchStatus = {
@@ -19,6 +21,7 @@ const columns = [
         title: 'Название запуска',
         dataIndex: 'RocketAndMissionName',
         width: 400,
+        align: 'left'
       },
       {
         title: 'Дата запуска',
@@ -29,6 +32,7 @@ const columns = [
         title: 'Космодром',
         dataIndex: 'pads',
         width: 300,
+        // align: 'right'
       },
 ]
 
@@ -42,9 +46,14 @@ export default ({launches}) => {
     return (
         <Table  
             dataSource={launchesWithTimer} 
-            pagination={{ pageSize: 10 , position: ['bottomCenter']}} 
+            pagination={{ position: ['bottomCenter'], }} 
             size="small" 
             columns={columns}
         />
     )   
 }
+
+// {this.state.markersLaunches
+//     ? <MapChart launches={this.state.markersLaunches} />
+//     : <h1>НАДО ВЫБРАТЬ ЗАПУСК</h1>
+// }
