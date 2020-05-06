@@ -20,6 +20,11 @@ const launchStatus = {
 }
 
 const columns = [
+  {
+    title: 'id',
+    dataIndex: 'key',
+    width: 400,
+  },
     {
         title: 'Название запуска',
         dataIndex: 'RocketAndMissionName',

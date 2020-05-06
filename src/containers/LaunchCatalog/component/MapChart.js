@@ -1,4 +1,4 @@
-import React from 'react';
+mport React from 'react';
 import {
   ComposableMap,
   Geographies,
@@ -22,7 +22,11 @@ const launchStatus = {
   7: 'Во время запуска произошел частичный сбой',
 }
 
-
+/**
+ * [description]
+ * @param  {[type]} options.launches [description]
+ * @return {[type]}                  [description]
+ */
 const MapChart = ({launches}) => {
   console.log(launches);
   
@@ -64,8 +68,6 @@ const MapChart = ({launches}) => {
         }
       </Geographies>
       
-      
-        <div></div>
       {markers.map(
         ({
           rocketName, 
@@ -75,15 +77,16 @@ const MapChart = ({launches}) => {
           mapURL,
           wikiURL,
           rocketwikiURL
+          
 
       }) => (
         <Marker on coordinates={coordinates}>
           {/* <circle r={4} fill={launchStatus[status]} stroke="#fff" strokeWidth={1}/> */}
-          
+          {/* ,баг => если пустой mapURL то редирект на свой же сайт */}
           <Tooltip 
             title ={
               <div>
-                <a href={mapURL} target="_blank">Google Maps</a><br></br>
+                <a href={mapURL} target="_blank">Google Maps(исправить ссылку)</a><br></br>
                 <a href={wikiURL} target="_blank">Wikipedia for pads</a><br></br>
                 <a href={rocketwikiURL} target="_blank">Wikipedia fro rocket</a><br></br>
               </div>
