@@ -1,0 +1,25 @@
+.RangePicker {
+    text-align: center;
+}
+
+.scroll-up {
+    width: 130px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #fcfcfc;
+    color: #aaa;
+    font-size: 13px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background .2s ease;
+    display: none;
+}
+
+.scroll-up:hover {
+    background-color: #eeeeee;
+    color: #777777;
+}

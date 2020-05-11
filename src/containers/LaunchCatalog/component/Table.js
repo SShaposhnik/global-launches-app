@@ -2,6 +2,7 @@ import React from 'react'
 import {Table, } from 'antd'
 import Timer from './Timer'
 
+
 const { Column, ColumnGroup} = Table;
 
 const launchStatus = {
@@ -45,7 +46,6 @@ const columns = [
       },
 ]
 
-
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
         rocketName: el.rocket.name,
@@ -54,7 +54,8 @@ export default ({launches}) => {
         pads: el.location.pads.map(p => (p.name)),
         net: el.net,
         status: launchStatus[el.status],
-        timer: <Timer timeTillLaunch={el.net} />
+        timer: <Timer timeTillLaunch={el.net}/>
+        // timer: moment(<Timer timeTillLaunch={el.net}/>)
     }))
     return (
         <Table  
