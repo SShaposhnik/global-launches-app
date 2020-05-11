@@ -1,6 +1,10 @@
 import React from 'react'
-import {Table, } from 'antd'
+import {Table, Tooltip} from 'antd'
 import Timer from './Timer'
+import 'moment/locale/ru'
+// import 'moment/locale/en-au'
+import moment from 'moment'
+moment.locale()
 
 
 const { Column, ColumnGroup} = Table;
@@ -52,17 +56,18 @@ export default ({launches}) => {
         missionsName: el.missions.map(els => (els.name)),
         RocketAndMissionName: el.name,
         pads: el.location.pads.map(p => (p.name)),
-        net: el.net,
+        // net: moment(el.net).utc(0).locale('ru').format('LLL Z'),
+        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).format('LLL Z')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
         status: launchStatus[el.status],
         timer: <Timer timeTillLaunch={el.net}/>
         // timer: moment(<Timer timeTillLaunch={el.net}/>)
     }))
     return (
-        <Table  
-            dataSource={launchesWithTimer} 
+        <Table
+            dataSource={launchesWithTimer}
             pagination={false}
-            size="small" 
+            size="small"
             columns={columns}
         />
-    )   
+    )
 }

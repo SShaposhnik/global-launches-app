@@ -42,7 +42,7 @@ class Timer extends Component {
         const { days, seconds, hours, minutes, time_up } = this.state
         return (
             <div>
-                    <p>{days}дней : {hours}часов : {minutes}минут : {seconds}секунд</p>
+                    <p>{days}: {hours}: {minutes}: {seconds}</p>
                     <strong>{time_up}</strong>
 
             </div>

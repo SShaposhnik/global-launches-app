@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Layout, Menu, Spin, Input, DatePicker, Modal, Table,} from 'antd'
+import {Layout, Menu, Input, DatePicker} from 'antd'
 import { SmileOutlined,LoadingOutlined } from '@ant-design/icons'
 import OldTable from '../LaunchCatalog/component/TableOld'
 import LaunchTable from "../LaunchCatalog/component/Table"
@@ -24,39 +24,23 @@ function disabledDate(current) {
     return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class LayoutContainer extends Component {
-    constructor(props) 
+    constructor(props)
     {
         super(props)
-        this.state = 
+        this.state =
         {
           launchData: null,
           launchOldData: null,
           NextlaunchData: null,
           launchButtonIsDisabled: false,
           launchButtonInputValue: null,
-          launchDateInputValue: null, 
+          launchDateInputValue: null,
           loading: false,
           visible: false,
         }
-
         this.launchButtonOnChange = this.launchButtonOnChange.bind(this)
         this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
-        
     }
 
     fetchLaunches (url, launchCount) {
@@ -110,20 +94,20 @@ class LayoutContainer extends Component {
           visible: true,
         })
       }
-    
-      handleOk = e => {
-        console.log(e)
-        this.setState({
-          visible: false,
-        })
-      }
-    
-      handleCancel = e => {
-        console.log(e)
-        this.setState({
-          visible: false,
-        })
-      }
+
+    handleOk = e => {
+    console.log(e)
+    this.setState({
+        visible: false,
+    })
+    }
+
+    handleCancel = e => {
+    console.log(e)
+    this.setState({
+        visible: false,
+    })
+    }
 
     render() {
         return (
@@ -135,7 +119,6 @@ class LayoutContainer extends Component {
                         <Menu.Item key="1">Статистика</Menu.Item>
                         <Menu.Item key="2">Запуски</Menu.Item>
                     </Menu>
-                    
                     </Header>
 
                 <Content className="content">
@@ -148,7 +131,7 @@ class LayoutContainer extends Component {
                         loading={this.state.launchButtonIsDisabled}
                         allowClear={true}
                     />   */}
-                   {/* <a onClick={() => scroll.scrollToBottom()}>скролл вниз</a>
+                   <a onClick={() => scroll.scrollToBottom()}>скролл вниз</a>
 
                     <h1 style={{textAlign: 'center'}}>Запуски для которых обьявлены точные дата и время</h1>
                     { this.state.launchData
@@ -161,22 +144,20 @@ class LayoutContainer extends Component {
                     { this.state.NextlaunchData
                         ? <NextLaunchTable launches={this.state.NextlaunchData.launches} />
                         : <p></p>
-                    } */}
+                    }
 
                     <RangePicker className="RangePicker"
                             onChange={this.launchDateButtonOnChange}
-                            disabledDate={disabledDate}   
+                            disabledDate={disabledDate}
                             allowClear={false}
 
                     />
 
                     { this.state.launchOldData
                         // ? <Spin tip="Подождите!"  className="spin"/>
-                        ? <OldTable launches={this.state.launchOldData.launches} />                       
+                        ? <OldTable launches={this.state.launchOldData.launches} />
                         : <p></p>
                     }
-
-                
                 </Content>
 
                 {/* <a onClick={this.showModal} >тык</a>
@@ -201,13 +182,6 @@ class LayoutContainer extends Component {
                         </Geographies>
                         </ComposableMap>
                 </Modal> */}
-
-                
-
-
-
-
-
                 <Footer className="footer">
                     <div class="scroll-up" id="scroll-up">Наверх</div>
                     Design © 2020

@@ -10,9 +10,9 @@ import './tooltip.css'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
-const markerOffset = 15
+const markerOffset =  - 30
 const launchStatus = {
-  1:'Запланированы точные дата и время запуска',
+  1: 'Запланированы точные дата и время запуска',
   2: 'Дата и время будут объявлены позже',
   3: 'green',
   4: 'red',
@@ -21,73 +21,65 @@ const launchStatus = {
   7: 'Во время запуска произошел частичный сбой',
 }
 
-const MapChart = ({launches}) => {
+const MapChart = ({ launches }) => {
   console.log(launches)
-  
-  const markers = launches.map( el => ({
-    id                  : el.id,
+  const markers = launches.map(el => ({
+    id: el.id,
     RocketAndMissionName: el.name,
-    rocketName          : el.rocket,
-    status              : el.statusNumber,
-    markerOffset        : markerOffset, 
-    coordinates         : [el.longitude, el.latitude],
-    mapURL              : el.PadsMapURL,
-    wikiURL             : el.PadsWikiURL,
-    rocketwikiURL       : el.RocketWikiURL,
-
+    rocketName: el.rocket,
+    status: el.statusNumber,
+    markerOffset: markerOffset,
+    coordinates: [el.longitude, el.latitude],
+    mapURL: el.PadsMapURL,
+    wikiURL: el.PadsWikiURL,
+    rocketwikiURL: el.RocketWikiURL,
+    latitude: el.latitude,
+    longitude: el.longitude,
   }))
+  console.log(markers);
 
-  
-  
   return (
-  
     <ComposableMap
       projection="geoMercator"
-      width     ="800"
-      height    ="600"
-      className ="mapChart"
+      width="800"
+      height="600"
+      className="mapChart"
     >
-  
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map(geo => (
-              <Geography
-                key      ={geo.rsmKey}
-                geography={geo}
-                fill     ="#EAEAEC"
-                stroke   ="#D6D6DA"
-              />
-            ))
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              fill="#EAEAEC"
+              stroke="#D6D6DA"
+            />
+          ))
         }
 
       </Geographies>
-      {markers.map(({rocketName, status, coordinates, markerOffset, mapURL,wikiURL,rocketwikiURL})=> (
+      {markers.map(({ rocketName, status, coordinates, markerOffset, wikiURL, rocketwikiURL, latitude, longitude }) => (
         <Marker on coordinates={coordinates}>
-          {/* <circle r={4} fill={launchStatus[status]} stroke="#fff" strokeWidth={1}/> */}
-          {/* ,баг => если пустой mapURL то редирект на свой же сайт */}
-          <Tooltip 
+          <Tooltip
             overlayClassName="tooltip"
-            // trigger="click"    
-            title ={
+            title={
               <div>
-                <a href={mapURL}          target="_blank">Google Maps(исправить ссылку)</a><br></br>
-                <a href={wikiURL}         target="_blank">Wikipedia for pads</a><br></br>
-                <a href={rocketwikiURL}   target="_blank">Wikipedia fro rocket</a><br></br>
+                <a href={"http://maps.google.com/maps?q=" + latitude + "," + longitude} target="_blank">Google Maps</a><br></br>
+                <a href={wikiURL} target="_blank">Wikipedia for pads</a><br></br>
+                <a href={rocketwikiURL} target="_blank">Wikipedia fro rocket</a><br></br>
               </div>
-              
 
             }
-            // defaultVisible ="false"
-            placement      ="bottom"
+            placement="bottom"
             mouseLeaveDelay="0.3"
           >
             <g
-              fill          ={launchStatus[status]}
-              stroke        ="none"
-              strokeWidth   ="3"
-              strokeLinecap ="round"
+              fill={launchStatus[status]}
+              stroke="none"
+              strokeWidth="3"
+              strokeLinecap="round"
               strokeLinejoin="round"
-              transform     ="translate(-12, -24)"
+              transform="translate(-12, -24)"
             >
               <circle cx="12" cy="10" r="3" />
               <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
@@ -96,14 +88,13 @@ const MapChart = ({launches}) => {
 
           <text
             textAnchor="middle"
-            y         ={markerOffset}
-            style     ={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
+            y={markerOffset}
+            style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
           >
-            {/* {rocketName} */}
+            {rocketName}
           </text>
         </Marker>
       )
-      
       )}
     </ComposableMap>
   )
