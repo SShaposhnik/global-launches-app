@@ -35,16 +35,18 @@ class Timer extends Component {
         const deadline = new Date(this.props.timeTillLaunch).getTime();
         setInterval(this.count, 1000)
         this.setState({...this.state, deadline: deadline})
-        
     }
 
     render() {
         const { days, seconds, hours, minutes, time_up } = this.state
         return (
             <div>
-                    <p>{days}: {hours}: {minutes}: {seconds}</p>
-                    <strong>{time_up}</strong>
-
+                    {/* <p>{days}d: {hours}h: {minutes}m: {seconds}s</p>
+                    <strong>{time_up}</strong> */}
+                    {(seconds < 10)
+                    ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
+                    : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>
+                    }
             </div>
         )
     }

@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
 import {Table, Modal, Tooltip} from 'antd'
 import MapChart from './MapChart'
-import '../styled/tablestyle.css'
-import './tableOldCss.css'
+import '../component/modal/modal.css'
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import moment from 'moment'
 import 'moment/locale/ru'
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import 'moment/locale/en-au'
+import '../styled/load.css'
+
 moment.locale()
+const geoUrl =
+  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const {Column} = Table;
 const launchStatus = {
@@ -35,6 +39,7 @@ class OldTable extends Component {
   scrollToTop() {
       scroll.scrollToTop();
     }
+
 
     showModal = () => {
       this.setState({
@@ -89,38 +94,61 @@ class OldTable extends Component {
         PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
         RocketWikiURL: el.rocket.wikiURL,
     }))
-    console.log(oldLaunch[0]);
     return (
       <div >
-        <Link to="anchor12">якорь 12</Link>
           <Table
               dataSource={oldLaunch}
               pagination={{
                 position: ['bottomCenter'],
                 defaultCurrent:1,
-                simple:"true",
+                // simple:"true",
                 pageSizeOptions:['10', '50', '100'],
                 showQuickJumper:"true",
               }}
               size="small"
               className="table"
+              style={{margin:10}}
             >
               <Column title="Название запуска" dataIndex="RocketAndMissionName"   width="400"
                 onCell={(selectedRows, selectedRowKeys) => {
                     return {
                       onClick: event => {
                       this.setState({markersLaunches: [selectedRows]})
-                      this.showModal()}, // click row
+                      this.showModal()
+                      // console.log('markersLaunches = ',this.markersLaunches);
+                      // как вывести markersLaunches
+
+                    }, // click row
                     }
                   }}
+                  fixed={true}
               >
               </Column>
-              <Column title="Дата запуска"     dataIndex="net"                    width="200"></Column>
-              <Column title="Статус"           dataIndex="statusText"             width="100"></Column>
+                <Column title="Дата запуска"     dataIndex="net"                    width="200" ></Column>
+              <Column
+                title="Статус"
+                dataIndex="statusText"
+                width="100"
+                filters={[
+                          {
+                            text: 'Успешно',
+                            value: 'Успешно',
+                          },
+                          {
+                            text: 'Неудача',
+                            value: 'Неудача',
+                          },
+                          {
+                            text: 'Произошел сбой',
+                            value: 'Произошел сбой',
+                          },
+                        ]}
+                onFilter={ (value, record) => record.statusText.indexOf(value) === 0}
+              >
+
+              </Column>
               <Column title="Космодром"        dataIndex="pads"                   width="300"></Column>
             </Table>
-
-
             <Modal
               centered
               // title="Расположение запуска на карте"
@@ -129,12 +157,10 @@ class OldTable extends Component {
               onCancel={this.handleCancel}
               footer={null}
               width='65%'
+              className="modal"
             >
-              <MapChart launches={this.state.markersLaunches}/>
+              <MapChart launches={this.state.markersLaunches} />
             </Modal>
-
-    <a onClick={this.scrollToTop}>To the top!   </a> <br></br>
-    <div id="anchor12">якорь 12</div>
     </div>
 
     )

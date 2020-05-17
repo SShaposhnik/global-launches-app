@@ -1,14 +1,19 @@
 import React, {Component} from 'react'
-import {Layout, Menu, Input, DatePicker} from 'antd'
-import { SmileOutlined,LoadingOutlined } from '@ant-design/icons'
+import {Layout, Menu, Input, DatePicker, Button, Tooltip, Table} from 'antd'
+import { ArrowUpOutlined, ArrowDownOutlined  } from '@ant-design/icons'
 import OldTable from '../LaunchCatalog/component/TableOld'
 import LaunchTable from "../LaunchCatalog/component/Table"
 import NextLaunchTable from '../LaunchCatalog/component/NextLaunchTable'
 import { isNormalInteger } from '../LaunchCatalog/component/utils'
-import './index.css'
+// import './index.css' // стандарт
+// import './pink.css' //влево вправо
+// import './pink2.scss' // шарики
+import './index.scss' // прыгающие квадраты
+import './progress.css'
 import moment from 'moment'
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { animateScroll as scroll} from 'react-scroll'
 import 'antd/dist/antd.css'
+import '../LaunchCatalog/component/modal/modal.css'
 
 const { Search } = Input
 const { Header, Content, Footer } = Layout
@@ -17,13 +22,13 @@ const nextUrl = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 const { RangePicker } = DatePicker
 const limit = 10000
 const launchCount = null
+const thisYear = moment(2000).format('YYYY')
 
-let oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+moment('2015-1-1').format('YYYY-MM-DD')+'&enddate='+moment().format('YYYY-MM-DD')+'&limit='+limit+'&fields=name,net,location,status,rocket,mapURL'
+let oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+moment(thisYear).format('YYYY-MM-DD')+'&enddate='+moment().format('YYYY-MM-DD')+'&limit='+limit+'&fields=name,net,location,status,rocket,mapURL'
 
 function disabledDate(current) {
     return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
   }
-
 class LayoutContainer extends Component {
     constructor(props)
     {
@@ -32,6 +37,7 @@ class LayoutContainer extends Component {
         {
           launchData: null,
           launchOldData: null,
+          reverselaunchOldData:null,
           NextlaunchData: null,
           launchButtonIsDisabled: false,
           launchButtonInputValue: null,
@@ -42,7 +48,6 @@ class LayoutContainer extends Component {
         this.launchButtonOnChange = this.launchButtonOnChange.bind(this)
         this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
     }
-
     fetchLaunches (url, launchCount) {
         fetch(url+launchCount)
             .then(response => response.json())
@@ -54,7 +59,6 @@ class LayoutContainer extends Component {
             .then(response => response.json())
             .then(data => this.setState({launchOldData: data}) )
     }
-
     fetchNextLaunches (nextUrl) {
         fetch(nextUrl)
             .then(response => response.json())
@@ -87,8 +91,6 @@ class LayoutContainer extends Component {
         
     }
 
-
-
     showModal = () => {
         this.setState({
           visible: true,
@@ -111,10 +113,12 @@ class LayoutContainer extends Component {
 
     render() {
         return (
-                <Layout className="layout">
+            <div>
+                {this.state.launchOldData && this.state.NextlaunchData && this.state.launchData
+                ? <Layout className="layout">
                 <Header>
                     <div className="logo" />
-
+                    {/* <img src={asd}></img> */}
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{textAlign:'right'}}>
                         <Menu.Item key="1">Статистика</Menu.Item>
                         <Menu.Item key="2">Запуски</Menu.Item>
@@ -131,62 +135,145 @@ class LayoutContainer extends Component {
                         loading={this.state.launchButtonIsDisabled}
                         allowClear={true}
                     />   */}
-                   <a onClick={() => scroll.scrollToBottom()}>скролл вниз</a>
+                   <Button type="primary" shape="circle" icon={<ArrowDownOutlined />} onClick={() => scroll.scrollToBottom()}/>
 
-                    <h1 style={{textAlign: 'center'}}>Запуски для которых обьявлены точные дата и время</h1>
+                   { this.state.launchOldData && this.state.NextlaunchData && this.state.launchData
+                        ? <div>
+                                <h1 style={{textAlign: 'center'}}>Обьявленные запуски</h1>
+                                <LaunchTable launches={this.state.launchData.launches} />
+                                <h1 style={{textAlign: 'center'}}>Запланированные запуски</h1>
+                                <NextLaunchTable launches={this.state.NextlaunchData.launches} />
+
+                                <Tooltip
+                                    title={<p>Здесь можно выбрать дату запусков!</p>}
+                                    defaultVisible={true}
+                                    placement="right"
+                                    arrowPointAtCenter="true"
+                                >
+                                    <RangePicker
+                                        className="RangePicker"
+                                        defaultValue={[moment(thisYear),moment()]}
+                                        showToday={false,true}
+                                        onChange={this.launchDateButtonOnChange}
+                                        disabledDate={disabledDate}
+                                        allowClear={false}
+                                        style={{margin:10}}
+
+                                    />
+                                </Tooltip>
+
+                                <OldTable launches={this.state.launchOldData.launches} />
+
+
+
+                        </div>
+                        : <p>NE PRIVET</p>
+
+                    }
+
+                    {/* <h1 style={{textAlign: 'center'}}>Обьявленные запуски</h1>
                     { this.state.launchData
                         ? <LaunchTable launches={this.state.launchData.launches} />
                         : <p></p>
-                    }
+                    } */}
                     <p></p>
 
-                    <h1 style={{textAlign: 'center'}}>Запланированные запуски</h1>
+                    {/* <h1 style={{textAlign: 'center'}}>Запланированные запуски</h1>
                     { this.state.NextlaunchData
                         ? <NextLaunchTable launches={this.state.NextlaunchData.launches} />
                         : <p></p>
-                    }
+                    } */}
+                    {/* <Tooltip
+                        title={<div>Здесь можно изменить дату</div>}
+                        defaultVisible={true}
+                        placement='topLeft'
+                        // showToday="true"
+                    > */}
+                    {/* <Tooltip
+                    title={<p>afasfasgkmalksgmlakslgmasg</p>}
+                    defaultVisible={true}
+                    >asd</Tooltip> */}
+                        {/* <RangePicker className="RangePicker"
+                                defaultValue={[moment(thisYear),moment()]}
+                                showToday={false,true}
+                                onChange={this.launchDateButtonOnChange}
+                                disabledDate={disabledDate}
+                                allowClear={false}
+                                style={{margin:10}}
 
-                    <RangePicker className="RangePicker"
-                            onChange={this.launchDateButtonOnChange}
-                            disabledDate={disabledDate}
-                            allowClear={false}
-
-                    />
-
-                    { this.state.launchOldData
-                        // ? <Spin tip="Подождите!"  className="spin"/>
+                        /> */}
+                    {/* { this.state.launchOldData
                         ? <OldTable launches={this.state.launchOldData.launches} />
                         : <p></p>
-                    }
+                    } */}
+
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<ArrowUpOutlined />}
+                        onClick={scroll.scrollToTop}
+                    />
                 </Content>
-
-                {/* <a onClick={this.showModal} >тык</a>
-                <Modal
-                    centered
-                    title="Расположение запуска на карте"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-
-                >
-                    <ComposableMap
-                        projection="geoMercator"
-                        width     ="1800"
-                        height    ="600"
-                        >
-                        <Geographies geography={geoUrl}>
-                            {({ geographies }) =>
-                            geographies.map(geo => <Geography key={geo.rsmKey} geography={geo} fill     ="#EAEAEC"
-                            stroke   ="#D6D6DA"/>)
-                            }
-                        </Geographies>
-                        </ComposableMap>
-                </Modal> */}
                 <Footer className="footer">
-                    <div class="scroll-up" id="scroll-up">Наверх</div>
                     Design © 2020
                 </Footer>
             </Layout>
+
+            // прыгающие квадраты
+            :<div id="hellopreloader">
+                <div id="hellopreloader_preload">
+                    <div class="container">
+                        <div class="element"></div>
+                        <div class="element"></div>
+                        <div class="element"></div>
+                        <div class="element"></div>
+                        <div class="element"></div>
+                    </div>
+                </div>
+             </div>
+
+            // // стандарт
+            // : <div id="hellopreloader">
+            //     <div id="hellopreloader_preload"></div>
+            //   </div>
+
+            // влево вправо
+            
+            // :<div class="loader">
+            // <div class="l_main">
+            //   <div class="l_square"><span></span><span></span><span></span></div>
+            //   <div class="l_square"><span></span><span></span><span></span></div>
+            //   <div class="l_square"><span></span><span></span><span></span></div>
+            //   <div class="l_square"><span></span><span></span><span></span></div>
+            // </div>
+            // </div>
+
+            // // шарики
+            // : <div class="container">
+            //     <div class="item-1"></div>
+            //     <div class="item-2"></div>
+            //     <div class="item-3"></div>
+            //     <div class="item-4"></div>
+            //     <div class="item-5"></div>
+            // </div>
+
+            // шарики
+            // :<div className="ipl-progress-indicator" id="ipl-progress-indicator">
+            //     <div className="ipl-progress-indicator-head">
+            //     <div className="first-indicator"></div>
+            //     <div className="second-indicator"></div>
+            //     </div>
+            //     <div className="container">
+            //     <div className="item-1"></div>
+            //     <div className="item-2"></div>
+            //     <div className="item-3"></div>
+            //     <div className="item-4"></div>
+            //     <div className="item-5"></div>
+            // </div>
+            //  </div>
+
+            }
+            </div>
         )
     }
 }
