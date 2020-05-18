@@ -1,11 +1,13 @@
 import React from 'react'
-import {Table, Pagination} from 'antd'
-import moment from 'moment'
-import { LoadingOutlined } from '@ant-design/icons';
+import {Table, Tooltip} from 'antd'
+import Timer from '../Timer/Timer'
 import 'moment/locale/ru'
+// import 'moment/locale/en-au'
+import moment from 'moment'
+import './Table.css'
 moment.locale()
 
-const antIcon = <LoadingOutlined style={{ fontSize: 240 }} spin />;
+
 const { Column, ColumnGroup} = Table;
 
 const launchStatus = {
@@ -23,7 +25,6 @@ const columns = [
         title: 'Название запуска',
         dataIndex: 'RocketAndMissionName',
         width: 400,
-        align: 'left'
       },
       {
         title: 'Дата запуска',
@@ -32,30 +33,33 @@ const columns = [
       },
       {
         title: 'Космодром',
-        dataIndex: 'pads',
+        dataIndex: 'padsName',
         width: 300,
-        // align: 'right'
+      },
+      {
+        title: 'Таймер',
+        dataIndex: 'timer',
+        width: 200,
       },
 ]
 
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
+        rocketName: el.rocket.name,
+        padsName: el.location.name,
+        missionsName: el.missions.map(els => (els.name)),
         RocketAndMissionName: el.name,
-        net: moment(el.net).locale('ru').format('MMMM YYYY'),
+        pads: el.location.pads.map(p => (p.name)),
+        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
         status: launchStatus[el.status],
-        pads: el.location.pads.map(els => (els.name)),
+        timer: <Timer timeTillLaunch={el.net}/>
     }))
     return (
         <Table
             dataSource={launchesWithTimer}
-            pagination={{ position: ['bottomCenter'], }}
+            pagination={false}
             size="small"
             columns={columns}
         />
     )
 }
-
-// {this.state.markersLaunches
-//     ? <MapChart launches={this.state.markersLaunches} />
-//     : <h1>НАДО ВЫБРАТЬ ЗАПУСК</h1>
-// }

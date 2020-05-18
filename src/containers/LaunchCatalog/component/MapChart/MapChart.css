@@ -1,0 +1,7 @@
+.MapChartStyle {
+    pointer-events: none;
+}
+
+.MarkersSryle {
+    pointer-events: all;
+}

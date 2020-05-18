@@ -6,7 +6,7 @@ import {
   Marker,
 } from "react-simple-maps"
 import { Tooltip } from 'antd'
-import './tooltip.css'
+import './MapChart.css'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
@@ -43,7 +43,7 @@ const MapChart = ({ launches }) => {
       projection="geoMercator"
       width="800"
       height="600"
-      className="modals"
+      className="MapChartStyle"
     >
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
@@ -60,10 +60,10 @@ const MapChart = ({ launches }) => {
       </Geographies>
       {markers.map(({ rocketName, status, coordinates, markerOffset, wikiURL, rocketwikiURL, latitude, longitude }) => (
         <Marker on coordinates={coordinates}
-        className="modalss"
+        className="MarkersSryle"
         >
           <Tooltip
-            overlayClassName="tooltip"
+            overlayClassName="tooltipInMapChart"
             title={
               <div>
                 <a href={"http://maps.google.com/maps?q=" + latitude + "," + longitude} target="_blank">Google Maps</a><br></br>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import moment from 'moment'
-moment('2015-1-1').format('YYYY-MM-DD, h:mm:ss')
+import './Timer.css'
 
 
 class Timer extends Component {
@@ -41,8 +40,6 @@ class Timer extends Component {
         const { days, seconds, hours, minutes, time_up } = this.state
         return (
             <div>
-                    {/* <p>{days}d: {hours}h: {minutes}m: {seconds}s</p>
-                    <strong>{time_up}</strong> */}
                     {(seconds < 10)
                     ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
                     : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>

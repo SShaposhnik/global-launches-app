@@ -1,12 +1,11 @@
 import React from 'react'
-import {Table, Tooltip} from 'antd'
-import Timer from './Timer'
-import 'moment/locale/ru'
-// import 'moment/locale/en-au'
+import {Table, Pagination} from 'antd'
 import moment from 'moment'
+import { LoadingOutlined } from '@ant-design/icons';
+import 'moment/locale/ru'
 moment.locale()
 
-
+const antIcon = <LoadingOutlined style={{ fontSize: 240 }} spin />;
 const { Column, ColumnGroup} = Table;
 
 const launchStatus = {
@@ -19,55 +18,45 @@ const launchStatus = {
     7: 'Во время запуска произошел частичный сбой',
 }
 
-
-
-
 const columns = [
     {
         title: 'Название запуска',
         dataIndex: 'RocketAndMissionName',
         width: 400,
+        align: 'left'
       },
       {
         title: 'Дата запуска',
         dataIndex: 'net',
         width: 200,
       },
-    //   {
-    //     title: 'Статус запуска',
-    //     dataIndex: 'status',
-    //     width: 200,
-    //   },
       {
         title: 'Космодром',
-        dataIndex: 'pads',
+        dataIndex: 'padsName',
         width: 300,
-      },
-      {
-        title: 'Таймер',
-        dataIndex: 'timer',
-        width: 200,
+        // align: 'right'
       },
 ]
 
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
-        rocketName: el.rocket.name,
-        missionsName: el.missions.map(els => (els.name)),
         RocketAndMissionName: el.name,
-        pads: el.location.pads.map(p => (p.name)),
-        // net: moment(el.net).utc(0).locale('ru').format('LLL Z'),
-        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
+        padsName: el.location.name,
+        net: moment(el.net).locale('ru').format('MMMM YYYY'),
         status: launchStatus[el.status],
-        timer: <Timer timeTillLaunch={el.net}/>
-        // timer: moment(<Timer timeTillLaunch={el.net}/>)
+        pads: el.location.pads.map(els => (els.name)),
     }))
     return (
         <Table
             dataSource={launchesWithTimer}
-            pagination={false}
+            pagination={{ position: ['bottomCenter'], }}
             size="small"
             columns={columns}
         />
     )
 }
+
+// {this.state.markersLaunches
+//     ? <MapChart launches={this.state.markersLaunches} />
+//     : <h1>НАДО ВЫБРАТЬ ЗАПУСК</h1>
+// }
