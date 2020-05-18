@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
 import {Layout, Menu, Input, DatePicker, Button, Tooltip, Table} from 'antd'
-import { ArrowUpOutlined, ArrowDownOutlined  } from '@ant-design/icons'
+import { ArrowUpOutlined, ArrowDownOutlined, GithubOutlined  } from '@ant-design/icons'
 import OldTable from '../LaunchCatalog/component/TableOld'
 import LaunchTable from "../LaunchCatalog/component/Table"
 import NextLaunchTable from '../LaunchCatalog/component/NextLaunchTable'
 import { isNormalInteger } from '../LaunchCatalog/component/utils'
-// import './index.css' // стандарт
+import './index.css' // стандарт
 // import './pink.css' //влево вправо
 // import './pink2.scss' // шарики
 import './index.scss' // прыгающие квадраты
 import './progress.css'
+// import './loading1.scss'
 import moment from 'moment'
 import { animateScroll as scroll} from 'react-scroll'
 import 'antd/dist/antd.css'
@@ -22,7 +23,7 @@ const nextUrl = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 const { RangePicker } = DatePicker
 const limit = 10000
 const launchCount = null
-const thisYear = moment(2000).format('YYYY')
+const thisYear = moment().format('YYYY')
 
 let oldurl = 'https://launchlibrary.net/1.4/launch?startdate='+moment(thisYear).format('YYYY-MM-DD')+'&enddate='+moment().format('YYYY-MM-DD')+'&limit='+limit+'&fields=name,net,location,status,rocket,mapURL'
 
@@ -125,7 +126,7 @@ class LayoutContainer extends Component {
                     </Menu>
                     </Header>
 
-                <Content className="content">
+                <Content style={{ padding: '0 50px' }}>
                      {/* <Search
                         placeholder="колличество запусков"
                         enterButton="Загрузить"
@@ -135,6 +136,7 @@ class LayoutContainer extends Component {
                         loading={this.state.launchButtonIsDisabled}
                         allowClear={true}
                     />   */}
+                    <div className="site-layout-contents">
                    <Button type="primary" shape="circle" icon={<ArrowDownOutlined />} onClick={() => scroll.scrollToBottom()}/>
 
                    { this.state.launchOldData && this.state.NextlaunchData && this.state.launchData
@@ -161,7 +163,7 @@ class LayoutContainer extends Component {
 
                                     />
                                 </Tooltip>
-
+                                <h1 style={{textAlign: 'center'}}>Состоявшиеся запуски</h1>
                                 <OldTable launches={this.state.launchOldData.launches} />
 
 
@@ -213,9 +215,27 @@ class LayoutContainer extends Component {
                         icon={<ArrowUpOutlined />}
                         onClick={scroll.scrollToTop}
                     />
+                    </div>
                 </Content>
+                {/* <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<ArrowUpOutlined />}
+                        onClick={scroll.scrollToTop}
+                        className="scrollButtonUp"
+                    />
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<ArrowUpOutlined />}
+                        onClick={scroll.scrollToTop}
+                        className="scrollButtonUp2"
+                    /> */}
                 <Footer className="footer">
-                    Design © 2020
+                    Design © 2020 <br></br>
+                    <GithubOutlined />
+                    
+                    <a href="https://github.com/SShaposhnik/global-launches-app" target="_blank"> Github</a>
                 </Footer>
             </Layout>
 
@@ -238,7 +258,6 @@ class LayoutContainer extends Component {
             //   </div>
 
             // влево вправо
-            
             // :<div class="loader">
             // <div class="l_main">
             //   <div class="l_square"><span></span><span></span><span></span></div>
@@ -271,6 +290,15 @@ class LayoutContainer extends Component {
             //     <div className="item-5"></div>
             // </div>
             //  </div>
+
+
+
+            // loading1
+        //     :<div class="e-loadholder">
+        //     <div class="m-loader">
+        //         <span class="e-text">Загрузка</span>
+        //     </div>
+        // </div>
 
             }
             </div>

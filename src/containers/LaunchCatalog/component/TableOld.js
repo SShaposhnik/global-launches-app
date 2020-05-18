@@ -81,7 +81,7 @@ class OldTable extends Component {
         net: <Tooltip title = {
                 <div>
                   <p style={{textAlign:'center'}}>Локальное время</p>
-                  <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL Z')}</p>
+                  <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p>
                 </div>}>
                 {moment(el.net).utc(0).locale('ru').format('LLL Z')}
               </Tooltip>,
@@ -108,6 +108,10 @@ class OldTable extends Component {
               size="small"
               className="table"
               style={{margin:10}}
+              locale = {{
+                filterReset: 'Сбросить',
+              }
+              }
             >
               <Column title="Название запуска" dataIndex="RocketAndMissionName"   width="400"
                 onCell={(selectedRows, selectedRowKeys) => {
@@ -157,7 +161,6 @@ class OldTable extends Component {
               onCancel={this.handleCancel}
               footer={null}
               width='65%'
-              className="modal"
             >
               <MapChart launches={this.state.markersLaunches} />
             </Modal>

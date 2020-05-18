@@ -57,7 +57,7 @@ export default ({launches}) => {
         RocketAndMissionName: el.name,
         pads: el.location.pads.map(p => (p.name)),
         // net: moment(el.net).utc(0).locale('ru').format('LLL Z'),
-        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL Z')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
+        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
         status: launchStatus[el.status],
         timer: <Timer timeTillLaunch={el.net}/>
         // timer: moment(<Timer timeTillLaunch={el.net}/>)
