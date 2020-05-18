@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/SShaposhnik/deploy-react/static/css/main.3be16888.chunk.css",
+    "main.js": "/SShaposhnik/deploy-react/static/js/main.9d60870b.chunk.js",
+    "main.js.map": "/SShaposhnik/deploy-react/static/js/main.9d60870b.chunk.js.map",
+    "runtime-main.js": "/SShaposhnik/deploy-react/static/js/runtime-main.4af7f223.js",
+    "runtime-main.js.map": "/SShaposhnik/deploy-react/static/js/runtime-main.4af7f223.js.map",
+    "static/css/2.35fcc229.chunk.css": "/SShaposhnik/deploy-react/static/css/2.35fcc229.chunk.css",
+    "static/js/2.60200775.chunk.js": "/SShaposhnik/deploy-react/static/js/2.60200775.chunk.js",
+    "static/js/2.60200775.chunk.js.map": "/SShaposhnik/deploy-react/static/js/2.60200775.chunk.js.map",
+    "index.html": "/SShaposhnik/deploy-react/index.html",
+    "precache-manifest.0390324e53292646495de28a77aa4246.js": "/SShaposhnik/deploy-react/precache-manifest.0390324e53292646495de28a77aa4246.js",
+    "service-worker.js": "/SShaposhnik/deploy-react/service-worker.js",
+    "static/css/2.35fcc229.chunk.css.map": "/SShaposhnik/deploy-react/static/css/2.35fcc229.chunk.css.map",
+    "static/css/main.3be16888.chunk.css.map": "/SShaposhnik/deploy-react/static/css/main.3be16888.chunk.css.map",
+    "static/js/2.60200775.chunk.js.LICENSE.txt": "/SShaposhnik/deploy-react/static/js/2.60200775.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4af7f223.js",
+    "static/css/2.35fcc229.chunk.css",
+    "static/js/2.60200775.chunk.js",
+    "static/css/main.3be16888.chunk.css",
+    "static/js/main.9d60870b.chunk.js"
+  ]
+}
