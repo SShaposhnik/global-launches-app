@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/global-launches-app/static/css/main.b85d28e0.chunk.css",
-    "main.js": "/global-launches-app/static/js/main.ed657f93.chunk.js",
-    "main.js.map": "/global-launches-app/static/js/main.ed657f93.chunk.js.map",
+    "main.css": "/global-launches-app/static/css/main.9ed5aff3.chunk.css",
+    "main.js": "/global-launches-app/static/js/main.7a5fa44a.chunk.js",
+    "main.js.map": "/global-launches-app/static/js/main.7a5fa44a.chunk.js.map",
     "runtime-main.js": "/global-launches-app/static/js/runtime-main.17462930.js",
     "runtime-main.js.map": "/global-launches-app/static/js/runtime-main.17462930.js.map",
     "static/css/2.35fcc229.chunk.css": "/global-launches-app/static/css/2.35fcc229.chunk.css",
-    "static/js/2.991319a9.chunk.js": "/global-launches-app/static/js/2.991319a9.chunk.js",
-    "static/js/2.991319a9.chunk.js.map": "/global-launches-app/static/js/2.991319a9.chunk.js.map",
+    "static/js/2.54d973d4.chunk.js": "/global-launches-app/static/js/2.54d973d4.chunk.js",
+    "static/js/2.54d973d4.chunk.js.map": "/global-launches-app/static/js/2.54d973d4.chunk.js.map",
     "index.html": "/global-launches-app/index.html",
-    "precache-manifest.184e29580e845f65c3197b62e7a02e43.js": "/global-launches-app/precache-manifest.184e29580e845f65c3197b62e7a02e43.js",
+    "precache-manifest.d201f58a053fe8d1021472a03438ec0a.js": "/global-launches-app/precache-manifest.d201f58a053fe8d1021472a03438ec0a.js",
     "service-worker.js": "/global-launches-app/service-worker.js",
     "static/css/2.35fcc229.chunk.css.map": "/global-launches-app/static/css/2.35fcc229.chunk.css.map",
-    "static/css/main.b85d28e0.chunk.css.map": "/global-launches-app/static/css/main.b85d28e0.chunk.css.map",
-    "static/js/2.991319a9.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.991319a9.chunk.js.LICENSE.txt"
+    "static/css/main.9ed5aff3.chunk.css.map": "/global-launches-app/static/css/main.9ed5aff3.chunk.css.map",
+    "static/js/2.54d973d4.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.54d973d4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.17462930.js",
     "static/css/2.35fcc229.chunk.css",
-    "static/js/2.991319a9.chunk.js",
-    "static/css/main.b85d28e0.chunk.css",
-    "static/js/main.ed657f93.chunk.js"
+    "static/js/2.54d973d4.chunk.js",
+    "static/css/main.9ed5aff3.chunk.css",
+    "static/js/main.7a5fa44a.chunk.js"
   ]
 }
