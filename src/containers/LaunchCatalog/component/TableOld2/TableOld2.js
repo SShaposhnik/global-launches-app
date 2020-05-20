@@ -4,10 +4,10 @@ import MapChart from '../MapChart/MapChart'
 import moment from 'moment'
 import 'moment/locale/ru'
 import './TableOld2.css'
-import {ClearOutlined, CheckOutlined} from '@ant-design/icons'
+import { ClearOutlined, CheckOutlined } from '@ant-design/icons'
 
 moment.locale()
-const { Column } = Table;
+const { Column } = Table
 const launchStatus = {
   1: 'Дата и время определены',
   2: 'Дата и время будут объявлены позже',
@@ -57,6 +57,11 @@ class OldTable2 extends Component {
     })
   }
 
+  testf() {
+    console.log('testf in table')
+
+  }
+
   render() {
 
     const oldLaunch = this.props.launches.map(el => ({
@@ -85,8 +90,7 @@ class OldTable2 extends Component {
     }))
 
     // перевернуть дату
-    // oldLaunch.reverse()
-
+    oldLaunch.reverse()
     return (
       <div >
         <Table
@@ -216,9 +220,9 @@ class OldTable2 extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={null}
-          width='65%'
+          width='70%'
+          closable={false}
         >
-
           <MapChart launches={this.state.markersLaunches} />
         </Modal>
       </div>

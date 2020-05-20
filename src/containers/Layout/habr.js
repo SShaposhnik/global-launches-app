@@ -31,10 +31,10 @@ class LayoutContainer extends Component {
     launchDateButtonOnChange(date, dateString) {
         oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + dateString[0] + '&enddate=' + dateString[1] + '&limit=10000&fields=name,net,location,status,rocket,mapURL,countryCode'
         this.fetchOldLaunches(oldurl)
+        console.log('лог в фукнции', this.state.launchOldData)
     }
     render() {
         console.log(this.state.launchOldData)
-        
         return (
             <Layout id="layout">
                 <Header>
@@ -67,17 +67,3 @@ class LayoutContainer extends Component {
 }
 
 export default LayoutContainer
-
-
-// Добрый день! 
-// Краткая суть проекта: получаем от сервера список космических запусков и выводим в таблицу <b>OldTable2</b>. Дату запусков можно изменять с помощью <b>RangePicker</b>
-// Почему то, при использовании <b>componentDidMount</b> ответ приходит 2 раза. 
-// Можно было бы и так оставить, но если вызвать любую функцию(к примеру нужно показать модальное окно если нет запусков за выбранное время, то она сработает 2 раза. 
-// Я пробовал при вызове фукнции <b>launchDateButtonOnChange</b> не вызывать <b>fetchOldLaunches</b>, а сразу <b>componentDidMount</b>, но ответ так же приходит 2 раза. Проверил и другие запросы, так же по 2 ответа. 
-
-// <a href="https://launchlibrary.net/1.4/launch?startdate=2020-01-01&enddate=2020-05-20&limit=10000&fields=name,net,location,status,rocket,mapURL,countryCode">Тут можно посмотреть ответ от сервера</a>
-// <code lang="javascript">
-
-// import React, { Component } from 'react'
-// import { Layout, Menu, DatePicker, Button, Tooltip, Modal , Alert} 
-// </code>
