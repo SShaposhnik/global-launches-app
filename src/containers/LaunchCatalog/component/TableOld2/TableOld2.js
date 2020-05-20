@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { Table, Modal, Tooltip } from 'antd'
 import MapChart from '../MapChart/MapChart'
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import moment from 'moment'
 import 'moment/locale/ru'
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import './TableOld2.css'
+import {ClearOutlined, CheckOutlined} from '@ant-design/icons'
 
 moment.locale()
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
-
 const { Column } = Table;
 const launchStatus = {
   1: 'Дата и время определены',
@@ -22,6 +18,18 @@ const launchStatus = {
   7: 'Произошел сбой',
 }
 
+const country = {
+  USA: 'Америка',
+  CHN: 'Китай',
+  KAZ: 'Казахстан',
+  IRN: 'Иран',
+  RUS: 'Россия',
+  GUF: 'Французская Гвиана',
+  JPN: 'Япония',
+  NZL: 'Новая Зеландия',
+  IND: 'Индия',
+  UNK: 'Великобритания',
+}
 
 class OldTable2 extends Component {
   constructor(props) {
@@ -29,15 +37,7 @@ class OldTable2 extends Component {
     this.state = {
       markersLaunches: null
     }
-
-    this.scrollToTop = this.scrollToTop.bind(this);
   }
-
-
-  scrollToTop() {
-    scroll.scrollToTop();
-  }
-
 
   showModal = () => {
     this.setState({
@@ -46,14 +46,12 @@ class OldTable2 extends Component {
   }
 
   handleOk = e => {
-    // console.log(e)
     this.setState({
       visible: false,
     })
   }
 
   handleCancel = e => {
-    // console.log(e)
     this.setState({
       visible: false,
     })
@@ -71,19 +69,23 @@ class OldTable2 extends Component {
           <p style={{ textAlign: 'center' }}>Локальное время</p>
           <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p>
         </div>}>
-        {moment(el.net).utc(0).locale('ru').format('LLL Z')}
+        {moment(el.net).utc(0).locale('ru').format('LLL z')}
       </Tooltip>,
+
       statusText: launchStatus[el.status],
       statusNumber: el.status,
-      pads: el.location.pads.map(els => (els.name)),
+      pads: el.location.name.split(',')[0],
       locationWithoutPads: el.location.name,
       longitude: el.location.pads.map(els => (els.longitude)),
       latitude: el.location.pads.map(els => (els.latitude)),
       PadsMapURL: el.location.pads.map(url => (url.mapURL)),
       PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
       RocketWikiURL: el.rocket.wikiURL,
+      countryCode: el.location.countryCode,
     }))
-    console.log(oldLaunch.reverse());
+
+    // перевернуть дату
+    // oldLaunch.reverse()
 
     return (
       <div >
@@ -95,14 +97,15 @@ class OldTable2 extends Component {
             // simple:"true",
             pageSizeOptions: ['10', '50', '100'],
             showQuickJumper: "true",
+            hideOnSinglePage: "true",
           }}
           size="small"
           className="table"
           style={{ margin: 10 }}
           locale={{
-            filterReset: 'Сбросить',
-          }
-          }
+            filterReset: <ClearOutlined />,
+            filterConfirm: <CheckOutlined />,
+          }}
         >
           <Column title="Название запуска" dataIndex="RocketAndMissionName" width="400"
             onCell={(selectedRows, selectedRowKeys) => {
@@ -139,7 +142,72 @@ class OldTable2 extends Component {
           >
 
           </Column>
-          <Column title="Космодром" dataIndex="locationWithoutPads" width="300"></Column>
+
+          <Column
+            title="Космодром"
+            dataIndex="pads"
+            width="300"
+            filters={[
+              {
+                text: 'Америка',
+                value: 'USA',
+              },
+              {
+                text: 'Китай',
+                value: 'CHN',
+              },
+              {
+                text: 'Казахстан',
+                value: 'KAZ',
+              },
+              {
+                text: 'Иран',
+                value: 'IRN',
+              },
+              {
+                text: 'Россия',
+                value: 'RUS',
+              },
+              {
+                text: 'Французская Гвиана',
+                value: 'GUF',
+              },
+              {
+                text: 'Япония',
+                value: 'JPN',
+              },
+              {
+                text: 'Новая Зеландия',
+                value: 'NZL',
+              },
+              {
+                text: 'Индия',
+                value: 'IND',
+              },
+              {
+                text: 'Великобритания',
+                value: 'UNK',
+              },
+              {
+                text: 'Тут можно сделать добавить фильтр, если нужно',
+                value: 'Submenu',
+                children: [
+                  {
+                    text: 'Green',
+                    value: 'Green',
+                  },
+                  {
+                    text: 'Black',
+                    value: 'Black',
+                  },
+                ],
+              }
+            ]}
+
+            onFilter={(value, record) => record.countryCode.indexOf(value) === 0}
+          >
+
+          </Column>
         </Table>
         <Modal
           centered

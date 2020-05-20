@@ -46,11 +46,11 @@ const columns = [
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
         rocketName: el.rocket.name,
-        padsName: el.location.name,
+        padsName: el.location.name.split(',')[0],
         missionsName: el.missions.map(els => (els.name)),
         RocketAndMissionName: el.name,
         pads: el.location.pads.map(p => (p.name)),
-        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL Z')}</Tooltip>,
+        net: <Tooltip title = {<div><p style={{textAlign:'center'}}>Локальное время</p> <p style={{textAlign:'center'}}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL z')}</Tooltip>,
         status: launchStatus[el.status],
         timer: <Timer timeTillLaunch={el.net}/>
     }))

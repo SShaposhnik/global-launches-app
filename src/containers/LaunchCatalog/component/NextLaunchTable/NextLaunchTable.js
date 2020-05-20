@@ -31,7 +31,7 @@ const columns = [
         width: 200,
       },
       {
-        title: 'Космодром',
+        title: 'Площадка / Космодром',
         dataIndex: 'padsName',
         width: 300,
         // align: 'right'
@@ -41,7 +41,10 @@ const columns = [
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
         RocketAndMissionName: el.name,
-        padsName: el.location.name,
+        padsName: <div>
+                        <p>{el.location.pads.map(els => (els.name.split(',')[0]))}</p>
+                        <p>{el.location.name.split(',')[0]}</p>
+                  </div>,
         net: moment(el.net).locale('ru').format('MMMM YYYY'),
         status: launchStatus[el.status],
         pads: el.location.pads.map(els => (els.name)),

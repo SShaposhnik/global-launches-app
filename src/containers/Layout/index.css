@@ -4,8 +4,9 @@
     text-align: center;
 }
 
-.layout {
+#layout {
   font-family: 'Ubuntu', sans-serif;
+  /* background: rgb(255, 255, 255); */
 }
 
 .site-layout-content {
@@ -33,8 +34,28 @@
   border: none;
   width: 50px;
   height: 50px;
-  background-color: rgb(4, 21, 40);
 }
 #myBtn:hover {
   background-color: #555;
 }
+
+
+/* #hellopreloader>
+      p {
+        display:none;
+      }
+      #hellopreloader_preload {
+        display: block;
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        bottom: 50px;
+        width: 100%;
+        height: 100%;
+        min-width: 1000px;
+        background: rgb(255, 255, 255) url(https://i.gifer.com/t9k.gif ) center center no-repeat;
+        background-size:400px;
+      } */
+
+      /* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
