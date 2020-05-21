@@ -24,22 +24,25 @@ const columns = [
   {
     title: 'Название запуска',
     dataIndex: 'RocketAndMissionName',
-    width: 400,
+    width: '30%',
+    align: 'center',
   },
   {
     title: 'Дата запуска',
     dataIndex: 'net',
-    width: 200,
-  },
-  {
-    title: 'Площадка / Космодром',
-    dataIndex: 'location',
-    width: 300,
+    align: 'center',
+    width: '25%',
   },
   {
     title: 'Таймер',
     dataIndex: 'timer',
-    width: 200,
+    align: 'center',
+  },
+  {
+    title: 'Площадка / Космодром',
+    dataIndex: 'location',
+    width: '30%',
+    align: 'center',
   },
 ]
 
@@ -64,6 +67,7 @@ export default ({ launches }) => {
       pagination={false}
       size="small"
       columns={columns}
+      bordered="true"
     />
   )
 }

@@ -26,12 +26,10 @@ class OldTable extends Component {
     super(props)
     this.state = {
       markersLaunches: null,
+      searchText: '',
+      searchedColumn: '',
     }
   }
-  state = {
-    searchText: '',
-    searchedColumn: '',
-  };
   showModal = () => {
     this.setState({
       visible: true,
@@ -119,6 +117,14 @@ class OldTable extends Component {
         dataIndex: "RocketAndMissionName",
         width: "400",
         ...this.getColumnSearchProps('Имя'),
+        onCell: (selectedRows, selectedRowKeys) => {
+          return {
+            onClick: event => {
+              this.setState({ markersLaunches: [selectedRows] })
+              this.showModal()
+            },
+          }
+        }
       },
       {
         title: "Дата запуска",

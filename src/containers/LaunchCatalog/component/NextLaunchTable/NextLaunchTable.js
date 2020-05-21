@@ -22,19 +22,20 @@ const columns = [
     {
         title: 'Название запуска',
         dataIndex: 'RocketAndMissionName',
-        width: 400,
-        align: 'left'
+        width: '30%',
+        align: 'center',
       },
       {
         title: 'Дата запуска',
         dataIndex: 'net',
-        width: 200,
+        align: 'center',
+        width: '25%',
       },
       {
         title: 'Площадка / Космодром',
         dataIndex: 'location',
-        width: 300,
-        // align: 'right'
+        width: '30%',
+        align: 'center',
       },
 ]
 
@@ -55,6 +56,7 @@ export default ({launches}) => {
             pagination={{ position: ['bottomCenter'], }}
             size="small"
             columns={columns}
+            bordered="true"
         />
     )
 }

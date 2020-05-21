@@ -6,10 +6,9 @@ import moment from 'moment'
 import 'moment/locale/ru'
 import './TableOld2.css'
 import { ClearOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons'
-const loadingIcon = <SearchOutlined style={{ fontSize: 30 }} spin />;
-
 
 moment.locale()
+
 const { Column } = Table
 const launchStatus = {
   1: 'Запуск скоро состоится',
@@ -92,8 +91,7 @@ class OldTable2 extends Component {
       </div>
     ),
     filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record.name.toString().toLowerCase().includes(value.toLowerCase()),
+    onFilter: (value, record) => record.name.toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: visible => {
       if (visible) {
         setTimeout(() => this.searchInput.select());
@@ -125,6 +123,114 @@ class OldTable2 extends Component {
   };
 
   render() {
+    const columns = [
+      {
+        title: "Название запуска",
+        dataIndex: "RocketAndMissionName",
+        width: '30%',
+        align: 'center',
+        ...this.getColumnSearchProps('Имя'),
+        onCell: (selectedRows, selectedRowKeys) => {
+          return {
+            onClick: event => {
+              this.setState({ markersLaunches: [selectedRows] })
+              this.showModal()
+            },
+          }
+        }
+      },
+      {
+        title: "Дата запуска",
+        dataIndex: "net",
+        align: 'center',
+        width: '25%',
+
+
+      },
+      {
+        title: "Статус",
+        dataIndex: "statusText",
+        align: 'center',
+        filters:[
+          {
+            text: 'Успешно',
+            value: 'Успешно',
+          },
+          {
+            text: 'Неудача',
+            value: 'Неудача',
+          },
+          {
+            text: 'Произошел сбой',
+            value: 'Произошел сбой',
+          },
+        ],
+        onFilter: (value, record) =>{return record.statusText.indexOf(value) === 0}
+      },
+      {
+        title: "Площадка / Космодром",
+        dataIndex: "location",
+        width: '30%',
+        align: 'center',
+        filters: [
+          {
+            text: 'США',
+            value: 'USA',
+          },
+          {
+            text: 'Китай',
+            value: 'CHN',
+          },
+          {
+            text: 'Казахстан',
+            value: 'KAZ',
+          },
+          {
+            text: 'Иран',
+            value: 'IRN',
+          },
+          {
+            text: 'Россия',
+            value: 'RUS',
+          },
+          {
+            text: 'Французская Гвиана',
+            value: 'GUF',
+          },
+          {
+            text: 'Япония',
+            value: 'JPN',
+          },
+          {
+            text: 'Новая Зеландия',
+            value: 'NZL',
+          },
+          {
+            text: 'Индия',
+            value: 'IND',
+          },
+          {
+            text: 'Великобритания',
+            value: 'UNK',
+          },
+          // {
+          //   text: 'Фильтр по космодромам',
+          //   value: 'Submenu',
+          //   children: [
+          //     {
+          //       text: 'Cape Canaveral',
+          //       value: 'Cape Canaveral',
+          //     },
+          //     {
+          //       text: 'Jiuquan',
+          //       value: 'Jiuquan',
+          //     },
+          //   ],
+          // }
+        ],
+        onFilter: (value, record) =>{return record.countryCode.indexOf(value) === 0},
+      },
+    ]
     const loading = this.props.loading
     const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
@@ -138,7 +244,6 @@ class OldTable2 extends Component {
         </div>}>
         {moment(el.net).utc(0).locale('ru').format('LLL z')}
       </Tooltip>,
-
       statusText: launchStatus[el.status],
       statusNumber: el.status,
       location: <div>
@@ -154,11 +259,14 @@ class OldTable2 extends Component {
       RocketWikiURL: el.rocket.wikiURL,
       countryCode: el.location.countryCode,
     }))
-    // перевернуть дату
+
+    // переверачиваем дату, не особо важно. Влияет только на вывод
     oldLaunch.reverse()
+
     return (
       <div >
         <Table
+          columns={columns}
           dataSource={oldLaunch}
           pagination={{
             position: ['bottomCenter'],
@@ -172,116 +280,12 @@ class OldTable2 extends Component {
           className="table"
           style={{ margin: 10 }}
           locale={{
-            filterReset: <ClearOutlined spin/>,
+            filterReset: <ClearOutlined/>,
             filterConfirm: <CheckOutlined/>,
           }}
           loading={loading}
+          bordered="true"
         >
-          <Column
-            title="Название запуска"
-            dataIndex="RocketAndMissionName"
-            width="400"
-            onCell={(selectedRows, selectedRowKeys) => {
-              return {
-                onClick: event => {
-                  this.setState({ markersLaunches: [selectedRows] })
-                  this.showModal()
-                },
-              }
-            }}
-            fixed={true}
-            
-          >
-          </Column>
-          <Column title="Дата запуска" dataIndex="net" width="200" ></Column>
-          <Column
-            title="Статус"
-            dataIndex="statusText"
-            width="100"
-            filters={[
-              {
-                text: 'Успешно',
-                value: 'Успешно',
-              },
-              {
-                text: 'Неудача',
-                value: 'Неудача',
-              },
-              {
-                text: 'Произошел сбой',
-                value: 'Произошел сбой',
-              },
-            ]}
-            onFilter={(value, record) => record.statusText.indexOf(value) === 0}
-          >
-
-          </Column>
-
-          <Column
-            title="Площадка / Космодром"
-            dataIndex="location"
-            width="300"
-            filters={[
-              {
-                text: 'США',
-                value: 'USA',
-              },
-              {
-                text: 'Китай',
-                value: 'CHN',
-              },
-              {
-                text: 'Казахстан',
-                value: 'KAZ',
-              },
-              {
-                text: 'Иран',
-                value: 'IRN',
-              },
-              {
-                text: 'Россия',
-                value: 'RUS',
-              },
-              {
-                text: 'Французская Гвиана',
-                value: 'GUF',
-              },
-              {
-                text: 'Япония',
-                value: 'JPN',
-              },
-              {
-                text: 'Новая Зеландия',
-                value: 'NZL',
-              },
-              {
-                text: 'Индия',
-                value: 'IND',
-              },
-              {
-                text: 'Великобритания',
-                value: 'UNK',
-              },
-              // {
-              //   text: 'Фильтр по космодромам',
-              //   value: 'Submenu',
-              //   children: [
-              //     {
-              //       text: 'Cape Canaveral',
-              //       value: 'Cape Canaveral',
-              //     },
-              //     {
-              //       text: 'Jiuquan',
-              //       value: 'Jiuquan',
-              //     },
-              //   ],
-              // }
-            ]}
-
-            onFilter={(value, record) => record.countryCode.indexOf(value) === 0}
-          >
-
-          </Column>
         </Table>
         <Modal
           centered

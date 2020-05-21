@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu, DatePicker, Button, Tooltip, Modal, Alert, notification } from 'antd'
+import { Layout, Menu, DatePicker, Button, Tooltip, Modal, Alert, notification, Table } from 'antd'
 import { ArrowUpOutlined, GithubOutlined, UpOutlined, RadiusUpleftOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import OldTable from '../LaunchCatalog/component/TableOld/TableOld'
 import OldTable2 from '../LaunchCatalog/component/TableOld2/TableOld2'
@@ -37,30 +37,29 @@ let def2 = moment().format('YYYY-MM-DD')
 // }
 // )
 
-const openNotification = placement => {
-    notification.info({
+const notification_for_invalid_date = () => {
+    notification.warning({
       message: <strong>За выбранный период запусков нет!</strong>,
-    //   description: <strong>За выбранный период запусков нет!</strong>,
-    placement,
-    className:"notification",
-      onClick: () => {
-        console.log('Notification Clicked!');
-      },
-    });
-  };
+    //   description: <strong>За выбранный период времени запусков нет!</strong>,
+      placement: 'topLeft',
+      className: 'notification',
+    //   duration: '1'
+    })
+  }
+
 function disabledDate(current) {
     return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
-// function scrollFunction() {
-//     if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-//         document.getElementById("myBtn").style.display = "block"
-//         // document.getElementById("layout").style.background = "rgb(4, 21, 40)"
-//     } else {
-//         document.getElementById("myBtn").style.display = "none"
-//         // document.getElementById("layout").style.background = "rgb(0, 0, 0)"
-//     }
-// }
-// window.onscroll = function () { scrollFunction() };
+function scrollFunction() {
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        document.getElementById("myBtn").style.display = "block"
+        // document.getElementById("layout").style.background = "rgb(4, 21, 40)"
+    } else {
+        document.getElementById("myBtn").style.display = "none"
+        // document.getElementById("layout").style.background = "rgb(0, 0, 0)"
+    }
+}
+window.onscroll = function () { scrollFunction() };
 
 class LayoutContainer extends Component {
     constructor(props) {
@@ -86,7 +85,6 @@ class LayoutContainer extends Component {
         fetch(url)
             .then(response => response.json())
             .then(data => this.setState({ launchOldData: data , loading: false, }))
-            .catch(console.log('sss'));
     }
 
     fetchNextLaunches(nextUrl) {
@@ -128,15 +126,6 @@ class LayoutContainer extends Component {
         })
     }
 
-    // checkCurrentDate (url){
-    //     let response = fetch(url)
-    //     if (response){
-    //         console.log(response);
-            
-    //     } else console.log(response);
-    // }
-
-
     countDown() {
         let secondsToGo = 3;
         const modal = Modal.warning({
@@ -159,13 +148,15 @@ class LayoutContainer extends Component {
     }
 
     async statusFetch (url) {
-        let response = await fetch(url);
-        if (response.ok) { // если HTTP-статус в диапазоне 200-299 получаем тело ответа
+        this.setState({ loading: true })
+        let response = await fetch(url)
+        if (response.ok) { // если HTTP-статус в диапазоне 200-299 получаем тело ответа иначе Notification
             this.fetchOldLaunches(url)
-        } else openNotification('topLeft')
+        } else {
+            notification_for_invalid_date('topLeft')
+            this.setState({ loading: false })
+        }
     }
-
-
 
     launchDateButtonOnChange(date, dateString) {
         oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + dateString[0] + '&enddate=' + dateString[1] + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
@@ -185,15 +176,14 @@ class LayoutContainer extends Component {
                                 <Menu.Item key="2">Запуски</Menu.Item>
                             </Menu>
                         </Header>
-
                         <Content style={{ padding: '0 50px' }}>
                             <div className="site-layout-content">
 
-                                {/* <h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1>
+                                <h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1>
                                 <LaunchTable launches={this.state.launchData.launches} />
 
                                 <h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1>
-                                <NextLaunchTable launches={this.state.NextlaunchData.launches} /> */}
+                                <NextLaunchTable launches={this.state.NextlaunchData.launches} />
 
                                 <h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1>
                                 <RangePicker
@@ -205,7 +195,6 @@ class LayoutContainer extends Component {
                                     allowClear={false}
                                     style={{ margin: 10 }}
                                 />
-
                                 <Tooltip
                                     title={
                                         <p>Здесь можно настроить период запусков</p>
@@ -219,14 +208,7 @@ class LayoutContainer extends Component {
 
                                 <Element name="scroll-to-Oldtable2">
                                     <OldTable2 launches={launchOldData.launches} loading={loading}/>
-                                    
                                 </Element>
-                                <Button type="primary" onClick={this.statusFetch}>
-        topLeft
-      </Button>
-                                {/* <p>table</p>
-                                <OldTable launches={launchOldData.launches} />
-                                <Tables launches={launchOldData.launches} /> */}
                             </div>
                             <testClass />
                             <Button
@@ -245,13 +227,6 @@ class LayoutContainer extends Component {
                                 id="ButtonUp"
                                 title="Наверх!"
                             /> */}
-
-                            {/* {this.state.launchOldData.status == "error"
-                                ? this.countDown()
-                                : <div className="defurl">{defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + def1 + '&enddate=' + def2 + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'}
-                                </div>
-                                // : this.state.normArr = this.state.launchOldData
-                            } */}
                             <Modal
                                 centered
                                 // title="Расположение запуска на карте"
