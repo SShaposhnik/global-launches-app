@@ -44,6 +44,7 @@ class Timer extends Component {
                     ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
                     : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>
                     }
+                    <strong>{time_up}</strong>
             </div>
         )
     }

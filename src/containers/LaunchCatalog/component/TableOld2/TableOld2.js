@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import { Table, Modal, Tooltip } from 'antd'
+import { Table, Modal, Tooltip, Input, Button, Space } from 'antd'
+import Highlighter from 'react-highlight-words';
 import MapChart from '../MapChart/MapChart'
 import moment from 'moment'
 import 'moment/locale/ru'
 import './TableOld2.css'
-import { ClearOutlined, CheckOutlined } from '@ant-design/icons'
+import { ClearOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons'
+const loadingIcon = <SearchOutlined style={{ fontSize: 30 }} spin />;
+
 
 moment.locale()
 const { Column } = Table
 const launchStatus = {
-  1: 'Дата и время определены',
+  1: 'Запуск скоро состоится',
   2: 'Дата и время будут объявлены позже',
   3: 'Успешно',
   4: 'Неудача',
@@ -19,7 +22,7 @@ const launchStatus = {
 }
 
 const country = {
-  USA: 'Америка',
+  USA: 'США',
   CHN: 'Китай',
   KAZ: 'Казахстан',
   IRN: 'Иран',
@@ -35,7 +38,9 @@ class OldTable2 extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      markersLaunches: null
+      markersLaunches: null,
+      searchText: '',
+      searchedColumn: '',
     }
   }
 
@@ -57,13 +62,70 @@ class OldTable2 extends Component {
     })
   }
 
-  testf() {
-    console.log('testf in table')
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record.name.toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text.toString()}
+        />
+      ) : (
+          text
+        ),
+  })
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex.name,
+    });
+  };
 
-  }
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
 
   render() {
-
+    const loading = this.props.loading
     const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
       RocketAndMissionName: <a>{el.name}</a>,
@@ -79,8 +141,12 @@ class OldTable2 extends Component {
 
       statusText: launchStatus[el.status],
       statusNumber: el.status,
-      pads: el.location.name.split(',')[0],
+      location: <div>
+        {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
+        {el.location.name.split(',')[0]}
+      </div>,
       locationWithoutPads: el.location.name,
+      spaceortName: el.location.name.split(',')[0],
       longitude: el.location.pads.map(els => (els.longitude)),
       latitude: el.location.pads.map(els => (els.latitude)),
       PadsMapURL: el.location.pads.map(url => (url.mapURL)),
@@ -88,7 +154,6 @@ class OldTable2 extends Component {
       RocketWikiURL: el.rocket.wikiURL,
       countryCode: el.location.countryCode,
     }))
-
     // перевернуть дату
     oldLaunch.reverse()
     return (
@@ -107,11 +172,15 @@ class OldTable2 extends Component {
           className="table"
           style={{ margin: 10 }}
           locale={{
-            filterReset: <ClearOutlined />,
-            filterConfirm: <CheckOutlined />,
+            filterReset: <ClearOutlined spin/>,
+            filterConfirm: <CheckOutlined/>,
           }}
+          loading={loading}
         >
-          <Column title="Название запуска" dataIndex="RocketAndMissionName" width="400"
+          <Column
+            title="Название запуска"
+            dataIndex="RocketAndMissionName"
+            width="400"
             onCell={(selectedRows, selectedRowKeys) => {
               return {
                 onClick: event => {
@@ -121,6 +190,7 @@ class OldTable2 extends Component {
               }
             }}
             fixed={true}
+            
           >
           </Column>
           <Column title="Дата запуска" dataIndex="net" width="200" ></Column>
@@ -148,12 +218,12 @@ class OldTable2 extends Component {
           </Column>
 
           <Column
-            title="Космодром"
-            dataIndex="pads"
+            title="Площадка / Космодром"
+            dataIndex="location"
             width="300"
             filters={[
               {
-                text: 'Америка',
+                text: 'США',
                 value: 'USA',
               },
               {
@@ -192,20 +262,20 @@ class OldTable2 extends Component {
                 text: 'Великобритания',
                 value: 'UNK',
               },
-              {
-                text: 'Тут можно сделать добавить фильтр, если нужно',
-                value: 'Submenu',
-                children: [
-                  {
-                    text: 'Green',
-                    value: 'Green',
-                  },
-                  {
-                    text: 'Black',
-                    value: 'Black',
-                  },
-                ],
-              }
+              // {
+              //   text: 'Фильтр по космодромам',
+              //   value: 'Submenu',
+              //   children: [
+              //     {
+              //       text: 'Cape Canaveral',
+              //       value: 'Cape Canaveral',
+              //     },
+              //     {
+              //       text: 'Jiuquan',
+              //       value: 'Jiuquan',
+              //     },
+              //   ],
+              // }
             ]}
 
             onFilter={(value, record) => record.countryCode.indexOf(value) === 0}

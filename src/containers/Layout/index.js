@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Layout, Menu, DatePicker, Button, Tooltip, Modal, Alert } from 'antd'
-import { ArrowUpOutlined, GithubOutlined, UpOutlined, QuestionCircleOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { Layout, Menu, DatePicker, Button, Tooltip, Modal, Alert, notification } from 'antd'
+import { ArrowUpOutlined, GithubOutlined, UpOutlined, RadiusUpleftOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import OldTable from '../LaunchCatalog/component/TableOld/TableOld'
 import OldTable2 from '../LaunchCatalog/component/TableOld2/TableOld2'
 import LaunchTable from "../LaunchCatalog/component/Table/Table"
@@ -8,9 +8,9 @@ import NextLaunchTable from '../LaunchCatalog/component/NextLaunchTable/NextLaun
 import './index.css' // стандарт
 import './index.scss' // прыгающие квадраты
 import moment from 'moment'
-import { animateScroll as scroll } from 'react-scroll'
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css'
-// import myImage from '../LaunchCatalog/image/clear-filter.gif'
+import Tables from '../LaunchCatalog/component/test/table'
 const { Header, Content, Footer } = Layout
 
 // следующие запуски с временем и датой
@@ -22,34 +22,45 @@ const nextUrl = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 const { RangePicker } = DatePicker
 const limit = 10000
 const thisYear = moment().format('YYYY')
+
 // старые запуски
-let ckeckU = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(thisYear).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
-let defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment('2000').format('YYYY-MM-DD') + '&enddate=' + moment('2001').format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
+
+let defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(thisYear).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
+
 let oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(thisYear).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
 
-let checkUrl = null
-
-let def1 = moment(2000).format('YYYY')
-let def2 = moment(2001).format('YYYY')
+let def1 = moment(thisYear).format('YYYY-MM-DD')
+let def2 = moment().format('YYYY-MM-DD')
 // const modals = Modal.warning({
-//     //   title: 'This is a notification message',
 //     content: `можно вывести стартовое сообщение!`,
-// })
+//     maskClosable: "true"
+// }
+// )
 
+const openNotification = placement => {
+    notification.info({
+      message: <strong>За выбранный период запусков нет!</strong>,
+    //   description: <strong>За выбранный период запусков нет!</strong>,
+    placement,
+    className:"notification",
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
 function disabledDate(current) {
     return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
-function scrollFunction() {
-    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        document.getElementById("myBtn").style.display = "block"
-        // document.getElementById("layout").style.background = "rgb(4, 21, 40)"
-    } else {
-        document.getElementById("myBtn").style.display = "none"
-        // document.getElementById("layout").style.background = "rgb(0, 0, 0)"
-    }
-}
-window.onscroll = function () { scrollFunction() };
-
+// function scrollFunction() {
+//     if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+//         document.getElementById("myBtn").style.display = "block"
+//         // document.getElementById("layout").style.background = "rgb(4, 21, 40)"
+//     } else {
+//         document.getElementById("myBtn").style.display = "none"
+//         // document.getElementById("layout").style.background = "rgb(0, 0, 0)"
+//     }
+// }
+// window.onscroll = function () { scrollFunction() };
 
 class LayoutContainer extends Component {
     constructor(props) {
@@ -58,16 +69,10 @@ class LayoutContainer extends Component {
             launchData: null,
             launchOldData: null,
             NextlaunchData: null,
-            check: null,
-            status: null,
             visible: false,
-            correctData: false,
+            loading: false,
         }
-        this.setState({
-            // launchOldData: null,
-        })
         this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
-        // this.checkData = this.checkData.bind(this)
     }
 
     fetchLaunches(url) {
@@ -76,36 +81,24 @@ class LayoutContainer extends Component {
             .then(data => this.setState({ launchData: data }))
     }
 
-    fetchOldLaunches(oldurl) {
-        fetch(oldurl)
+    fetchOldLaunches(url) {
+        this.setState({ loading: true })
+        fetch(url)
             .then(response => response.json())
-            .then(data => this.setState({ launchOldData: data }))
+            .then(data => this.setState({ launchOldData: data , loading: false, }))
+            .catch(console.log('sss'));
     }
+
     fetchNextLaunches(nextUrl) {
         fetch(nextUrl)
             .then(response => response.json())
             .then(data => this.setState({ NextlaunchData: data }))
     }
 
-
-
-
-    fetchCheck(checkUrl){
-        fetch(checkUrl)
-            .then(response => response.json())
-            .then(data => this.setState({ check: data }))
-    }
-
-
-
-
-
-
     componentDidMount() {
         this.fetchLaunches(url)
         this.fetchOldLaunches(oldurl)
         this.fetchNextLaunches(nextUrl)
-        this.fetchCheck(checkUrl)
     }
 
 
@@ -127,13 +120,31 @@ class LayoutContainer extends Component {
         })
     }
 
+    scrollToOldTable2() {
+        scroller.scrollTo('scroll-to-Oldtable2', {
+          duration: 800,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        })
+    }
+
+    // checkCurrentDate (url){
+    //     let response = fetch(url)
+    //     if (response){
+    //         console.log(response);
+            
+    //     } else console.log(response);
+    // }
+
+
     countDown() {
         let secondsToGo = 3;
-        console.log(this.state.launchOldData)
         const modal = Modal.warning({
             content: `За выбранный период запусков нет!`,
         })
+        // modal.centered="true"
         this.fetchOldLaunches(defurl)
+        // modal.destroy()
         // const timer = setInterval(() => {
         //   secondsToGo -= 1;
         //   modal.update({
@@ -147,19 +158,25 @@ class LayoutContainer extends Component {
         // }, secondsToGo * 1000)
     }
 
+    async statusFetch (url) {
+        let response = await fetch(url);
+        if (response.ok) { // если HTTP-статус в диапазоне 200-299 получаем тело ответа
+            this.fetchOldLaunches(url)
+        } else openNotification('topLeft')
+    }
+
+
+
     launchDateButtonOnChange(date, dateString) {
         oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + dateString[0] + '&enddate=' + dateString[1] + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
-        // this.fetchOldLaunches(oldurl)
-        this.fetchOldLaunches(oldurl)
-        def1 = dateString[0]
-        def2 = dateString[1]
+        this.statusFetch(oldurl)
     }
 
     render() {
-
+        const { launchOldData,launchData,NextlaunchData, loading } = this.state
         return (
             <div>
-                {this.state.launchOldData && this.state.NextlaunchData && this.state.launchData
+                {launchOldData && NextlaunchData && launchData
                     ? <Layout id="layout">
                         <Header>
                             <div className="logo"></div>
@@ -178,6 +195,7 @@ class LayoutContainer extends Component {
                                 <h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1>
                                 <NextLaunchTable launches={this.state.NextlaunchData.launches} /> */}
 
+                                <h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1>
                                 <RangePicker
                                     className="RangePicker"
                                     defaultValue={[moment(thisYear), moment()]}
@@ -199,11 +217,18 @@ class LayoutContainer extends Component {
                                     <InfoCircleOutlined style={{ fontSize: 19 }} />
                                 </Tooltip>
 
-                                <h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1>
-                                <OldTable2 launches={this.state.launchOldData.launches} />
-
+                                <Element name="scroll-to-Oldtable2">
+                                    <OldTable2 launches={launchOldData.launches} loading={loading}/>
+                                    
+                                </Element>
+                                <Button type="primary" onClick={this.statusFetch}>
+        topLeft
+      </Button>
+                                {/* <p>table</p>
+                                <OldTable launches={launchOldData.launches} />
+                                <Tables launches={launchOldData.launches} /> */}
                             </div>
-
+                            <testClass />
                             <Button
                                 type="primary"
                                 shape="circle"
@@ -212,29 +237,39 @@ class LayoutContainer extends Component {
                                 id="myBtn"
                                 title="Наверх!"
                             />
-                            {/* defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + def1+ '&enddate=' + def2+ '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode' */}
-                            {this.state.launchOldData.status == "error"
-                                ? <div>{this.countDown()}{
-                                }</div>
-                            : <div>{console.log(this.state.launchOldData)}</div>
-                            }
+                            {/* <Button
+                                type="primary"
+                                // shape="circle"
+                                icon={<UpOutlined />}
+                                onClick={this.scrollToOldTable2}
+                                id="ButtonUp"
+                                title="Наверх!"
+                            /> */}
+
+                            {/* {this.state.launchOldData.status == "error"
+                                ? this.countDown()
+                                : <div className="defurl">{defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + def1 + '&enddate=' + def2 + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'}
+                                </div>
+                                // : this.state.normArr = this.state.launchOldData
+                            } */}
+                            <Modal
+                                centered
+                                // title="Расположение запуска на карте"
+                                visible={this.state.visible}
+                                onOk={this.handleOk}
+                                onCancel={this.handleCancel}
+                                footer={null}
+                                width='70%'
+                                closable={false}
+                            >
+                                контент
+                                </Modal>
                         </Content>
                         <Footer className="footer">
                             Design © 2020 <br></br>
                             <GithubOutlined />
                             <a href="https://github.com/SShaposhnik/global-launches-app" target="_blank"> Github</a>
                         </Footer>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          afterClose={this.testf}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
                     </Layout>
 
                     : <div id="hellopreloader">

@@ -17,6 +17,7 @@
     "pretty-ms": "^6.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-highlight-words": "^0.16.0",
     "react-scripts": "3.4.1",
     "react-scroll": "^1.7.16",
     "react-simple-maps": "^2.0.0",

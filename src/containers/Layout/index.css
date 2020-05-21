@@ -38,7 +38,9 @@
 #myBtn:hover {
   background-color: #555;
 }
-
+.defurl {
+  display: none;
+}
 
 /* #hellopreloader>
       p {
@@ -59,3 +61,7 @@
       } */
 
       /* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
+
+.notification {
+  pointer-events: none;
+}

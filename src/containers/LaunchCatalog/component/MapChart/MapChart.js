@@ -26,7 +26,7 @@ const launchStatus = {
 const MapChart = ({ launches }) => {
   const markers = launches.map(el => ({
     id: el.id,
-    RocketAndMissionName: el.name,
+    RocketAndMissionNames: el.name,
     rocketName: el.rocket,
     status: el.statusNumber,
     markerOffset: markerOffset,
@@ -37,6 +37,7 @@ const MapChart = ({ launches }) => {
     latitude: el.latitude,
     longitude: el.longitude,
   }))
+console.log('mapchart',launches);
 
   return (
     <ComposableMap

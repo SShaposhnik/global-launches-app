@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Table, Modal, Tooltip } from 'antd'
+import { Table, Modal, Tooltip, Input, Space, Button } from 'antd'
 import MapChart from '../MapChart/MapChart'
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import moment from 'moment'
 import 'moment/locale/ru'
-import './TableOld.css'
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 
 moment.locale()
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const { Column } = Table;
+
 const launchStatus = {
   1: 'Дата и время определены',
   2: 'Дата и время будут объявлены позже',
@@ -21,21 +21,17 @@ const launchStatus = {
   7: 'Произошел сбой',
 }
 
-
 class OldTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      markersLaunches: null
+      markersLaunches: null,
     }
-
-    this.scrollToTop = this.scrollToTop.bind(this);
   }
-
-  scrollToTop() {
-    scroll.scrollToTop();
-  }
-
+  state = {
+    searchText: '',
+    searchedColumn: '',
+  };
   showModal = () => {
     this.setState({
       visible: true,
@@ -54,8 +50,91 @@ class OldTable extends Component {
     })
   }
 
-  render() {
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) => record.name.toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text.toString()}
+        />
+      ) : (
+          text
+        ),
+  });
 
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex.name,
+    });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
+
+  render() {
+    const columns = [
+      {
+        title: "Название запуска",
+        dataIndex: "RocketAndMissionName",
+        width: "400",
+        ...this.getColumnSearchProps('Имя'),
+      },
+      {
+        title: "Дата запуска",
+        dataIndex: "net",
+      },
+      {
+        title: "Статус",
+        dataIndex: "statusText",
+        width: "100",
+      },
+      {
+        title: "Космодром",
+        dataIndex: "pads",
+        width: "300"
+      },
+    ]
     const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
       RocketAndMissionName: <a>{el.name}</a>,
@@ -80,6 +159,7 @@ class OldTable extends Component {
     return (
       <div >
         <Table
+          columns={columns}
           dataSource={oldLaunch}
           pagination={{
             position: ['bottomCenter'],
@@ -91,48 +171,10 @@ class OldTable extends Component {
           size="small"
           className="table"
           style={{ margin: 10 }}
-          locale={{
-            filterReset: 'Сбросить',
-          }
-          }
+          bordered="true"
         >
-          <Column title="Название запуска" dataIndex="RocketAndMissionName" width="400"
-            onCell={(selectedRows, selectedRowKeys) => {
-              return {
-                onClick: event => {
-                  this.setState({ markersLaunches: [selectedRows] })
-                  this.showModal()
-                },
-              }
-            }}
-            fixed={true}
-          >
-          </Column>
-          <Column title="Дата запуска" dataIndex="net"               ></Column>
-          <Column
-            title="Статус"
-            dataIndex="statusText"
-            width="100"
-            filters={[
-              {
-                text: 'Успешно',
-                value: 'Успешно',
-              },
-              {
-                text: 'Неудача',
-                value: 'Неудача',
-              },
-              {
-                text: 'Произошел сбой',
-                value: 'Произошел сбой',
-              },
-            ]}
-            onFilter={(value, record) => record.statusText.indexOf(value) === 0}
-          >
-
-          </Column>
-          <Column title="Космодром" dataIndex="pads" width="300"></Column>
         </Table>
+
         <Modal
           centered
           // title="Расположение запуска на карте"
