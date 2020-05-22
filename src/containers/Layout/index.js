@@ -1,51 +1,76 @@
 import React, { Component } from 'react'
-import { Layout, Menu, DatePicker, Button, Tooltip, Modal, Alert, notification, Table } from 'antd'
-import { ArrowUpOutlined, GithubOutlined, UpOutlined, RadiusUpleftOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import {
+    Layout,
+    Menu,
+    DatePicker,
+    Button,
+    Tooltip,
+    Modal,
+    notification,
+    Divider,
+    Slider,
+    Switch
+} from 'antd'
+import {
+    GithubOutlined,
+    UpOutlined,
+    InfoCircleOutlined,
+    FrownOutlined
+} from '@ant-design/icons'
+import 'antd/dist/antd.css'
 import OldTable from '../LaunchCatalog/component/TableOld/TableOld'
 import OldTable2 from '../LaunchCatalog/component/TableOld2/TableOld2'
 import LaunchTable from "../LaunchCatalog/component/Table/Table"
 import NextLaunchTable from '../LaunchCatalog/component/NextLaunchTable/NextLaunchTable'
+import SliderMapChart from '../LaunchCatalog/component/SliderMapChart/SliderMapChart'
+import MapChart from '../LaunchCatalog/component/MapChart/MapChart'
 import './index.css' // стандарт
 import './index.scss' // прыгающие квадраты
 import moment from 'moment'
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import 'antd/dist/antd.css'
-import Tables from '../LaunchCatalog/component/test/table'
+import {
+    Element,
+    animateScroll as scroll, scroller
+} from 'react-scroll'
+
 const { Header, Content, Footer } = Layout
 
 // следующие запуски с временем и датой
-const url = 'https://launchlibrary.net/1.4/launch/next/1000?status=1,2'
+const URL = 'https://launchlibrary.net/1.4/launch/next/1000?status=1,2'
 
 // следующие запуски с датой(без времени)
-const nextUrl = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
+const NEXT_URL = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 
 const { RangePicker } = DatePicker
-const limit = 10000
-const thisYear = moment().format('YYYY')
-
+const LIMIT = 10000
+const THIS_YEAR = moment().format('YYYY')
+// для слайдера
+// let leftValue  = moment(THIS_YEAR).format('YYYY-MM-DD')
+// let rightValue = moment().format('YYYY-MM-DD')
+// let maxValue   = leftValue.diff(rightValue, 'days')
+let maxValue = 142
 // старые запуски
+let oldUrl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(THIS_YEAR).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,mapURL,countryCode'
 
-let defurl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(thisYear).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
-
-let oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(thisYear).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
-
-let def1 = moment(thisYear).format('YYYY-MM-DD')
-let def2 = moment().format('YYYY-MM-DD')
 // const modals = Modal.warning({
 //     content: `можно вывести стартовое сообщение!`,
 //     maskClosable: "true"
 // }
 // )
-
-const notification_for_invalid_date = () => {
+const notificationForInvalidDate = (placement) => {
     notification.warning({
-      message: <strong>За выбранный период запусков нет!</strong>,
-    //   description: <strong>За выбранный период времени запусков нет!</strong>,
-      placement: 'topLeft',
-      className: 'notification',
-    //   duration: '1'
+        message: <strong>Похоже, что за выбранный период времени запусков нет</strong> ,
+        //   description: <strong>За выбранный период времени запусков нет!</strong>,
+        placement,
+        //   duration: '1'
     })
-  }
+}
+
+const notificationMessage = (message, placement) => {
+    notification.error({
+        message,
+        placement,
+    })
+}
 
 function disabledDate(current) {
     return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
@@ -70,6 +95,7 @@ class LayoutContainer extends Component {
             NextlaunchData: null,
             visible: false,
             loading: false,
+            disabledSlider: false,
         }
         this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
     }
@@ -84,21 +110,24 @@ class LayoutContainer extends Component {
         this.setState({ loading: true })
         fetch(url)
             .then(response => response.json())
-            .then(data => this.setState({ launchOldData: data , loading: false, }))
+            .then(data => this.setState({ launchOldData: data, loading: false, }))
     }
 
-    fetchNextLaunches(nextUrl) {
-        fetch(nextUrl)
+    fetchNextLaunches(url) {
+        fetch(url)
             .then(response => response.json())
             .then(data => this.setState({ NextlaunchData: data }))
     }
 
     componentDidMount() {
-        this.fetchLaunches(url)
-        this.fetchOldLaunches(oldurl)
-        this.fetchNextLaunches(nextUrl)
+        this.fetchLaunches(URL)
+        this.fetchOldLaunches(oldUrl)
+        this.fetchNextLaunches(NEXT_URL)
     }
 
+    handleDisabledChange = disabled => {
+        this.setState({ disabled })
+    }
 
     showModal = () => {
         this.setState({
@@ -120,51 +149,31 @@ class LayoutContainer extends Component {
 
     scrollToOldTable2() {
         scroller.scrollTo('scroll-to-Oldtable2', {
-          duration: 800,
-          delay: 0,
-          smooth: 'easeInOutQuart'
+            duration: 800,
+            delay: 0,
+            smooth: 'easeInOutQuart'
         })
     }
 
-    countDown() {
-        let secondsToGo = 3;
-        const modal = Modal.warning({
-            content: `За выбранный период запусков нет!`,
-        })
-        // modal.centered="true"
-        this.fetchOldLaunches(defurl)
-        // modal.destroy()
-        // const timer = setInterval(() => {
-        //   secondsToGo -= 1;
-        //   modal.update({
-        //     content: `This modal will be destroyed after ${secondsToGo} second.`,
-        //   })
-        // }, 1000)
-
-        // setTimeout(() => {
-        //   clearInterval(timer)
-        //   modal.destroy()
-        // }, secondsToGo * 1000)
-    }
-
-    async statusFetch (url) {
+    async validationOfDate(url) {
         this.setState({ loading: true })
         let response = await fetch(url)
         if (response.ok) { // если HTTP-статус в диапазоне 200-299 получаем тело ответа иначе Notification
             this.fetchOldLaunches(url)
         } else {
-            notification_for_invalid_date('topLeft')
+            notificationForInvalidDate('topLeft')
             this.setState({ loading: false })
         }
     }
 
     launchDateButtonOnChange(date, dateString) {
-        oldurl = 'https://launchlibrary.net/1.4/launch?startdate=' + dateString[0] + '&enddate=' + dateString[1] + '&limit=' + limit + '&fields=name,net,location,status,rocket,mapURL,countryCode'
-        this.statusFetch(oldurl)
+        oldUrl = 'https://launchlibrary.net/1.4/launch?startdate=' + dateString[0] + '&enddate=' + dateString[1] + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,mapURL,countryCode'
+        this.validationOfDate(oldUrl)
     }
 
+
     render() {
-        const { launchOldData,launchData,NextlaunchData, loading } = this.state
+        const { launchOldData, launchData, NextlaunchData, loading, disabled } = this.state
         return (
             <div>
                 {launchOldData && NextlaunchData && launchData
@@ -178,17 +187,16 @@ class LayoutContainer extends Component {
                         </Header>
                         <Content style={{ padding: '0 50px' }}>
                             <div className="site-layout-content">
+                                {/* <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
+                                <LaunchTable launches={launchData.launches} />
 
-                                <h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1>
-                                <LaunchTable launches={this.state.launchData.launches} />
+                                <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
+                                <NextLaunchTable launches={NextlaunchData.launches} /> */}
 
-                                <h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1>
-                                <NextLaunchTable launches={this.state.NextlaunchData.launches} />
-
-                                <h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1>
+                                <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
                                 <RangePicker
                                     className="RangePicker"
-                                    defaultValue={[moment(thisYear), moment()]}
+                                    defaultValue={[moment(THIS_YEAR), moment()]}
                                     showToday={false, true}
                                     onChange={this.launchDateButtonOnChange}
                                     disabledDate={disabledDate}
@@ -207,19 +215,26 @@ class LayoutContainer extends Component {
                                 </Tooltip>
 
                                 <Element name="scroll-to-Oldtable2">
-                                    <OldTable2 launches={launchOldData.launches} loading={loading}/>
+                                    {/* <OldTable2 launches={launchOldData.launches} loading={loading} /> */}
                                 </Element>
+                                    <SliderMapChart launches={launchOldData.launches} />
                             </div>
-                            <testClass />
-                            <Button
-                                type="primary"
-                                shape="circle"
-                                icon={<UpOutlined />}
-                                onClick={scroll.scrollToTop}
-                                id="myBtn"
-                                title="Наверх!"
-                            />
-                            {/* <Button
+                        </Content>
+
+                        <Footer className="footer">
+                            Design © 2020 <br></br>
+                            <GithubOutlined />
+                            <a href="https://github.com/SShaposhnik/global-launches-app" target="_blank"> Github</a>
+                        </Footer>
+                        <Button
+                            type="primary"
+                            shape="circle"
+                            icon={<UpOutlined />}
+                            onClick={scroll.scrollToTop}
+                            id="myBtn"
+                            title="Наверх!"
+                        />
+                        {/* <Button
                                 type="primary"
                                 // shape="circle"
                                 icon={<UpOutlined />}
@@ -227,29 +242,11 @@ class LayoutContainer extends Component {
                                 id="ButtonUp"
                                 title="Наверх!"
                             /> */}
-                            <Modal
-                                centered
-                                // title="Расположение запуска на карте"
-                                visible={this.state.visible}
-                                onOk={this.handleOk}
-                                onCancel={this.handleCancel}
-                                footer={null}
-                                width='70%'
-                                closable={false}
-                            >
-                                контент
-                                </Modal>
-                        </Content>
-                        <Footer className="footer">
-                            Design © 2020 <br></br>
-                            <GithubOutlined />
-                            <a href="https://github.com/SShaposhnik/global-launches-app" target="_blank"> Github</a>
-                        </Footer>
                     </Layout>
 
                     : <div id="hellopreloader">
                         <div id="hellopreloader_preload">
-                            <div class="container">
+                            <div className="container">
                                 <div className="element"></div>
                                 <div className="element"></div>
                                 <div className="element"></div>

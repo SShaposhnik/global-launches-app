@@ -4,8 +4,7 @@ import './Timer.css'
 
 class Timer extends Component {
     constructor(props) {
-        super(props);
-        this.count = this.count.bind(this)
+        super(props)
         this.state = {
             days: 0,
             minutes: 0,
@@ -14,6 +13,7 @@ class Timer extends Component {
             time_up: "",
             deadline: null,
         }
+        this.count = this.count.bind(this)
     }
 
     count () {
@@ -34,6 +34,8 @@ class Timer extends Component {
         const deadline = new Date(this.props.timeTillLaunch).getTime();
         setInterval(this.count, 1000)
         this.setState({...this.state, deadline: deadline})
+        console.log('timer data', this.state.deadline)
+        
     }
 
     render() {

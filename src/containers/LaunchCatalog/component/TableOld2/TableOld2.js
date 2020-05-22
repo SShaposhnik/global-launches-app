@@ -10,7 +10,7 @@ import { ClearOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons'
 moment.locale()
 
 const { Column } = Table
-const launchStatus = {
+const LAUNCH_STATUS = {
   1: 'Запуск скоро состоится',
   2: 'Дата и время будут объявлены позже',
   3: 'Успешно',
@@ -20,7 +20,7 @@ const launchStatus = {
   7: 'Произошел сбой',
 }
 
-const country = {
+const COUNTRY = {
   USA: 'США',
   CHN: 'Китай',
   KAZ: 'Казахстан',
@@ -110,17 +110,18 @@ class OldTable2 extends Component {
         ),
   })
   handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
+    confirm()
     this.setState({
       searchText: selectedKeys[0],
       searchedColumn: dataIndex.name,
     });
-  };
+  }
 
   handleReset = clearFilters => {
-    clearFilters();
+    clearFilters()
     this.setState({ searchText: '' });
-  };
+  }
+
 
   render() {
     const columns = [
@@ -144,7 +145,6 @@ class OldTable2 extends Component {
         dataIndex: "net",
         align: 'center',
         width: '25%',
-
 
       },
       {
@@ -244,7 +244,7 @@ class OldTable2 extends Component {
         </div>}>
         {moment(el.net).utc(0).locale('ru').format('LLL z')}
       </Tooltip>,
-      statusText: launchStatus[el.status],
+      statusText: LAUNCH_STATUS[el.status],
       statusNumber: el.status,
       location: <div>
         {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
@@ -297,6 +297,7 @@ class OldTable2 extends Component {
           width='70%'
           closable={false}
         >
+          {/* <a onClick={}>ТЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫыК</a> */}
           <MapChart launches={this.state.markersLaunches} />
         </Modal>
       </div>

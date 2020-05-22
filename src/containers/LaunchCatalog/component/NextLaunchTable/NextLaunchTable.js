@@ -5,8 +5,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 import 'moment/locale/ru'
 moment.locale()
 
-const antIcon = <LoadingOutlined style={{ fontSize: 240 }} spin />;
-const { Column, ColumnGroup} = Table;
 
 const launchStatus = {
     1: 'Запланированы точные дата и время запуска',
@@ -60,8 +58,3 @@ export default ({launches}) => {
         />
     )
 }
-
-// {this.state.markersLaunches
-//     ? <MapChart launches={this.state.markersLaunches} />
-//     : <h1>НАДО ВЫБРАТЬ ЗАПУСК</h1>
-// }

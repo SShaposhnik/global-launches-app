@@ -10,7 +10,7 @@
 }
 
 .site-layout-content {
-  /* background: rgb(226, 226, 226); */
+  background: #fff;
   padding: 24px;
   font-family: 'Ubuntu', sans-serif;
 }
@@ -61,3 +61,6 @@
       } */
 
       /* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
+
+.Next-Launch-Table {
+}
