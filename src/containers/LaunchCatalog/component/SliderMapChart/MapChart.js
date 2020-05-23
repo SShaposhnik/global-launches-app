@@ -27,7 +27,7 @@ const MapChartt = ({ launches }) => {
     rocketName: el.rocketName,
     flightStatus: el.flightStatus,
     coordinates: el.coordinates,
-    markerOffset: el.markerOffset,
+    markerOffset: markerOffset,
   }))
 
   return (
@@ -55,7 +55,7 @@ const MapChartt = ({ launches }) => {
         className="MarkersSryle"
         >
             <g
-              fill="green"
+              fill={launchStatus[flightStatus]}
               stroke="none"
               strokeWidth="3"
               strokeLinecap="round"

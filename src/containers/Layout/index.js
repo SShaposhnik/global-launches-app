@@ -43,11 +43,7 @@ const NEXT_URL = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 const { RangePicker } = DatePicker
 const LIMIT = 10000
 const THIS_YEAR = moment().format('YYYY')
-// для слайдера
-// let leftValue  = moment(THIS_YEAR).format('YYYY-MM-DD')
-// let rightValue = moment().format('YYYY-MM-DD')
-// let maxValue   = leftValue.diff(rightValue, 'days')
-let maxValue = 142
+
 // старые запуски
 let oldUrl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(THIS_YEAR).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,mapURL,countryCode'
 
@@ -61,7 +57,6 @@ const notificationForInvalidDate = (placement) => {
         message: <strong>Похоже, что за выбранный период времени запусков нет</strong> ,
         //   description: <strong>За выбранный период времени запусков нет!</strong>,
         placement,
-        //   duration: '1'
     })
 }
 
@@ -78,10 +73,8 @@ function disabledDate(current) {
 function scrollFunction() {
     if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
         document.getElementById("myBtn").style.display = "block"
-        // document.getElementById("layout").style.background = "rgb(4, 21, 40)"
     } else {
         document.getElementById("myBtn").style.display = "none"
-        // document.getElementById("layout").style.background = "rgb(0, 0, 0)"
     }
 }
 window.onscroll = function () { scrollFunction() };

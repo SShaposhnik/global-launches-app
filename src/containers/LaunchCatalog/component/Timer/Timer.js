@@ -34,8 +34,6 @@ class Timer extends Component {
         const deadline = new Date(this.props.timeTillLaunch).getTime();
         setInterval(this.count, 1000)
         this.setState({...this.state, deadline: deadline})
-        console.log('timer data', this.state.deadline)
-        
     }
 
     render() {
