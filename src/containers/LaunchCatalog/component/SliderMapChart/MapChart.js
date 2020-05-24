@@ -31,9 +31,10 @@ const MapChartt = ({ launches }) => {
   }))
 
   return (
+    <div>
     <ComposableMap
       projection="geoMercator"
-      width="800"
+      width="1800"
       height="600"
       className="MapChartStyle"
     >
@@ -76,6 +77,7 @@ const MapChartt = ({ launches }) => {
       )
       )}
     </ComposableMap>
+    </div>
   )
 }
 

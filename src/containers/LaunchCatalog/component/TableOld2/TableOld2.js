@@ -114,12 +114,12 @@ class OldTable2 extends Component {
     this.setState({
       searchText: selectedKeys[0],
       searchedColumn: dataIndex.name,
-    });
+    })
   }
 
   handleReset = clearFilters => {
     clearFilters()
-    this.setState({ searchText: '' });
+    this.setState({ searchText: '' })
   }
 
 
@@ -232,6 +232,7 @@ class OldTable2 extends Component {
       },
     ]
     const loading = this.props.loading
+
     const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
       RocketAndMissionName: <a>{el.name}</a>,
