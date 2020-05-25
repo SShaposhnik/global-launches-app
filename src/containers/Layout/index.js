@@ -7,6 +7,7 @@ import {
   Tooltip,
   notification,
   Divider,
+  Breadcrumb
 } from 'antd'
 import {
   GithubOutlined,
@@ -33,6 +34,12 @@ import {
   Element,
   animateScroll as scroll, scroller
 } from 'react-scroll'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
@@ -183,12 +190,45 @@ class LayoutContainer extends Component {
               </Menu>
             </Header>
             <Content style={{ padding: '0 50px' }}>
-              <div className="site-layout-content">
-                <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
-                                <LaunchTable launches={launchData.launches} />
 
-                                <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
-                                <NextLaunchTable launches={NextlaunchData.launches} />
+
+              <Router>
+                <Breadcrumb>
+
+                  <Breadcrumb.Item>
+                    <Link to="/">Home</Link>
+                  </Breadcrumb.Item>
+
+                  <Breadcrumb.Item>
+                    <Link to="/about">About</Link>
+                  </Breadcrumb.Item>
+
+                  <Breadcrumb.Item>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </Breadcrumb.Item>
+
+                  <Breadcrumb.Item>An Application</Breadcrumb.Item>
+                </Breadcrumb>
+                <Switch>
+                  <Route exact path="/">
+                    <Home />
+                  </Route>
+                  <Route path="/about">
+                    <About />
+                  </Route>
+                  <Route path="/dashboard">
+                    <Dashboard />
+                  </Route>
+                </Switch>
+              </Router>
+
+
+              <div className="site-layout-content">
+                {/* <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
+                <LaunchTable launches={launchData.launches} />
+
+                <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
+                <NextLaunchTable launches={NextlaunchData.launches} /> */}
 
                 <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
                 <RangePicker
