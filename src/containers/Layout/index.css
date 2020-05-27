@@ -1,46 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-
 .RangePicker {
     text-align: center;
 }
 
 #layout {
-  font-family: 'Ubuntu', sans-serif;
-  /* background: rgb(255, 255, 255); */
+    font-family: 'Ubuntu', sans-serif;
+    /* background: rgb(255, 255, 255); */
 }
 
 .site-layout-content {
-  background: #fff;
-  padding: 24px;
-  font-family: 'Ubuntu', sans-serif;
+    background: #fff;
+    padding: 24px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .logo {
-  width: 50px;
-  height: 30px;
-  /* background: url(https://image.flaticon.com/icons/png/512/1420/1420337.png) center center no-repeat; */
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-  text-align: center;
-  color: yellow;
+    width: 50px;
+    height: 30px;
+    /* background: url(https://image.flaticon.com/icons/png/512/1420/1420337.png) center center no-repeat; */
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+    text-align: center;
+    color: yellow;
+}
+
+#hid {
+    display: block;
 }
 
 #myBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  border: none;
-  width: 50px;
-  height: 50px;
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    border: none;
+    width: 50px;
+    height: 50px;
 }
+
 #myBtn:hover {
-  background-color: #555;
+    background-color: #555;
 }
+
 .defurl {
-  display: none;
+    display: none;
 }
+
 
 /* #hellopreloader>
       p {
@@ -60,7 +66,35 @@
         background-size:400px;
       } */
 
-      /* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
 
-.Next-Launch-Table {
+/* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
+
+.conteiner {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.wr_razmer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: red;
+}
+
+.wr_razmer2 {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: blue;
+    transition: all .2s;
+}
+
+.conteiner:hover .wr_razmer2 {
+    opacity: 1;
+}
+
+.conteiner:hover .wr_razmer {
+    opacity: 0;
 }

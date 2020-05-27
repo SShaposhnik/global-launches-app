@@ -10,10 +10,10 @@ import './MapChart.css'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
-const markerOffset =  - 30
+const MARKER_OF_SET =  - 30
 
 // цвета маркеров
-const launchStatus = {
+const LAUNCH_STATUS = {
   1: 'Запланированы точные дата и время запуска',
   2: 'Дата и время будут объявлены позже',
   3: 'green',
@@ -23,20 +23,36 @@ const launchStatus = {
   7: 'Во время запуска произошел частичный сбой',
 }
 
-const MapChart = ({ launches }) => {
-  const markers = launches.map(el => ({
-    id: el.id,
-    RocketAndMissionNames: el.name,
-    rocketName: el.rocket,
-    status: el.statusNumber,
-    markerOffset: markerOffset,
-    coordinates: [el.longitude, el.latitude],
-    mapURL: el.PadsMapURL,
-    wikiURL: el.PadsWikiURL,
-    rocketwikiURL: el.RocketWikiURL,
-    latitude: el.latitude,
-    longitude: el.longitude,
-  }))
+const MapChart = ({ launches, flag , tableData}) => {
+  let markers = []
+
+  if (flag) {
+     markers = tableData.map(el => ({
+      RocketAndMissionNames: el.name,
+      rocketName: el.rocketName,
+      status: el.statusNumber,
+      markerOffset: MARKER_OF_SET,
+      coordinates: [el.longitude, el.latitude],
+      padsMapURL: el.padsMapURL,
+      padsWikiURL: el.padsWikiURL,
+      rocketwikiURL: el.rocketwikiURL,
+      latitude: el.latitude,
+      longitude: el.longitude,
+    }))
+  }  else {
+     markers = launches.map(el => ({
+      RocketAndMissionNames: el.name,
+      rocketName: el.rocket.name,
+      status: el.status,
+      markerOffset: MARKER_OF_SET,
+      coordinates: [el.location.pads.map(els => (els.longitude)), el.location.pads.map(els => (els.latitude))],
+      padsMapURL: el.location.pads.map(els => (els.mapURL)),
+      padsWikiURL: el.location.pads.map(els => (els.wikiURL)),
+      rocketwikiURL: el.rocket.wikiURL,
+      latitude: el.location.pads.map(els => (els.latitude)),
+      longitude: el.location.pads.map(els => (els.longitude)),
+    }))
+  }
 
   return (
     <ComposableMap
@@ -58,7 +74,7 @@ const MapChart = ({ launches }) => {
         }
 
       </Geographies>
-      {markers.map(({ rocketName, status, coordinates, markerOffset, wikiURL, rocketwikiURL, latitude, longitude }) => (
+      {markers.map(({ rocketName, status, coordinates, markerOffset, padsWikiURL, rocketwikiURL, latitude, longitude, RocketAndMissionNames }) => (
         <Marker on coordinates={coordinates}
         className="MarkersSryle"
         >
@@ -67,7 +83,7 @@ const MapChart = ({ launches }) => {
             title={
               <div>
                 <a href={"http://maps.google.com/maps?q=" + latitude + "," + longitude} target="_blank">Google Maps</a><br></br>
-                <a href={wikiURL} target="_blank">Космодром вики</a><br></br>
+                <a href={padsWikiURL} target="_blank">Космодром вики</a><br></br>
                 <a href={rocketwikiURL} target="_blank">Ракета вики</a><br></br>
               </div>
 
@@ -76,7 +92,7 @@ const MapChart = ({ launches }) => {
             mouseLeaveDelay="0.3"
           >
             <g
-              fill={launchStatus[status]}
+              fill={LAUNCH_STATUS[status]}
               stroke="none"
               strokeWidth="3"
               strokeLinecap="round"
@@ -93,7 +109,7 @@ const MapChart = ({ launches }) => {
             y={markerOffset}
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
           >
-            {rocketName}
+            {RocketAndMissionNames.split('|')[0]}
           </text>
         </Marker>
       )

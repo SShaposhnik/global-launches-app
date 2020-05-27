@@ -35,12 +35,6 @@ class LaunchCard extends Component {
                 src="https://images.pexels.com/photos/23769/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               />
             }
-            actions={[
-              <SettingOutlined key="setting" />,
-              <EditOutlined key="edit" />,
-              <EllipsisOutlined key="ellipsis" />,
-            ]}
-
           >
             <Meta
               avatar={<Avatar src="https://image.flaticon.com/icons/svg/2929/2929073.svg" />}

@@ -5,6 +5,7 @@ import MapChart from '../MapChart/MapChart'
 import moment from 'moment'
 import 'moment/locale/ru'
 import './TableOld2.css'
+import swal from '@sweetalert/with-react'
 import { ClearOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons'
 
 moment.locale()
@@ -40,6 +41,7 @@ class OldTable2 extends Component {
       markersLaunches: null,
       searchText: '',
       searchedColumn: '',
+      show: false,
     }
   }
 
@@ -122,7 +124,6 @@ class OldTable2 extends Component {
     this.setState({ searchText: '' })
   }
 
-
   render() {
     const columns = [
       {
@@ -132,10 +133,23 @@ class OldTable2 extends Component {
         align: 'center',
         ...this.getColumnSearchProps('Имя'),
         onCell: (selectedRows, selectedRowKeys) => {
+          // selectedRowKeys -> number
+          // selectedRows    -> data
           return {
             onClick: event => {
+              // console.log(selectedRowKeys);
+              // console.log(selectedRows);
+              // this.setState({ markersLaunches: [selectedRows] })
               this.setState({ markersLaunches: [selectedRows] })
+              console.log(selectedRows)
               this.showModal()
+              // swal({
+              //   // icon: 'error',
+              //   buttons: false,
+              //   content: (
+              //     <MapChart tableData={[selectedRows] } flag={true}/>
+              //   )
+              // })
             },
           }
         }
@@ -151,7 +165,7 @@ class OldTable2 extends Component {
         title: "Статус",
         dataIndex: "statusText",
         align: 'center',
-        filters:[
+        filters: [
           {
             text: 'Успешно',
             value: 'Успешно',
@@ -165,7 +179,7 @@ class OldTable2 extends Component {
             value: 'Произошел сбой',
           },
         ],
-        onFilter: (value, record) =>{return record.statusText.indexOf(value) === 0}
+        onFilter: (value, record) => { return record.statusText.indexOf(value) === 0 }
       },
       {
         title: "Площадка / Космодром",
@@ -228,12 +242,12 @@ class OldTable2 extends Component {
           //   ],
           // }
         ],
-        onFilter: (value, record) =>{return record.countryCode.indexOf(value) === 0},
+        onFilter: (value, record) => { return record.countryCode.indexOf(value) === 0 },
       },
     ]
     const loading = this.props.loading
 
-    const oldLaunch = this.props.launches.map(el => ({
+    const oldLaunch = this.props.launches.launches.map(el => ({
       key: el.id,
       RocketAndMissionName: <a>{el.name}</a>,
       name: el.name,
@@ -260,7 +274,6 @@ class OldTable2 extends Component {
       RocketWikiURL: el.rocket.wikiURL,
       countryCode: el.location.countryCode,
     }))
-
     // переверачиваем дату, не особо важно. Влияет только на вывод
     oldLaunch.reverse()
 
@@ -281,16 +294,24 @@ class OldTable2 extends Component {
           className="table"
           style={{ margin: 10 }}
           locale={{
-            filterReset: <ClearOutlined/>,
-            filterConfirm: <CheckOutlined/>,
+            filterReset: <ClearOutlined />,
+            filterConfirm: <CheckOutlined />,
           }}
           loading={loading}
           bordered="true"
         >
         </Table>
+
+
+
+
+
+
+
+
+
         <Modal
           centered
-          // title="Расположение запуска на карте"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -298,8 +319,7 @@ class OldTable2 extends Component {
           width='70%'
           closable={false}
         >
-          {/* <a onClick={}>ТЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫыК</a> */}
-          <MapChart launches={this.state.markersLaunches} />
+          <MapChart tableData={this.state.markersLaunches} flag={true} />
         </Modal>
       </div>
 

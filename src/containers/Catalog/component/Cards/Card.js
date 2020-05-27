@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import './Card.css'
+// import './Card.css'
 import { Card } from 'antd';
 import Column from 'antd/lib/table/Column'
 
