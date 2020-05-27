@@ -37,6 +37,7 @@ import Menu from '../Catalog/component/TestTable/Menu'
 import Planets from '../Catalog/component/TestTable/Planets'
 
 import LaunchCard from '../Catalog/component/Cards/OldCard'
+import { css } from 'styled-components'
 
 const { Content } = Layout
 const { RangePicker } = DatePicker
@@ -78,6 +79,8 @@ function HookFunction() {
   const [announcedLaunches, setAnnouncedLaunches] = useState(null)
   const [scheduledLaunches, setScheduledLaunches] = useState(null)
   const [finishedLaunches, setFinishedLaunches] = useState(null)
+  const [test, setTest] = useState([])
+  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -102,42 +105,86 @@ function HookFunction() {
     setLoading(true)
     fetch(url)
       .then(res => res.json())
-      .then(res =>  setFinishedLaunches(res), setLoading(false) )
+      .then(res => setFinishedLaunches(res), setLoading(false))
   }
 
   function validationOfDate(url) {
     setLoading(true)
     fetch(url)
-      .then(function(res){
+      .then(function (res) {
         if (res.ok) {
           fetchOldLaunches(url)
         } else {
           notificationForInvalidDate('topRight')
-          setLoading(false)}
-        })
+          setLoading(false)
+        }
+      })
   }
-
-  // const handleDisabledChange = (disabled) => {
-  //   this.setState({ disabled })
-  // }
 
   function launchDateButtonOnChange(date, dateString) {
     oldUrl = `https://launchlibrary.net/1.4/launch?startdate=${dateString[0]}&enddate=${dateString[1]}&limit=${LIMIT}&fields=name,net,location,status,rocket,mapURL,countryCode`
     validationOfDate(oldUrl)
   }
 
-
   if (announcedLaunches && scheduledLaunches && finishedLaunches) {
+    function timeBeforeToShowMarkers() {
+      let secondsToGo = 1
+      console.log(finishedLaunches.launches[0])
+      const timer = setInterval(() => {
+        secondsToGo -= 1
+      }, 1000);
+
+      setTimeout(() => {
+        clearInterval(timer)
+        func()
+      }, secondsToGo * 1000)
+
+    }
+function n () {
+  setTest([finishedLaunches.launches[0]])
+}
+    function showMarkers() {
+      let count = 0
+      const timer = setInterval(() => {
+        setTest([finishedLaunches.launches[finishedLaunches.launches.length - 1]])
+        count++
+      }, 1000)
+
+      setTimeout(() => {
+        clearInterval(timer)
+        func()
+      }, count * 1000)
+    }
+
+    function func() {
+      let count = finishedLaunches.launches.length - 1
+      const timer = setInterval(() =>{
+        count--
+        setTest([finishedLaunches.launches[count]])
+      }, 1000)
+
+      setTimeout(() => {
+        clearInterval(timer)
+        showMarkers()
+      }, count * 1000)
+    }
     return (
       <div>
+        {console.log(test)}
         <Content style={{ padding: '0 50px' }}>
           <div className="site-layout-content">
+            <div>
+              <p>Вы кликнули {count} раз(а)</p>
+              <button onClick={() => setCount(count + 1)}>
+                Нажми на меня
+       </button>
+            </div>
 
-            <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
+            {/* <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
             <LaunchTable launches={announcedLaunches.launches} />
 
             <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
-            <NextLaunchTable launches={scheduledLaunches.launches} />
+            <NextLaunchTable launches={scheduledLaunches.launches} /> */}
 
             <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
             <RangePicker className="RangePicker"
@@ -155,7 +202,10 @@ function HookFunction() {
               <InfoCircleOutlined />
             </Tooltip>
 
-            <OldTable2 launches={finishedLaunches} loading={loading}/>
+            <Button onClick={timeBeforeToShowMarkers} > ТЫК </Button>
+            <MapChart launches={test} />
+
+            <OldTable2 launches={finishedLaunches.launches} loading={loading} />
           </div>
           <Button
             type="primary"

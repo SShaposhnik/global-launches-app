@@ -247,7 +247,7 @@ class OldTable2 extends Component {
     ]
     const loading = this.props.loading
 
-    const oldLaunch = this.props.launches.launches.map(el => ({
+    const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
       RocketAndMissionName: <a>{el.name}</a>,
       name: el.name,
