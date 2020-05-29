@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/global-launches-app/static/css/main.f9c3e808.chunk.css",
-    "main.js": "/global-launches-app/static/js/main.867e6265.chunk.js",
-    "main.js.map": "/global-launches-app/static/js/main.867e6265.chunk.js.map",
+    "main.css": "/global-launches-app/static/css/main.f12b5df6.chunk.css",
+    "main.js": "/global-launches-app/static/js/main.db54c4c2.chunk.js",
+    "main.js.map": "/global-launches-app/static/js/main.db54c4c2.chunk.js.map",
     "runtime-main.js": "/global-launches-app/static/js/runtime-main.58963f45.js",
     "runtime-main.js.map": "/global-launches-app/static/js/runtime-main.58963f45.js.map",
-    "static/css/2.63b65d4e.chunk.css": "/global-launches-app/static/css/2.63b65d4e.chunk.css",
-    "static/js/2.5fbf61c1.chunk.js": "/global-launches-app/static/js/2.5fbf61c1.chunk.js",
-    "static/js/2.5fbf61c1.chunk.js.map": "/global-launches-app/static/js/2.5fbf61c1.chunk.js.map",
+    "static/css/2.3034213d.chunk.css": "/global-launches-app/static/css/2.3034213d.chunk.css",
+    "static/js/2.38c81b6b.chunk.js": "/global-launches-app/static/js/2.38c81b6b.chunk.js",
+    "static/js/2.38c81b6b.chunk.js.map": "/global-launches-app/static/js/2.38c81b6b.chunk.js.map",
     "index.html": "/global-launches-app/index.html",
-    "precache-manifest.9ba031a41bdb5a15fb08cf62373afadb.js": "/global-launches-app/precache-manifest.9ba031a41bdb5a15fb08cf62373afadb.js",
+    "precache-manifest.c143faaa75a6ad923708c640610d90b9.js": "/global-launches-app/precache-manifest.c143faaa75a6ad923708c640610d90b9.js",
     "service-worker.js": "/global-launches-app/service-worker.js",
-    "static/css/2.63b65d4e.chunk.css.map": "/global-launches-app/static/css/2.63b65d4e.chunk.css.map",
-    "static/css/main.f9c3e808.chunk.css.map": "/global-launches-app/static/css/main.f9c3e808.chunk.css.map",
-    "static/js/2.5fbf61c1.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.5fbf61c1.chunk.js.LICENSE.txt"
+    "static/css/2.3034213d.chunk.css.map": "/global-launches-app/static/css/2.3034213d.chunk.css.map",
+    "static/css/main.f12b5df6.chunk.css.map": "/global-launches-app/static/css/main.f12b5df6.chunk.css.map",
+    "static/js/2.38c81b6b.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.38c81b6b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.58963f45.js",
-    "static/css/2.63b65d4e.chunk.css",
-    "static/js/2.5fbf61c1.chunk.js",
-    "static/css/main.f9c3e808.chunk.css",
-    "static/js/main.867e6265.chunk.js"
+    "static/css/2.3034213d.chunk.css",
+    "static/js/2.38c81b6b.chunk.js",
+    "static/css/main.f12b5df6.chunk.css",
+    "static/js/main.db54c4c2.chunk.js"
   ]
 }
