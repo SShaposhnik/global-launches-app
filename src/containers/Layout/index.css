@@ -3,9 +3,14 @@
     text-align: center;
 }
 
+body {
+  background-color: rgb(20, 20, 20);
+}
+
 #layout {
     font-family: 'Ubuntu', sans-serif;
-    /* background: rgb(255, 255, 255); */
+    /* min-height: 100vh; */
+    /* background: rgb(122, 10, 10); */
 }
 
 .site-layout-content {
@@ -14,15 +19,14 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
+.test {
+  width: auto;
+}
+
 .logo {
-    width: 50px;
-    height: 30px;
-    /* background: url(https://image.flaticon.com/icons/png/512/1420/1420337.png) center center no-repeat; */
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px 24px 16px 0;
-    float: left;
-    text-align: center;
-    color: yellow;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 
 #hid {
@@ -68,33 +72,3 @@
 
 
 /* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
-
-.conteiner {
-    position: relative;
-    width: 100px;
-    height: 100px;
-}
-
-.wr_razmer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: red;
-}
-
-.wr_razmer2 {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: blue;
-    transition: all .2s;
-}
-
-.conteiner:hover .wr_razmer2 {
-    opacity: 1;
-}
-
-.conteiner:hover .wr_razmer {
-    opacity: 0;
-}

@@ -6,8 +6,10 @@ import {
   Tooltip,
   notification,
   Divider,
-  Table,
+  Modal,
+  Menu
 } from 'antd'
+import swal from '@sweetalert/with-react'
 import {
   GithubOutlined,
   UpOutlined,
@@ -20,6 +22,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import 'antd/dist/antd.css'
+import './index.css'
 import OldTable from '../Catalog/component/TableOld/TableOld'
 import OldTable2 from '../Catalog/component/TableOld2/TableOld2'
 import LaunchTable from '../Catalog/component/Table/Table'
@@ -33,14 +36,15 @@ import {
 } from 'react-scroll'
 import MapChart from '../Catalog/component/MapChart/MapChart'
 import { sayHi, announcedLaunchesFetch } from '../Catalog/component/LoadLaunchData'
-import Menu from '../Catalog/component/TestTable/Menu'
 import Planets from '../Catalog/component/TestTable/Planets'
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
 import LaunchCard from '../Catalog/component/Cards/OldCard'
 import { css } from 'styled-components'
 
-const { Content } = Layout
+const { Content, Sider } = Layout;
 const { RangePicker } = DatePicker
+const { SubMenu } = Menu;
 const LIMIT = 10000
 const THIS_YEAR = moment().format('YYYY')
 
@@ -61,18 +65,43 @@ const notificationForInvalidDate = (placement) => {
   })
 }
 
-function scrollFunction() {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-    document.getElementById("myBtn").style.display = "block"
-  } else {
-    document.getElementById("myBtn").style.display = "none"
-  }
-}
-window.onscroll = function () { scrollFunction() };
+
+
+// function scrollFunction() {
+//   if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+//     document.getElementById("myBtn").style.display = "block"
+//   } else {
+//     document.getElementById("myBtn").style.display = "none"
+//   }
+// }
+// window.onscroll = function () { scrollFunction() };
 
 function disabledDate(current) {
   return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
+
+// const modals = Modal.warning({
+//     content: `Забыл сказать, посмотрите на такое меню`,
+//     maskClosable: "true"
+// }
+// )
+
+
+const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
+const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
+const Yellow = ({ children }) => <span style={{ color: '#EFF59B' }}>{children}</span>
+const Lightblue = ({ children }) => <span style={{ color: '#9AEDFE' }}>{children}</span>
+const Green = ({ children }) => <span style={{ color: '#57EE89' }}>{children}</span>
+const Blue = ({ children }) => <span style={{ color: '#57C7FF' }}>{children}</span>
+const Gray = ({ children }) => <span style={{ color: '#909090' }}>{children}</span>
+
+
+
+
+
+
+
+
 
 
 function HookFunction() {
@@ -82,12 +111,17 @@ function HookFunction() {
   const [test, setTest] = useState([])
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     fetchLaunches(URL)
     fetchNextLaunches(NEXT_URL)
     fetchOldLaunches(oldUrl)
   }, [])
+
+  function onCollapse(collapsed) {
+    setCollapsed(collapsed)
+  }
 
   function fetchLaunches(url) {
     fetch(url)
@@ -140,51 +174,128 @@ function HookFunction() {
       }, secondsToGo * 1000)
 
     }
-function n () {
-  setTest([finishedLaunches.launches[0]])
-}
+
     function showMarkers() {
       let count = 0
       const timer = setInterval(() => {
         setTest([finishedLaunches.launches[finishedLaunches.launches.length - 1]])
         count++
-      }, 1000)
+      }, 2000)
 
       setTimeout(() => {
         clearInterval(timer)
         func()
-      }, count * 1000)
+      }, count * 2000)
     }
 
     function func() {
       let count = finishedLaunches.launches.length - 1
-      const timer = setInterval(() =>{
+      const timer = setInterval(() => {
         count--
         setTest([finishedLaunches.launches[count]])
-      }, 1000)
+      }, 2000)
 
       setTimeout(() => {
         clearInterval(timer)
         showMarkers()
-      }, count * 1000)
+      }, count * 2000)
     }
+
     return (
       <div>
-        {console.log(test)}
-        <Content style={{ padding: '0 50px' }}>
+
+<Parallax pages={5}>
+        <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
+        <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
+
+        <ParallaxLayer offset={0} speed={0} factor={3} style={{ backgroundImage: url('stars'), backgroundSize: 'cover' }} />
+
+        <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
+          <img src={url('satellite4')} style={{ width: '15%', marginLeft: '70%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={2.5} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+          <img src={url('earth')} style={{ width: '60%' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2}
+          speed={-0.3}
+          style={{
+            backgroundSize: '80%',
+            backgroundPosition: 'center',
+            backgroundImage: url('clients', true)
+          }}
+        />
+
+        <ParallaxLayer
+          offset={0}
+          speed={0.1}
+          style={{ display: 'flex', alignItems: 'bottom', justifyContent: 'right' }}
+          >
+          <img src={url('satellite2')} style={{ width: '20%' }} />
+          <LaunchTable launches={announcedLaunches.launches}/>
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1}
+          speed={0.1}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {/* <img src={url('bash')} style={{ width: '40%' }} /> */}
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2}
+          speed={-0}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src={url('clients-main')} style={{ width: '10%' }} />
+        </ParallaxLayer>
+      </Parallax>
+
+
+
+
+
+
+
+
+        {/* <Content style={{ padding: '0 50px' }}>
           <div className="site-layout-content">
-            <div>
-              <p>Вы кликнули {count} раз(а)</p>
-              <button onClick={() => setCount(count + 1)}>
-                Нажми на меня
-       </button>
+
+          
+            Простейший <a class="tooltip" href="#">Tooltip<span><LaunchCard launches={[announcedLaunches.launches[0]]} /></span></a>
+            <div className="table1">
+              <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
+              <LaunchTable launches={announcedLaunches.launches} />
             </div>
-
-            {/* <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
-            <LaunchTable launches={announcedLaunches.launches} />
-
-            <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
-            <NextLaunchTable launches={scheduledLaunches.launches} /> */}
+             <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
+            <NextLaunchTable launches={scheduledLaunches.launches} />
 
             <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
             <RangePicker className="RangePicker"
@@ -201,11 +312,11 @@ function n () {
               placement="top" >
               <InfoCircleOutlined />
             </Tooltip>
-
+            <OldTable2 launches={finishedLaunches.launches} loading={loading} />
             <Button onClick={timeBeforeToShowMarkers} > ТЫК </Button>
             <MapChart launches={test} />
 
-            <OldTable2 launches={finishedLaunches.launches} loading={loading} />
+            
           </div>
           <Button
             type="primary"
@@ -215,7 +326,7 @@ function n () {
             id="myBtn"
             title="Наверх!"
           />
-        </Content>
+        </Content> */}
 
       </div>
     )

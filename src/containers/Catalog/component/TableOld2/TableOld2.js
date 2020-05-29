@@ -129,6 +129,7 @@ class OldTable2 extends Component {
       {
         title: "Название запуска",
         dataIndex: "RocketAndMissionName",
+        className: 'Name-launch-style',
         width: '30%',
         align: 'center',
         ...this.getColumnSearchProps('Имя'),
@@ -141,7 +142,6 @@ class OldTable2 extends Component {
               // console.log(selectedRows);
               // this.setState({ markersLaunches: [selectedRows] })
               this.setState({ markersLaunches: [selectedRows] })
-              console.log(selectedRows)
               this.showModal()
               // swal({
               //   // icon: 'error',
@@ -285,20 +285,18 @@ class OldTable2 extends Component {
           pagination={{
             position: ['bottomCenter'],
             defaultCurrent: 1,
-            // simple:"true",
+            simple:"true",
             pageSizeOptions: ['10', '50', '100'],
-            showQuickJumper: "true",
-            hideOnSinglePage: "true",
+            // showQuickJumper: "true",
+            // hideOnSinglePage: "true",
           }}
           size="small"
-          className="table"
-          style={{ margin: 10 }}
           locale={{
             filterReset: <ClearOutlined />,
             filterConfirm: <CheckOutlined />,
           }}
           loading={loading}
-          bordered="true"
+          // bordered="true"
         >
         </Table>
 

@@ -1,40 +1,54 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Table, Button } from 'antd'
-import FetchLaunchApi from '../LoadLaunchData/index'
+import {
+  LoadingOutlined,
+} from '@ant-design/icons'
+import '../../css/index.css'
+import {
+  animateScroll as scroll,
+  scroller
+} from 'react-scroll'
 
 
+// not-uploaded-content
 
 
 export default () => {
 
   return (
-    <div>
-      <Table
-        size="large"
-      >
-      </Table>
+    <div className='not-uploaded-content'>
+      <LoadingOutlined />
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <Button type="primary"
+              shape="circle"
+              onClick={scroll.scrollToTop}
+              id="myBtn"
+              title="Наверх!"
+            />
     </div>
   )
 }
 
-// class Tabless extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       test: this.props.testim,
-//     }
-//   }
-//   render() {
-//     console.log('announcedLaunches', this.props.announcedLaunches);
-//     console.log('test', this.state.testim);
-    
-//     return (
-//       <div>
-//         <Table />
-//         <Button >Tabless</Button>
-//       </div>
-//     )
-//   }
-// }
+// export default () => {
 
-// export default Tabless
+//   return (
+//     <div>
+//       <Table
+//         size="large"
+//       >
+//       </Table>
+//     </div>
+//   )
+// }

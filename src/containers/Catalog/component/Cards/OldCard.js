@@ -37,7 +37,7 @@ class LaunchCard extends Component {
             }
           >
             <Meta
-              avatar={<Avatar src="https://image.flaticon.com/icons/svg/2929/2929073.svg" />}
+              // avatar={<Avatar src="https://image.flaticon.com/icons/svg/2929/2929073.svg" />}
               title={el.rocket.name}
               description={el.name.split('|')[1]}
             /><br />

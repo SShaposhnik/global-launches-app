@@ -1,23 +1,15 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component } from 'react'
+import '../../containers/Catalog/css/index.css'
 import {
   Layout,
   DatePicker,
   Button,
-  Tooltip,
   notification,
   Divider,
-  Table,
 } from 'antd'
 import {
-  GithubOutlined,
   UpOutlined,
-  InfoCircleOutlined,
-  FrownOutlined,
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
+  LoadingOutlined,
 } from '@ant-design/icons'
 import 'antd/dist/antd.css'
 import OldTable from '../Catalog/component/TableOld/TableOld'
@@ -25,6 +17,7 @@ import OldTable2 from '../Catalog/component/TableOld2/TableOld2'
 import LaunchTable from "../Catalog/component/Table/Table"
 import NextLaunchTable from '../Catalog/component/NextLaunchTable/NextLaunchTable'
 import SliderMapChart from '../Catalog/component/SliderMapChart/SliderMapChart'
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import '../Layout/index.css' // стандарт
 import '../Layout/index.scss' // прыгающие квадраты
 import moment from 'moment'
@@ -33,12 +26,9 @@ import {
   scroller
 } from 'react-scroll'
 import MapChart from '../Catalog/component/MapChart/MapChart'
-import { sayHi, announcedLaunchesFetch } from '../Catalog/component/LoadLaunchData'
 import Planets from '../Catalog/component/TestTable/Planets'
-import YesOrNoPreloader from '../Catalog/component/TestTable/exportFunc'
 
 import LaunchCard from '../Catalog/component/Cards/OldCard'
-import SweetAlert from 'sweetalert'
 
 const { Content } = Layout
 const LIMIT = 10000
@@ -61,6 +51,8 @@ export let oldUrl = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(T
 //     maskClosable: "true"
 // }
 // )
+
+const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const notificationForInvalidDate = (placement) => {
   notification.warning({
     message: <strong> Похоже,что за выбранный период времени запусков нет </strong>,
@@ -231,54 +223,139 @@ class MapLaunches extends Component {
     }, count * 1000)
   }
 
-
   render() {
     const { launchOldData, launchData, NextlaunchData, loading, disabled, isActive } = this.state
 
     return (
       <div>
         {launchData && NextlaunchData && launchOldData
-        ?        <Content style={{ padding: '0 50px' }} >
-        <div className="site-layout-content" >
+          ?
+
+
+
+
+
+
+
+
+
+
+          <Parallax pages={3}>
+            <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
+            <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
+
+            <ParallaxLayer offset={0} speed={0} factor={3}
+              className='background-parallax'
+              style={{
+                backgroundImage: url('stars', true),
+                backgroundSize: 'cover'
+              }} />
+
+
+            <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={0.1} speed={-0.7} style={{ pointerEvents: 'none' }}>
+              <img src={url('satellite4')} style={{ width: '15%', marginRight: '70%' }} />
+            </ParallaxLayer>
+            <ParallaxLayer offset={2.5} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+              <img src={'https://image.flaticon.com/icons/svg/2277/2277588.svg'} style={{ width: '60%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={0}
+              speed={0.3}
+              className='table1-parallax'>
+              <LaunchTable launches={launchData.launches} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={1.3}
+              speed={0.3}
+              className='table2-parallax'>
+              <NextLaunchTable launches={NextlaunchData.launches} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={2}
+              speed={1}
+              // style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              className='table3-parallax'
+            >
+              <OldTable2 launches={launchOldData.launches} loading={loading} />
+              <Button type="primary"
+                shape="circle"
+                icon={< UpOutlined />}
+                onClick={scroll.scrollToTop}
+                id="myBtn"
+                title="Наверх!"
+              />
+            </ParallaxLayer>
+
+            {/* <ParallaxLayer
+          offset={2}
+          speed={-0}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          onClick={() => this.parallax.scrollTo(0)}>
           <RangePicker className="RangePicker"
-            defaultValue={[moment(THIS_YEAR), moment()]}
-            showToday={false, true}
-            onChange={this.launchDateButtonOnChange}
-            disabledDate={disabledDate}
-            allowClear={false}
-            style={{ margin: 10 }}
-          />
-          <Divider><h1 style={{ textAlign: 'center' }}>Обьявленные запуски</h1></Divider>
-          <LaunchTable launches={launchData.launches} />
+                defaultValue={[moment(THIS_YEAR), moment()]}
+                showToday={false, true}
+                onChange={this.launchDateButtonOnChange}
+                disabledDate={disabledDate}
+                allowClear={false}
+                style={{ margin: 10 }}
+              />
+              <Tooltip title={<p > Здесь можно настроить период запусков </p>}
+                mouseEnterDelay={0.2}
+                mouseLeaveDelay={0.5}
+                placement="top" >
+                <InfoCircleOutlined />
+              </Tooltip>
+              <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
+              <OldTable2 launches={launchOldData.launches} loading={loading} />
+</ParallaxLayer> */}
 
-          <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
-                      <NextLaunchTable launches={NextlaunchData.launches} /> 
 
-          <Divider className="next-launch-table"><h1 style={{ textAlign: 'center' }}>Запланированные запуски</h1></Divider>
-          <NextLaunchTable launches={NextlaunchData.launches} />
 
-          <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
-          <OldTable2 launches={launchOldData} loading={loading} />
 
-          <Button onClick={this.timeBeforeToShowMarkers} > ТЫК </Button>
-          <Tooltip title={<p > Здесь можно настроить период запусков </p>}
-            mouseEnterDelay={0.2}
-            mouseLeaveDelay={0.5}
-            placement="top" >
-            <InfoCircleOutlined />
-          </Tooltip>
-          <MapChart launches={this.state.test} />
-          <Button onClick={() => this.setState({ show: true })}> show </Button>
-        </div>
-        <Button type="primary"
-          shape="circle"
-          icon={< UpOutlined />}
-          onClick={scroll.scrollToTop}
-          id="myBtn"
-          title="Наверх!"
-        />
-      </Content>
-:<div>пусто</div>
+
+
+
+            {/* <Button onClick={this.timeBeforeToShowMarkers} > ТЫК </Button>
+              <MapChart launches={this.state.test} /> */}
+          </Parallax>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          : <LoadingOutlined className='not-uploaded-content' />
         }
 
       </div>

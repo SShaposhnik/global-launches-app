@@ -4,6 +4,8 @@ import Timer from '../Timer/Timer'
 import 'moment/locale/ru'
 import moment from 'moment'
 import './Table.css'
+import swal from '@sweetalert/with-react'
+import LaunchCard from '../Cards/OldCard'
 moment.locale()
 
 
@@ -18,7 +20,6 @@ const launchStatus = {
   6: 'В полете',
   7: 'Во время запуска произошел частичный сбой',
 }
-
 const columns = [
   {
     title: 'Название запуска',
@@ -36,6 +37,7 @@ const columns = [
     title: 'Таймер',
     dataIndex: 'timer',
     align: 'center',
+    width: '20%'
   },
   {
     title: 'Площадка / Космодром',
@@ -46,24 +48,25 @@ const columns = [
 ]
 
 export default ({ launches }) => {
+
   const launchesWithTimer = launches.map(el => ({
-    rocketName: el.rocket.name,
+  rocketName: el.rocket.name,
     location: <div>
       {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
       {el.location.name.split(',')[0]}
     </div>,
     missionsName: el.missions.map(els => (els.name)),
-    RocketAndMissionName: <a >{el.name}</a>,
+    RocketAndMissionName: el.name,
     pads: el.location.pads.map(p => (p.name)),
     net: <Tooltip title={<div><p style={{ textAlign: 'center' }}>Локальное время</p> <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL z')}</Tooltip>,
     status: launchStatus[el.status],
     timer: <Timer timeTillLaunch={el.net} />
   }))
-  // document.getElementById('hider').onclick = function() {
-  
+
   return (
     <div>
       <Table
+      className="table1"
         dataSource={launchesWithTimer}
         pagination={false}
         size="small"

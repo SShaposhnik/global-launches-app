@@ -2,6 +2,7 @@ import React from 'react'
 import {Table, Pagination} from 'antd'
 import moment from 'moment'
 import { LoadingOutlined } from '@ant-design/icons';
+import './NextLaunchTable.css'
 import 'moment/locale/ru'
 moment.locale()
 
@@ -22,6 +23,7 @@ const columns = [
         dataIndex: 'RocketAndMissionName',
         width: '30%',
         align: 'center',
+        className: 'launch-name-nextlaunch'
       },
       {
         title: 'Дата запуска',
@@ -39,7 +41,7 @@ const columns = [
 
 export default ({launches}) => {
     const launchesWithTimer = launches.map(el => ({
-        RocketAndMissionName: el.name,
+        RocketAndMissionName: <p className='launchText'>{el.name}</p>,
         location: <div>
                         {el.location.pads.map(els => (els.name.split(',')[0]))}<br/>
                         {el.location.name.split(',')[0]}
@@ -50,11 +52,19 @@ export default ({launches}) => {
     }))
     return (
         <Table
+            className='NextLaunchTable'
             dataSource={launchesWithTimer}
-            pagination={{ position: ['bottomCenter'], }}
+            pagination={{
+              position: ['bottomCenter'],
+              showSizeChanger: false,
+              defaultCurrent: 1,
+              // simple:"true",
+              showQuickJumper: false,
+              hideOnSinglePage: "true",
+            }}
             size="small"
             columns={columns}
-            bordered="true"
+            bordered="false"
         />
     )
 }

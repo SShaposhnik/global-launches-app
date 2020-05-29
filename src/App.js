@@ -5,7 +5,7 @@ import './containers/Layout/index.scss'
 import { BrowserRouter } from 'react-router-dom'
 import YesOrNoPreloader from './containers/Catalog/component/TestTable/exportFunc'
 import HookWithData from './containers/Launches/HookWithData'
-
+import Parall from './containers/Catalog/component/parallax'
 
 function App() {
   let uploadedData = YesOrNoPreloader()

@@ -1,0 +1,25 @@
+a:hover {	
+	text-decoration	: none;
+}
+a.tooltip span {
+	display			: none; 
+  margin-left		: 10px; 
+  width			: 500px;;
+  height: 650px;
+  z-index: 8888;
+}
+a.tooltip:hover span {
+	display			: inline; 
+	position		: absolute; 
+	background		: #ffffff; 
+	border			: 1px solid #cccccc; 
+	color			: #6c6c6c;
+}
+
+.table1 {
+  width: 80%;
+}
+
+.content-back {
+  /* background: yellow; */
+}
