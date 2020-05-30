@@ -1,25 +1,36 @@
 {
   "files": {
-    "main.css": "/global-launches-app/static/css/main.6377bcb0.chunk.css",
-    "main.js": "/global-launches-app/static/js/main.d086c9cd.chunk.js",
-    "main.js.map": "/global-launches-app/static/js/main.d086c9cd.chunk.js.map",
+    "main.css": "/global-launches-app/static/css/main.95f32d25.chunk.css",
+    "main.js": "/global-launches-app/static/js/main.d9264c34.chunk.js",
+    "main.js.map": "/global-launches-app/static/js/main.d9264c34.chunk.js.map",
     "runtime-main.js": "/global-launches-app/static/js/runtime-main.58963f45.js",
     "runtime-main.js.map": "/global-launches-app/static/js/runtime-main.58963f45.js.map",
     "static/css/2.3034213d.chunk.css": "/global-launches-app/static/css/2.3034213d.chunk.css",
-    "static/js/2.e47d03c9.chunk.js": "/global-launches-app/static/js/2.e47d03c9.chunk.js",
-    "static/js/2.e47d03c9.chunk.js.map": "/global-launches-app/static/js/2.e47d03c9.chunk.js.map",
+    "static/js/2.62a480fb.chunk.js": "/global-launches-app/static/js/2.62a480fb.chunk.js",
+    "static/js/2.62a480fb.chunk.js.map": "/global-launches-app/static/js/2.62a480fb.chunk.js.map",
     "index.html": "/global-launches-app/index.html",
-    "precache-manifest.0e8b9b8407ac3ea2c0e9f8d667d27ce8.js": "/global-launches-app/precache-manifest.0e8b9b8407ac3ea2c0e9f8d667d27ce8.js",
+    "precache-manifest.7bb20203286c6501db3ddd8613cf5b44.js": "/global-launches-app/precache-manifest.7bb20203286c6501db3ddd8613cf5b44.js",
     "service-worker.js": "/global-launches-app/service-worker.js",
     "static/css/2.3034213d.chunk.css.map": "/global-launches-app/static/css/2.3034213d.chunk.css.map",
-    "static/css/main.6377bcb0.chunk.css.map": "/global-launches-app/static/css/main.6377bcb0.chunk.css.map",
-    "static/js/2.e47d03c9.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.e47d03c9.chunk.js.LICENSE.txt"
+    "static/css/main.95f32d25.chunk.css.map": "/global-launches-app/static/css/main.95f32d25.chunk.css.map",
+    "static/js/2.62a480fb.chunk.js.LICENSE.txt": "/global-launches-app/static/js/2.62a480fb.chunk.js.LICENSE.txt",
+    "static/media/alien.svg": "/global-launches-app/static/media/alien.9c05602d.svg",
+    "static/media/cloud.svg": "/global-launches-app/static/media/cloud.305b7b7b.svg",
+    "static/media/comet.svg": "/global-launches-app/static/media/comet.60dacd2c.svg",
+    "static/media/earth.svg": "/global-launches-app/static/media/earth.c046ac84.svg",
+    "static/media/mars.svg": "/global-launches-app/static/media/mars.cf923732.svg",
+    "static/media/meteor.svg": "/global-launches-app/static/media/meteor.ae2d9c66.svg",
+    "static/media/moon.svg": "/global-launches-app/static/media/moon.48fb74a2.svg",
+    "static/media/satellite2.svg": "/global-launches-app/static/media/satellite2.bb5b6803.svg",
+    "static/media/satellite4.svg": "/global-launches-app/static/media/satellite4.021c26fd.svg",
+    "static/media/spaceship.svg": "/global-launches-app/static/media/spaceship.a981e12e.svg",
+    "static/media/stars.svg": "/global-launches-app/static/media/stars.5546c7c6.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.58963f45.js",
     "static/css/2.3034213d.chunk.css",
-    "static/js/2.e47d03c9.chunk.js",
-    "static/css/main.6377bcb0.chunk.css",
-    "static/js/main.d086c9cd.chunk.js"
+    "static/js/2.62a480fb.chunk.js",
+    "static/css/main.95f32d25.chunk.css",
+    "static/js/main.d9264c34.chunk.js"
   ]
 }
