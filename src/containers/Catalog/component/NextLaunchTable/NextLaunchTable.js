@@ -52,7 +52,6 @@ export default ({launches}) => {
     }))
     return (
         <Table
-            className='NextLaunchTable'
             dataSource={launchesWithTimer}
             pagination={{
               position: ['bottomCenter'],

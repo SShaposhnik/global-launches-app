@@ -74,7 +74,7 @@ class LayoutContainer extends Component {
             <Menu defaultSelectedKeys={['1']} mode="horizontal">
               <Menu.Item key="1" icon={<HomeOutlined />}><NavLink to="/">         Приветсвие    </NavLink></Menu.Item>
               <Menu.Item key="2" icon={<AreaChartOutlined />}><NavLink to="/Table">    Cтатистика    </NavLink></Menu.Item>
-              <Menu.Item key="3" icon={<RocketOutlined />}><NavLink to="/Launches"> Запуски       </NavLink></Menu.Item>
+              <Menu.Item key="3" icon={<RocketOutlined />}><NavLink to="/laynches"> Запуски       </NavLink></Menu.Item>
             </Menu>
           </Header>
 
@@ -82,7 +82,7 @@ class LayoutContainer extends Component {
             <Switch>
               <Route exact path='/' />
               <Route exact path='/Table' component={Tabless} />
-              <Route exact path='/Launches' component={MapLaunches} />
+              <Route exact path='/laynches' component={MapLaunches} />
             </Switch>
             {/* <Footer>
               Design © 2020 <br></br>

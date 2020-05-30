@@ -309,6 +309,7 @@ class OldTable2 extends Component {
 
 
         <Modal
+        className='modal-style-from-oldTable2'
           centered
           visible={this.state.visible}
           onOk={this.handleOk}

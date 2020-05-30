@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import '../../containers/Catalog/css/index.css'
 import {
   Layout,
   DatePicker,
   Button,
   notification,
   Divider,
+  Table,
+  Tooltip
+
 } from 'antd'
 import {
   UpOutlined,
   LoadingOutlined,
+  InfoCircleOutlined
 } from '@ant-design/icons'
 import 'antd/dist/antd.css'
 import OldTable from '../Catalog/component/TableOld/TableOld'
@@ -26,7 +29,7 @@ import {
   scroller
 } from 'react-scroll'
 import MapChart from '../Catalog/component/MapChart/MapChart'
-import Planets from '../Catalog/component/TestTable/Planets'
+import ParallaxImageScreen from '../Catalog/component/parallax/index'
 
 import LaunchCard from '../Catalog/component/Cards/OldCard'
 
@@ -71,24 +74,14 @@ function disabledDate(current) {
   return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
 
-function scrollFunction() {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-    document.getElementById("myBtn").style.display = "block"
-  } else {
-    document.getElementById("myBtn").style.display = "none"
-  }
-}
-window.onscroll = function () { scrollFunction() };
-
-
-function hid() {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-    document.getElementById("myBtn").style.display = "block"
-  } else {
-    document.getElementById("myBtn").style.display = "none"
-  }
-}
-
+// function scrollFunction() {
+//   if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+//     document.getElementById("myBtn").style.display = "block"
+//   } else {
+//     document.getElementById("myBtn").style.display = "none"
+//   }
+// }
+// window.onscroll = function () { scrollFunction() };
 
 class MapLaunches extends Component {
   constructor(props) {
@@ -102,9 +95,14 @@ class MapLaunches extends Component {
       disabledSlider: false,
       test: [],
       show: false,
+
     }
     this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
     this.timeBeforeToShowMarkers = this.timeBeforeToShowMarkers.bind(this)
+    this.scrollToTop = this.scrollToTop.bind(this)
+  }
+  scrollToTop() {
+    scroll.scrollToTop();
   }
   fetchLaunches(url) {
     fetch(url)
@@ -231,6 +229,134 @@ class MapLaunches extends Component {
         {launchData && NextlaunchData && launchOldData
           ?
 
+          <Parallax pages={3.15}>
+            <ParallaxLayer offset={1} speed={1}
+              style={{ backgroundColor: '#805E73' }}
+            />
+
+            <ParallaxLayer offset={2} speed={1}
+              style={{ backgroundColor: '#87BCDE' }}
+            />
+
+            <ParallaxLayer offset={0} speed={0} factor={3.5} style={{ backgroundImage: url('stars', true), backgroundSize: 'cover', backgroundColor: '#253237' }} />
+
+
+
+            <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
+              <img src={url('satellite2')} style={{ width: '15%', marginLeft: '70%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
+              <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={2.85} speed={0.4} style={{ opacity: 0.6 }}>
+              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '37%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={0.1} speed={-0.7} style={{ pointerEvents: 'none' }}>
+              <img src={url('satellite4')} style={{ width: '15%', marginRight: '70%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={1.2} speed={-0.3} style={{ pointerEvents: 'none' }}>
+              <img src={'https://image.flaticon.com/icons/svg/2909/2909590.svg'} style={{ width: '25%', marginLeft: '15%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={0.6} speed={-0.2} style={{ pointerEvents: 'none' }}>
+              <img src={'https://image.flaticon.com/icons/svg/2929/2929375.svg'} style={{ width: '15%', marginLeft: '55%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={2.7} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+              <img src={'https://image.flaticon.com/icons/svg/2277/2277588.svg'} style={{ width: '60%', marginRight: '45%' }} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={0}
+              speed={0.3}
+              style={{
+                opacity: '80%',
+                // marginLeft: 'auto', 
+                // marginRight: 'auto', 
+                marginTop: '230px'
+              }}
+            >
+              <LaunchTable launches={launchData.launches} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={1.1}
+              speed={1}
+              style={{
+                opacity: '80%',
+                marginLeft: '10%',
+                //  marginRight: 'auto',
+                width: '80%'
+              }}
+            >
+              <NextLaunchTable launches={NextlaunchData.launches} />
+            </ParallaxLayer>
+
+            <ParallaxLayer
+              offset={2}
+              speed={1}
+              style={{ opacity: '80%', marginLeft: 'auto', marginRight: 'auto', width: '80%', marginLeft: '9%', }}
+            >
+              <RangePicker className="RangePicker"
+                defaultValue={[moment(THIS_YEAR), moment()]}
+                showToday={false, true}
+                onChange={this.launchDateButtonOnChange}
+                disabledDate={disabledDate}
+                allowClear={false}
+                style={{ margin: 10 }}
+              />
+              <Tooltip title={<p > Здесь можно настроить период запусков </p>}
+                mouseEnterDelay={0.2}
+                mouseLeaveDelay={0.5}
+                placement="top" >
+                <InfoCircleOutlined />
+              </Tooltip>
+              <OldTable2 launches={launchOldData.launches} loading={loading} />
+
+              {/* <Button 
+                type="primary"
+                shape="circle"
+                icon={< UpOutlined />}
+                onClick={this.scrollToTop}
+                // id="myBtn"
+                title="Наверх!"
+                style={{
+                  display: 'block',
+                  position: 'fixed',
+                  bottom: '20px',
+                  right: '30px',
+                  border: 'none',
+                  width: '50px',
+                  height: '50px',
+                }} */}
+            </ParallaxLayer>
+          </Parallax>
 
 
 
@@ -240,7 +366,36 @@ class MapLaunches extends Component {
 
 
 
-          <Parallax pages={3}>
+
+
+
+
+
+
+
+
+
+
+
+
+          : <div style={{backgroundColor: '#253237', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <LoadingOutlined style={{fontSize: '100px'}}/>
+          </div>
+        }
+      </div>
+    )
+  }
+}
+
+export default MapLaunches
+
+
+
+
+
+{/* 
+
+ <Parallax pages={3}>
             <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
             <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
@@ -310,7 +465,20 @@ class MapLaunches extends Component {
               />
             </ParallaxLayer>
 
-            {/* <ParallaxLayer
+            
+
+
+
+
+
+
+
+              </Parallax>
+*/}
+{/* <Button onClick={this.timeBeforeToShowMarkers} > ТЫК </Button>
+  <MapChart launches={this.state.test} /> */}
+
+{/* <ParallaxLayer
           offset={2}
           speed={-0}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -332,35 +500,3 @@ class MapLaunches extends Component {
               <Divider><h1 style={{ textAlign: 'center' }}>Состоявшиеся запуски</h1></Divider>
               <OldTable2 launches={launchOldData.launches} loading={loading} />
 </ParallaxLayer> */}
-
-
-
-
-
-
-
-            {/* <Button onClick={this.timeBeforeToShowMarkers} > ТЫК </Button>
-              <MapChart launches={this.state.test} /> */}
-          </Parallax>
-
-
-
-
-
-
-
-
-
-
-
-
-
-          : <LoadingOutlined className='not-uploaded-content' />
-        }
-
-      </div>
-    )
-  }
-}
-
-export default MapLaunches

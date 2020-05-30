@@ -1,5 +1,8 @@
 .MapChartStyle {
     pointer-events: none;
+    margin: none;
+    max-width: 100%;
+    /* background: #797979; */
 }
 
 .MarkersSryle {
