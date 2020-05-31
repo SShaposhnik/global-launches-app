@@ -1,31 +1,35 @@
-import React from 'react'
-import './App.css';
-import LayoutContainer from './containers/Layout/index'
-import './containers/Layout/index.scss'
-import YesOrNoPreloader from './containers/Catalog/component/TestTable/exportFunc'
+import React, {useState} from 'react'
+
+import LayoutContainer from './catalog/component/Layout'
+import './catalog/css/index.scss'
 
 
 function App() {
-  let uploadedData = YesOrNoPreloader()
+  const [preload, setPreload] = useState(false)
+  console.log(preload);
+
+  function func () {
+    setPreload(true)
+  }
+  setTimeout(func, 3000)
   
   return (
     <div className="App">
-      {uploadedData[0] && uploadedData[1] && uploadedData[2]
+      {preload
         ? <div>
-          {/* <HookWithData data0 = {uploadedData[0]} data1 = {uploadedData[1]} data2 = {uploadedData[2]}/> */}
-              <LayoutContainer />
-          </div>
+          <LayoutContainer />
+        </div>
         : <div id="hellopreloader">
-            <div id="hellopreloader_preload">
-              <div className="container">
-                <div className="element"></div>
-                <div className="element"></div>
-                <div className="element"></div>
-                <div className="element"></div>
-                <div className="element"></div>
-              </div>
+          <div id="hellopreloader_preload">
+            <div className="container">
+              <div className="element"></div>
+              <div className="element"></div>
+              <div className="element"></div>
+              <div className="element"></div>
+              <div className="element"></div>
             </div>
           </div>
+        </div>
       }
     </div>
   )
