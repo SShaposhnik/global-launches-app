@@ -3,25 +3,21 @@
     text-align: center;
 }
 
-body {
-  background-color: rgb(20, 20, 20);
-}
-
 #layout {
     font-family: 'Ubuntu', sans-serif;
+    background-color: #00b7ff;
     /* min-height: 100vh; */
     /* background: rgb(122, 10, 10); */
 }
-
+.layout-content {
+  background-color: #fff;
+}
 .site-layout-content {
     background: #fff;
     padding: 24px;
     font-family: 'Ubuntu', sans-serif;
 }
 
-.test {
-  width: auto;
-}
 
 .logo {
   height: 32px;

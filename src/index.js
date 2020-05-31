@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import './containers/Layout/index.scss'
-import HookFunction from './containers/Launches/Hook'
-import HookWithData from './containers/Launches/HookWithData'
+import { HashRouter } from 'react-router-dom'
 
-  ReactDOM.render(
-    <App />,
-    // <HookFunction />,
-    document.getElementById('root')
-  )
+ReactDOM.render(
+  <HashRouter>
+    <App />
+  </HashRouter>
+  , document.getElementById('root')
+)

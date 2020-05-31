@@ -2,7 +2,7 @@
   "name": "global-launches-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://SShaposhnik.github.io/global-launches-app",
+  "homepage": "https://SShaposhnik.github.io/global-launches-app",
   "dependencies": {
     "@south-paw/react-vector-maps": "^3.0.0",
     "@sweetalert/with-react": "^0.1.1",

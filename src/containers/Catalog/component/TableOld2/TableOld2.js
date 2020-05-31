@@ -6,7 +6,7 @@ import moment from 'moment'
 import 'moment/locale/ru'
 import './TableOld2.css'
 import swal from '@sweetalert/with-react'
-import { ClearOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons'
+import { ClearOutlined, CheckOutlined, SearchOutlined, SettingFilled } from '@ant-design/icons'
 
 moment.locale()
 
@@ -70,7 +70,7 @@ class OldTable2 extends Component {
           ref={node => {
             this.searchInput = node;
           }}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`${dataIndex}`}
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
@@ -84,10 +84,10 @@ class OldTable2 extends Component {
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Поиск
           </Button>
           <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
+            Сбросить
           </Button>
         </Space>
       </div>
@@ -115,7 +115,7 @@ class OldTable2 extends Component {
     confirm()
     this.setState({
       searchText: selectedKeys[0],
-      searchedColumn: dataIndex.name,
+      searchedColumn: toString(dataIndex),
     })
   }
 
@@ -131,8 +131,8 @@ class OldTable2 extends Component {
         dataIndex: "RocketAndMissionName",
         className: 'Name-launch-style',
         width: '30%',
-        align: 'center',
-        ...this.getColumnSearchProps('Имя'),
+        align: 'left',
+        ...this.getColumnSearchProps('Название запуска'),
         onCell: (selectedRows, selectedRowKeys) => {
           // selectedRowKeys -> number
           // selectedRows    -> data
@@ -245,11 +245,12 @@ class OldTable2 extends Component {
         onFilter: (value, record) => { return record.countryCode.indexOf(value) === 0 },
       },
     ]
+
     const loading = this.props.loading
 
     const oldLaunch = this.props.launches.map(el => ({
       key: el.id,
-      RocketAndMissionName: <a>{el.name}</a>,
+    RocketAndMissionName: <a>{el.name}</a>,
       name: el.name,
       rocket: el.rocket.name,
       net: <Tooltip title={
@@ -280,6 +281,7 @@ class OldTable2 extends Component {
     return (
       <div >
         <Table
+          className='TableOld2'
           columns={columns}
           dataSource={oldLaunch}
           pagination={{
@@ -296,7 +298,6 @@ class OldTable2 extends Component {
             filterConfirm: <CheckOutlined />,
           }}
           loading={loading}
-          // bordered="true"
         >
         </Table>
 

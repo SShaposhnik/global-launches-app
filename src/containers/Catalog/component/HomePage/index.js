@@ -1,12 +1,9 @@
 import React from 'react'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
-import {Table} from 'antd'
-import './index.css'
 
-// Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
-class ParallaxImageScreen extends React.Component {
+class HomePage extends React.Component {
   render() {
     return (
       <Parallax pages={3.15}>
@@ -20,7 +17,7 @@ class ParallaxImageScreen extends React.Component {
 
             <ParallaxLayer offset={0} speed={0} factor={3.5} style={{ backgroundImage: url('stars', true), backgroundSize: 'cover', backgroundColor: '#253237' }} />
 
-            <ParallaxLayer offset={2.3} speed={-0.1} style={{ pointerEvents: 'none' }}>
+            {/* <ParallaxLayer offset={2.3} speed={-0.1} style={{ pointerEvents: 'none' }}>
               <img src={url('satellite2')} style={{ width: '15%', marginLeft: '70%' }} />
             </ParallaxLayer>
 
@@ -79,11 +76,11 @@ class ParallaxImageScreen extends React.Component {
             // 
             <ParallaxLayer offset={2.7} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
               <img src={'https://image.flaticon.com/icons/svg/2277/2277588.svg'} style={{ width: '60%', marginRight: '45%' }} />
-            </ParallaxLayer>
+            </ParallaxLayer> */}
 
           </Parallax>
     )
   }
 }
 
-export default ParallaxImageScreen
+export default HomePage

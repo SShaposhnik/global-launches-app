@@ -93,10 +93,6 @@ const MapChart = ({ launches, flag , tableData}) => {
           >
             <g
               fill={LAUNCH_STATUS[status]}
-              stroke="none"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
               transform="translate(-12, -24)"
             >
               <circle cx="12" cy="10" r="3" />

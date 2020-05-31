@@ -23,23 +23,23 @@ import {
 } from '@ant-design/icons'
 import 'antd/dist/antd.css'
 import './index.css'
-import OldTable from '../Catalog/component/TableOld/TableOld'
-import OldTable2 from '../Catalog/component/TableOld2/TableOld2'
-import LaunchTable from '../Catalog/component/Table/Table'
-import NextLaunchTable from '../Catalog/component/NextLaunchTable/NextLaunchTable'
-import SliderMapChart from '../Catalog/component/SliderMapChart/SliderMapChart'
+import OldTable from '../TableOld/TableOld'
+import OldTable2 from '../TableOld2/TableOld2'
+import LaunchTable from '../Table/Table'
+import NextLaunchTable from '../NextLaunchTable/NextLaunchTable'
+import SliderMapChart from '../SliderMapChart/SliderMapChart'
 import '../Layout/index.css' // стандарт
 import '../Layout/index.scss' // прыгающие квадраты
 import moment from 'moment'
 import {
   animateScroll as scroll, scroller
 } from 'react-scroll'
-import MapChart from '../Catalog/component/MapChart/MapChart'
-import { sayHi, announcedLaunchesFetch } from '../Catalog/component/LoadLaunchData'
-import Planets from '../Catalog/component/TestTable/Planets'
+import MapChart from '../MapChart/MapChart'
+import { sayHi, announcedLaunchesFetch } from '../LoadLaunchData'
+import Planets from '../TestTable/Planets'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
-import LaunchCard from '../Catalog/component/Cards/OldCard'
+import LaunchCard from '../Cards/OldCard'
 import { css } from 'styled-components'
 
 const { Content, Sider } = Layout;
