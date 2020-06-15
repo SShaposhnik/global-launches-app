@@ -13,7 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { Route, NavLink } from "react-router-dom"
 // @material-ui/icons
 import { Apps, CloudDownload } from '@material-ui/icons';
-import MapLaunches from '../Launches'
+import MapLaunches from '../LaunhcesTable/LaunchesTables'
 
 // core components
 import CustomDropdown from '../CustomDropdown/CustomDropdown.js';

@@ -2,8 +2,7 @@ import React from 'react'
 
 import { ComposableMap, Geographies, Geography, Marker, } from "react-simple-maps"
 import { Tooltip } from 'antd'
-import Popover from "@material-ui/core/Popover";
-import '../css/index.css'
+import '../../css/index.css'
 
 
 const geoUrl =

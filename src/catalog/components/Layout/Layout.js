@@ -6,17 +6,17 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { Route, NavLink } from "react-router-dom"
 import { animateScroll as scroll } from 'react-scroll'
 import 'antd/dist/antd.css'
-import Header from './Header/Header';
-import HeaderLinks from './Header/HeaderLinks';
+import Header from '../Header/Header';
+import HeaderLinks from '../Header/HeaderLinks';
 // import 'antd/dist/antd.dark.css'
 
-import '../css/index.css' // стандарт
-import MapLaunches from './Launches'
-import Static from './testComponents/Static'
-import HomePage from './HomePage'
+import '../../css/index.css'
+import MapLaunches from '../LaunhcesTable/LaunchesTables'
+import Static from '../testComponents/Static'
+import HomePage from '../HomePage/HomePage'
 
 function scrollFunction() {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
     document.getElementById("myBtn").style.display = "block"
 
   } else {

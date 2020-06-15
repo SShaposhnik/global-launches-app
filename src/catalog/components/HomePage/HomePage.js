@@ -1,19 +1,19 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
-import Parallax from '../component/Parallax/Parallax'
-import GridContainer from "../component/Grid/GridContainer";
-import GridItem from '../component/Grid/GridItem';
-import LaunchesTables from './Launches'
-import MapChart from './MapChart'
-import Footer from './Footer/Footer'
+import Parallax from '../Parallax/Parallax'
+import GridContainer from "../Grid/GridContainer";
+import GridItem from '../Grid/GridItem';
+import LaunchesTables from '../LaunhcesTable/LaunchesTables'
+import MapChart from '../MapChart/MapChart'
+import Footer from '../Footer/Footer'
 import 'antd/dist/antd.css'
-import Header from './Header/Header';
-import HeaderLinks from './Header/HeaderLinks';
+import Header from '../Header/Header';
+import HeaderLinks from '../Header/HeaderLinks';
 
-import '../css/index.css'
+import '../../css/index.css'
 
-import styles from '../../assets/jss/views/components';
+import styles from '../../../assets/jss/views/components';
 const useStyles = makeStyles(styles);
 
 export default function HomePage (props) {
@@ -31,7 +31,7 @@ export default function HomePage (props) {
               color: "white"
             }}
           /> */}
-        <Parallax small image={require("../../assets/images/space1.jpg")}>
+        <Parallax small image={require('../../../assets/images/space1.jpg')}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem>

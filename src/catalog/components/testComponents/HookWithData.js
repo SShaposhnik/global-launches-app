@@ -93,14 +93,6 @@ function HookWithData() {
               <OldTable2 launches={finishedLaunches} />
 
           </div>
-          <Button
-              type="primary"
-              shape="circle"
-              icon={<UpOutlined />}
-              onClick={scroll.scrollToTop}
-              id="myBtn"
-              title="Наверх!"
-            />
         </Content>
 
       </div>

@@ -5,8 +5,8 @@ import moment from 'moment'
 import 'moment/locale/ru'
 import { LoadingOutlined } from '@ant-design/icons'
 
-import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../assets/images/index'
-import '../css/index.css'
+import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../../assets/images/index'
+import '../../css/index.css'
 moment.locale()
 
 
@@ -56,8 +56,7 @@ const columns = [
 
 export default ({ launches }) => {
   const launchesWithTimer = launches.map(el => ({
-    RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{width: '10%', marginRight: '10px'}}/> {el.name}</span>,
-    // `${<img src={usaFlag} style={{width: '7%'}}/>}  ${{el.name}}`
+    RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{width: '9%', marginRight: '10px'}}/> {el.name}</span>,
     location: <div>
       {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
       {el.location.name.split(',')[0]}
@@ -77,7 +76,7 @@ export default ({ launches }) => {
         showQuickJumper: false,
         hideOnSinglePage: "true",
       }}
-      size="small"
+      // size="small"
       columns={columns}
       style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}
       // bordered="false"

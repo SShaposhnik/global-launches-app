@@ -27,11 +27,5 @@
   </Tooltip>
   <MapChart launches={this.state.test} />
 </div>
-<Button type="primary"
-  shape="circle"
-  icon={< UpOutlined />}
-  onClick={scroll.scrollToTop}
-  id="myBtn"
-  title="Наверх!"
-/>
+
 </Content>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import LayoutContainer from './catalog/component/Layout'
+import LayoutContainer from './catalog/components/Layout/Layout'
 import './catalog/css/index.scss'
 
 

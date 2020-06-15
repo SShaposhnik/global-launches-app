@@ -65,41 +65,11 @@ const notificationForInvalidDate = (placement) => {
 }
 
 
-
-// function scrollFunction() {
-//   if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-//     document.getElementById("myBtn").style.display = "block"
-//   } else {
-//     document.getElementById("myBtn").style.display = "none"
-//   }
-// }
-// window.onscroll = function () { scrollFunction() };
-
 function disabledDate(current) {
   return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
 
-// const modals = Modal.warning({
-//     content: `Забыл сказать, посмотрите на такое меню`,
-//     maskClosable: "true"
-// }
-// )
-
-
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
-const Yellow = ({ children }) => <span style={{ color: '#EFF59B' }}>{children}</span>
-const Lightblue = ({ children }) => <span style={{ color: '#9AEDFE' }}>{children}</span>
-const Green = ({ children }) => <span style={{ color: '#57EE89' }}>{children}</span>
-const Blue = ({ children }) => <span style={{ color: '#57C7FF' }}>{children}</span>
-const Gray = ({ children }) => <span style={{ color: '#909090' }}>{children}</span>
-
-
-
-
-
-
-
 
 
 
@@ -317,14 +287,7 @@ function HookFunction() {
 
             
           </div>
-          <Button
-            type="primary"
-            shape="circle"
-            icon={<UpOutlined />}
-            onClick={scroll.scrollToTop}
-            id="myBtn"
-            title="Наверх!"
-          />
+          
         </Content> */}
 
       </div>

@@ -5,15 +5,15 @@ import { UpOutlined, LoadingOutlined, InfoCircleOutlined, GithubOutlined } from 
 import moment from 'moment'
 import { animateScroll as scroll, scroller } from 'react-scroll'
 
-import { Earth, Satellite2, Alien, Mars, Comet, Meteor, Satellite4, Stars, Cloud, Upi, Spaceship, RocketButton } from '../images'
-import FinishedTable from './FinishedLaunches'
-import AnnouncedTable from "./AnnouncedLaunches"
-import ScheduledTable from './ScheduledLaunches'
-import { FetchData } from './FetchData'
+import { Earth, Satellite2, Alien, Mars, Comet, Meteor, Satellite4, Stars, Cloud, Upi, Spaceship, RocketButton } from '../../images'
+import FinishedTable from '../FinishedLaunches/FinishedLaunches'
+import AnnouncedTable from "../AnnouncedLaunches/AnnouncedLaunches"
+import ScheduledTable from '../ScheduledLaunches/ScheduledLaunches'
+import { FetchData } from '../testComponents/FetchData'
 
-import MapChart from './MapChart'
+import MapChart from '../MapChart/MapChart'
 import 'antd/dist/antd.css'
-import '../css/index.css'
+import '../../css/index.css'
 
 const { Content, Footer } = Layout
 const LIMIT = 10000
@@ -43,15 +43,15 @@ function disabledDate(current) {
 }
 
 
-function scrollFunction() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    document.getElementById("myBtn").style.display = "block"
+// function scrollFunction() {
+//   if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+//     document.getElementById("myBtn").style.display = "block"
 
-  } else {
-    document.getElementById("myBtn").style.display = "none"
+//   } else {
+//     document.getElementById("myBtn").style.display = "none"
 
-  }
-}
+//   }
+// }
 
 export default class LaunchesTables extends Component {
   constructor(props) {
@@ -250,15 +250,6 @@ export default class LaunchesTables extends Component {
 
 
             <br /><br />
-            <Button
-              type="primary"
-              shape="circle"
-              icon={<UpOutlined />}
-              onClick={() => this.parallax.scrollTo(0)}
-              // id="myBtn"
-              title="Наверх!"
-              className='myBtn'
-            />
 
           </div>
           : <div style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

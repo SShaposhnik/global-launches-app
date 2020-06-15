@@ -65,6 +65,7 @@
     border: none;
     width: 50px;
     height: 50px;
+    z-index: 100;
 }
 
 .MapChartStyle {
@@ -95,22 +96,6 @@
 .upi {
   
 }
-.myBtn {
-    position: fixed;
-    right: -97%;
-    width: 50px;
-    height: 50px;
-    /* -webkit-animation: swing 2s ease;
-    animation: swing 2s ease;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: infinite; */
-}
-/* .myBtn:hover {
-  -webkit-animation: swing 0.8s ease;
-  animation: swing 0.8s ease;
-   -webkit-animation-iteration-count: 1;
-   animation-iteration-count: infinite;
-} */
 
 @-webkit-keyframes swing {
   15% {

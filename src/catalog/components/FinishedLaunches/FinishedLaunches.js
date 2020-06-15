@@ -2,18 +2,16 @@ import React, { Component } from 'react'
 
 import { Table, Modal, Tooltip, Input, Button, Space } from 'antd'
 import { ClearOutlined, CheckOutlined, SearchOutlined, SettingFilled } from '@ant-design/icons'
-import {Alien} from '../images'
 import Popover from "@material-ui/core/Popover";
 import Highlighter from 'react-highlight-words'
 import moment from 'moment'
 import 'moment/locale/ru'
 
-import MapChart from './MapChart'
-import LaunchCard from './OldCard'
+import MapChart from '../MapChart/MapChart'
 
-import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../assets/images/index'
-import agencies from '../agency.json'
-import '../css/index.css'
+import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../../assets/images/index'
+import agencies from '../../agency.json'
+import '../../css/index.css'
 
 moment.locale()
 
