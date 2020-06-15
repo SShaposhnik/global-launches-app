@@ -26,9 +26,10 @@ class LaunchCard extends Component {
 
   render() {
     const { launches } = this.props
+    console.log(launches);
+    
     return (
       <div className="card-layout">
-        {launches.map(el => (
           <Card
             hoverable
             className="card-grid"
@@ -42,13 +43,12 @@ class LaunchCard extends Component {
           >
             <Meta
               // avatar={<Avatar src="https://image.flaticon.com/icons/svg/2929/2929073.svg" />}
-              title={el.rocket.name}
-              description={el.name.split('|')[1]}
+              title={this.props.launches.rocket.name}
+              description={this.props.launches.name.split('|')[1]}
             /><br />
-              Дата запуска: {moment(el.net).utc(0).locale('ru').format('LLL z')}<br /><br />
-            <Timer timeTillLaunch={el.net} />
+              Дата запуска: {moment(this.props.launches.net).utc(0).locale('ru').format('LLL z')}<br /><br />
+            <Timer timeTillLaunch={this.props.launches.net} />
           </Card>
-        ))}
       </div>
     )
   }

@@ -1,21 +1,11 @@
-a:hover {	
-	text-decoration	: none;
-}
-a.tooltip span {
-	display			: none; 
-  margin-left		: 10px; 
-  width			: 500px;;
-  height: 650px;
-  z-index: 8888;
-}
-a.tooltip:hover span {
-	display			: inline; 
-	position		: absolute; 
-	background		: #ffffff; 
-	border			: 1px solid #cccccc; 
-	color			: #6c6c6c;
-}
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons');
+  .site-layout-content {
+      background: #fff;
+      padding: 24px;
+      font-family: 'Roboto', "Helvetica","Arial", sans-serif;
+      font-weight: 300;
+      line-height: 2.5em;
+  }
 .announced-table {
   /* display: flex; */
   width: 80%;
@@ -23,63 +13,48 @@ a.tooltip:hover span {
   margin-right: auto;
 }
 
+.homepage {
+  background-color: white;
+}
 .spaceship {
   display: block;
    width: 10%;
     margin-left: 95%;
 }
 
-.background {
+.background-parallax {
   background-color: #253237;
+  background-image: url('../images/stars.svg');
 }
+
 
 .Alien {
   transform: rotate(-45deg);
   width: 10%;
   margin-left: 93%;
 }
-
-.MapChartStyle {
-  pointer-events: none;
-  margin: none;
-  max-width: 100%;
-  /* background: #797979; */
-}
-
-.MarkersSryle {
-  pointer-events: all;
-  background: yellow;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-.RangePicker {
-    text-align: center;
+.alert-if-no-launch {
+  min-height: 30%;
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 #layout {
-    font-family: 'Ubuntu', sans-serif;
-    background-color: #00b7ff;
-    /* min-height: 100vh; */
-    /* background: rgb(122, 10, 10); */
-}
-.layout-content {
-  background-color: #fff;
-}
-.site-layout-content {
-    background: #fff;
-    padding: 24px;
-    font-family: 'Ubuntu', sans-serif;
+  font-family: 'Roboto', "Helvetica","Arial", sans-serif;
+      font-weight: 300;
+      line-height: 2.5em;
 }
 
-
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+.RangePicker {
+  margin-bottom: 20px;
 }
 
-#hid {
-    display: block;
+.finished-table-content {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #myBtn {
@@ -92,6 +67,107 @@ a.tooltip:hover span {
     height: 50px;
 }
 
+.MapChartStyle {
+  pointer-events: none;
+  background: rgb(255, 255, 255);
+}
+
+.MarkersSryle{
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(3);
+	animation: pulse 1s infinite;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+    box-shadow: 4 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+	50% {
+		transform: scale(1.5);
+    box-shadow: 4 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(1);
+    box-shadow: 4 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+.upi {
+  
+}
+.myBtn {
+    position: fixed;
+    right: -97%;
+    width: 50px;
+    height: 50px;
+    /* -webkit-animation: swing 2s ease;
+    animation: swing 2s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: infinite; */
+}
+/* .myBtn:hover {
+  -webkit-animation: swing 0.8s ease;
+  animation: swing 0.8s ease;
+   -webkit-animation-iteration-count: 1;
+   animation-iteration-count: infinite;
+} */
+
+@-webkit-keyframes swing {
+  15% {
+    -webkit-transform: translateX(9px);
+    transform: translateX(9px);
+  }
+  30% {
+    -webkit-transform: translateX(-9px);
+    transform: translateX(-9px);
+  }
+  40% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  50% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  65% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes swing {
+  15% {
+    -webkit-transform: translateX(9px);
+    transform: translateX(9px);
+  }
+  30% {
+    -webkit-transform: translateX(-9px);
+    transform: translateX(-9px);
+  }
+  40% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  50% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  65% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+
+
 #myBtn:hover {
     background-color: #555;
 }
@@ -100,24 +176,6 @@ a.tooltip:hover span {
     display: none;
 }
 
-
-/* #hellopreloader>
-      p {
-        display:none;
-      }
-      #hellopreloader_preload {
-        display: block;
-        position: fixed;
-        z-index: 99999;
-        top: 0;
-        left: 0;
-        bottom: 50px;
-        width: 100%;
-        height: 100%;
-        min-width: 1000px;
-        background: rgb(255, 255, 255) url(https://i.gifer.com/t9k.gif ) center center no-repeat;
-        background-size:400px;
-      } */
-
-
-/* https://i.gifer.com/t9k.gif https://i.gifer.com/WS2c.gif*/
+.custom-popover {
+  width: 130vh;
+}

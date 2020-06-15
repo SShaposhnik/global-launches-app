@@ -1,86 +1,54 @@
 import React from 'react'
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import { makeStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+import Parallax from '../component/Parallax/Parallax'
+import GridContainer from "../component/Grid/GridContainer";
+import GridItem from '../component/Grid/GridItem';
+import LaunchesTables from './Launches'
+import MapChart from './MapChart'
+import Footer from './Footer/Footer'
+import 'antd/dist/antd.css'
+import Header from './Header/Header';
+import HeaderLinks from './Header/HeaderLinks';
 
-const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
+import '../css/index.css'
 
-class HomePage extends React.Component {
-  render() {
+import styles from '../../assets/jss/views/components';
+const useStyles = makeStyles(styles);
+
+export default function HomePage (props) {
+  const classes = useStyles();
     return (
-      <Parallax pages={3.15}>
-        <ParallaxLayer offset={1} speed={1}
-          style={{ backgroundColor: '#805E73' }}
-        />
 
-        <ParallaxLayer offset={2} speed={1}
-          style={{ backgroundColor: '#87BCDE' }}
-        />
-
-        <ParallaxLayer offset={0} speed={0} factor={3.5} style={{ backgroundImage: url('stars', true), backgroundSize: 'cover', backgroundColor: '#253237' }} />
-
-        {/* <ParallaxLayer offset={2.3} speed={-0.1} style={{ pointerEvents: 'none' }}>
-              <img src={url('satellite2')} style={{ width: '15%', marginLeft: '70%' }} />
-            </ParallaxLayer>
-
-            //земля
-            <ParallaxLayer offset={2.5} speed={-0.3} style={{ pointerEvents: 'none' }}>
-              <img src={url('earth')} style={{ width: '45%', marginLeft: '70%' }} />
-            </ParallaxLayer>
-            <ParallaxLayer offset={2.46} speed={-0.4} style={{ opacity: 0.9 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '85%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
-              <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={2.85} speed={0.4} style={{ opacity: 0.6 }}>
-              <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '37%' }} />
-            </ParallaxLayer>
-
-            <ParallaxLayer offset={0.1} speed={-0.6} style={{ pointerEvents: 'none' }}>
-              <img src={url('satellite4')} style={{ width: '15%', marginRight: '65%' }} />
-            </ParallaxLayer>
-
-            // комета
-            <ParallaxLayer offset={1.2} speed={-1.5} style={{ pointerEvents: 'none' }}>
-              <img src={'https://image.flaticon.com/icons/svg/2909/2909590.svg'} style={{ width: '15%', marginLeft: '15%' }} />
-            </ParallaxLayer>
-
-            // планета
-            <ParallaxLayer offset={0.6} speed={-0.3} style={{ pointerEvents: 'none' }}>
-              <img src={'https://image.flaticon.com/icons/svg/2929/2929375.svg'} style={{ width: '10%', marginLeft: '55%' }} />
-            </ParallaxLayer>
-
-            // 
-            <ParallaxLayer offset={2.7} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-              <img src={'https://image.flaticon.com/icons/svg/2277/2277588.svg'} style={{ width: '60%', marginRight: '45%' }} />
-            </ParallaxLayer> */}
-
+      <div className='homepage'>
+        {/* <Header
+            brand="Material Kit React"
+            rightLinks={<HeaderLinks />}
+            fixed
+            color="transparent"
+            changeColorOnScroll={{
+              height: 400,
+              color: "white"
+            }}
+          /> */}
+        <Parallax small image={require("../../assets/images/space1.jpg")}>
+        <div className={classes.container}>
+          <GridContainer>
+            <GridItem>
+              <div className={classes.brand}>
+                <h1 className={classes.title}>Actual info</h1>
+                <h3 className={classes.subtitle}>
+                  about space launches
+                </h3>
+              </div>
+            </GridItem>
+          </GridContainer>
+        </div>
       </Parallax>
+      <div className={classNames(classes.main, classes.mainRaised)}>
+        <LaunchesTables />
+      </div>
+      <Footer />
+      </div>
     )
-  }
 }
-
-export default HomePage

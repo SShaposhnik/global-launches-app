@@ -2,11 +2,17 @@ import React, { Component } from 'react'
 
 import { Table, Modal, Tooltip, Input, Button, Space } from 'antd'
 import { ClearOutlined, CheckOutlined, SearchOutlined, SettingFilled } from '@ant-design/icons'
+import {Alien} from '../images'
+import Popover from "@material-ui/core/Popover";
 import Highlighter from 'react-highlight-words'
 import moment from 'moment'
 import 'moment/locale/ru'
 
 import MapChart from './MapChart'
+import LaunchCard from './OldCard'
+
+import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../assets/images/index'
+import agencies from '../agency.json'
 import '../css/index.css'
 
 moment.locale()
@@ -22,18 +28,29 @@ const LAUNCH_STATUS = {
   7: 'Произошел сбой',
 }
 
-const COUNTRY = {
-  USA: 'США',
-  CHN: 'Китай',
-  KAZ: 'Казахстан',
-  IRN: 'Иран',
-  RUS: 'Россия',
-  GUF: 'Французская Гвиана',
-  JPN: 'Япония',
-  NZL: 'Новая Зеландия',
-  IND: 'Индия',
-  UNK: 'Великобритания',
+const COUNTRY_FLAG = {
+  USA: usaFlag,
+  CHN: chinaFlag,
+  KAZ: kazakhstanFlag,
+  IRN: iranFlag,
+  RUS: russiaFlag,
+  FRA: franceFlag,
+  JPN: japanFlag,
+  NZL: newzealandFlag,
+  IND: indiaFlag,
+  UNK: ukFlag,
+
 }
+
+let listIDandCountryCode = {}
+let count = 0
+while (count <= agencies.agencies.length - 1) {
+  listIDandCountryCode[agencies.agencies[count].id] = (agencies.agencies[count].countryCode)
+  count++
+}
+
+console.log(listIDandCountryCode);
+
 
 class FinishedTable extends Component {
   constructor(props) {
@@ -43,6 +60,8 @@ class FinishedTable extends Component {
       searchText: '',
       searchedColumn: '',
       show: false,
+      anchorElRight: null,
+      finishedLaunches: null,
     }
   }
 
@@ -126,6 +145,67 @@ class FinishedTable extends Component {
   }
 
   render() {
+    const {anchorElRight} = this.state
+    const loading = this.props.loading
+    const oldLaunch = this.props.launches.map(el => ({
+      key: el.id,
+      RocketAndMissionName: <span><img src={COUNTRY_FLAG[listIDandCountryCode[el.lsp]]} style={{width: '10%', marginRight: '10px'}}/>  <a>{el.name}</a></span>,
+      name: el.name,
+      rocket: el.rocket.name,
+      net: <Tooltip title={
+        <div>
+          <p style={{ textAlign: 'center' }}>Локальное время</p>
+          <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p>
+        </div>}>
+        {moment(el.net).utc(0).locale('ru').format('LLL z')}
+      </Tooltip>,
+      statusText: LAUNCH_STATUS[el.status],
+      statusNumber: el.status,
+      location: <div>
+        {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
+        {el.location.name.split(',')[0]}
+      </div>,
+      locationWithoutPads: el.location.name,
+      spaceortName: el.location.name.split(',')[0],
+      longitude: el.location.pads.map(els => (els.longitude)),
+      latitude: el.location.pads.map(els => (els.latitude)),
+      PadsMapURL: el.location.pads.map(url => (url.mapURL)),
+      PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
+      RocketWikiURL: el.rocket.wikiURL,
+      countryCode: el.location.countryCode,
+    }))
+
+    const oldLaunch2 = this.props.launches.map(el => ({
+      key: el.id,
+      RocketAndMissionName: <span><img src={COUNTRY_FLAG[listIDandCountryCode[el.lsp]]} style={{width: '10%', marginRight: '10px'}}/> <a>{el.name}</a></span>,
+      name: el.name,
+      rocket: el.rocket.name,
+      net: <Tooltip title={
+        <div>
+          <p style={{ textAlign: 'center' }}>Локальное время</p>
+          <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p>
+        </div>}>
+        {moment(el.net).utc(0).locale('ru').format('LLL z')}
+      </Tooltip>,
+      statusText: LAUNCH_STATUS[el.status],
+      statusNumber: el.status,
+      location: <div>
+        {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
+        {el.location.name.split(',')[0]}
+      </div>,
+      locationWithoutPads: el.location.name,
+      spaceortName: el.location.name.split(',')[0],
+      longitude: el.location.pads.map(els => (els.longitude)),
+      latitude: el.location.pads.map(els => (els.latitude)),
+      PadsMapURL: el.location.pads.map(url => (url.mapURL)),
+      PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
+      RocketWikiURL: el.rocket.wikiURL,
+      countryCode: el.location.countryCode,
+    }))
+    // переверачиваем дату, не особо важно. Влияет только на вывод
+    oldLaunch.reverse() 
+    oldLaunch2.reverse()
+
     const columns = [
       {
         title: "Название запуска",
@@ -144,13 +224,17 @@ class FinishedTable extends Component {
               // this.setState({ markersLaunches: [selectedRows] })
               this.setState({ markersLaunches: [selectedRows] })
               this.showModal()
-              // swal({
-              //   // icon: 'error',
-              //   buttons: false,
-              //   content: (
-              //     <MapChart tableData={[selectedRows] } flag={true}/>
-              //   )
-              // })
+              // swal (
+              //   <div>
+              //     {/* <h1>{this.props.launches[0].name}</h1>
+              //     <p>Время: {this.props.launches[0].net}</p>
+              //     <p>Космодром: {this.props.launches[0].location.name}</p>
+              //     <img src={Alien} style={{width: '50%'}}/> */}
+              //     <LaunchCard launches={this.props.launches[0]} />
+              //     {/* <MapChart tableData={this.state.markersLaunches} flag={true} /> */}
+              //   </div>, 
+              //   {button: false,}
+              // )
             },
           }
         }
@@ -228,61 +312,109 @@ class FinishedTable extends Component {
             text: 'Великобритания',
             value: 'UNK',
           },
-          // {
-          //   text: 'Фильтр по космодромам',
-          //   value: 'Submenu',
-          //   children: [
-          //     {
-          //       text: 'Cape Canaveral',
-          //       value: 'Cape Canaveral',
-          //     },
-          //     {
-          //       text: 'Jiuquan',
-          //       value: 'Jiuquan',
-          //     },
-          //   ],
-          // }
+        ],
+        onFilter: (value, record) => { return record.countryCode.indexOf(value) === 0 },
+      },
+    ]
+    const columns2 = [
+      {
+        title: "Название запуска",
+        dataIndex: "RocketAndMissionName",
+        className: 'Name-launch-style',
+        width: '30%',
+        align: 'left',
+        ...this.getColumnSearchProps('Название запуска'),
+        onCell: (selectedRows, selectedRowKeys) => {
+          return {
+            onClick: event => {
+              this.setState({markersLaunches: [selectedRows]})
+              this.setState({anchorElRight: event.currentTarget})
+            },
+          }
+        }
+      },
+      {
+        title: "Дата запуска",
+        dataIndex: "net",
+        align: 'center',
+        width: '25%',
+
+      },
+      {
+        title: "Статус",
+        dataIndex: "statusText",
+        align: 'center',
+        filters: [
+          {
+            text: 'Успешно',
+            value: 'Успешно',
+          },
+          {
+            text: 'Неудача',
+            value: 'Неудача',
+          },
+          {
+            text: 'Произошел сбой',
+            value: 'Произошел сбой',
+          },
+        ],
+        onFilter: (value, record) => { return record.statusText.indexOf(value) === 0 }
+      },
+      {
+        title: "Площадка / Космодром",
+        dataIndex: "location",
+        width: '30%',
+        align: 'center',
+        filters: [
+          {
+            text: 'США',
+            value: 'USA',
+          },
+          {
+            text: 'Китай',
+            value: 'CHN',
+          },
+          {
+            text: 'Казахстан',
+            value: 'KAZ',
+          },
+          {
+            text: 'Иран',
+            value: 'IRN',
+          },
+          {
+            text: 'Россия',
+            value: 'RUS',
+          },
+          {
+            text: 'Французская Гвиана',
+            value: 'GUF',
+          },
+          {
+            text: 'Япония',
+            value: 'JPN',
+          },
+          {
+            text: 'Новая Зеландия',
+            value: 'NZL',
+          },
+          {
+            text: 'Индия',
+            value: 'IND',
+          },
+          {
+            text: 'Великобритания',
+            value: 'UNK',
+          },
         ],
         onFilter: (value, record) => { return record.countryCode.indexOf(value) === 0 },
       },
     ]
 
-    const loading = this.props.loading
-
-    const oldLaunch = this.props.launches.map(el => ({
-      key: el.id,
-    RocketAndMissionName: <a>{el.name}</a>,
-      name: el.name,
-      rocket: el.rocket.name,
-      net: <Tooltip title={
-        <div>
-          <p style={{ textAlign: 'center' }}>Локальное время</p>
-          <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p>
-        </div>}>
-        {moment(el.net).utc(0).locale('ru').format('LLL z')}
-      </Tooltip>,
-      statusText: LAUNCH_STATUS[el.status],
-      statusNumber: el.status,
-      location: <div>
-        {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
-        {el.location.name.split(',')[0]}
-      </div>,
-      locationWithoutPads: el.location.name,
-      spaceortName: el.location.name.split(',')[0],
-      longitude: el.location.pads.map(els => (els.longitude)),
-      latitude: el.location.pads.map(els => (els.latitude)),
-      PadsMapURL: el.location.pads.map(url => (url.mapURL)),
-      PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
-      RocketWikiURL: el.rocket.wikiURL,
-      countryCode: el.location.countryCode,
-    }))
-    // переверачиваем дату, не особо важно. Влияет только на вывод
-    oldLaunch.reverse()
-
     return (
       <div >
         <Table
-          className='TableOld2'
+          className='fineshed-launches-table'
           columns={columns}
           dataSource={oldLaunch}
           pagination={{
@@ -299,8 +431,57 @@ class FinishedTable extends Component {
             filterConfirm: <CheckOutlined />,
           }}
           loading={loading}
+          // bordered='true'
         >
         </Table>
+
+
+        <Table
+          className='fineshed-launches-table'
+          columns={columns2}
+          dataSource={oldLaunch2}
+          pagination={{
+            position: ['bottomCenter'],
+            defaultCurrent: 1,
+            simple:"true",
+            pageSizeOptions: ['10', '50', '100'],
+            // showQuickJumper: "true",
+            // hideOnSinglePage: "true",
+          }}
+          size="small"
+          locale={{
+            filterReset: <ClearOutlined />,
+            filterConfirm: <CheckOutlined />,
+          }}
+          loading={loading}
+          // bordered='true'
+        >
+        </Table>
+
+        <Popover
+                open={Boolean(anchorElRight)}
+                anchorEl={anchorElRight}
+                onClose={() => this.setState({anchorElRight: null})}
+                anchorOrigin={{
+                  vertical: "center",
+                  horizontal: "right"
+                }}
+                transformOrigin={{
+                  vertical: "center",
+                  horizontal: "left"
+                }}
+              >
+                  <div className='custom-popover'>
+                  <MapChart tableData={this.state.markersLaunches} flag={true} />
+                  </div>
+          </Popover>
+
+
+
+
+
+
+
 
         <Modal
           className='modal-style-from-oldTable2'

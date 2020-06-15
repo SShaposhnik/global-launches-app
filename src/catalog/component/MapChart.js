@@ -2,8 +2,9 @@ import React from 'react'
 
 import { ComposableMap, Geographies, Geography, Marker, } from "react-simple-maps"
 import { Tooltip } from 'antd'
-
+import Popover from "@material-ui/core/Popover";
 import '../css/index.css'
+
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
@@ -13,8 +14,8 @@ const MARKER_OF_SET = - 30
 const LAUNCH_STATUS = {
   1: 'Запланированы точные дата и время запуска',
   2: 'Дата и время будут объявлены позже',
-  3: 'green',
-  4: 'red',
+  3: '#36d325',
+  4: '#791a1f',
   5: 'Незапланированная задержка',
   6: 'В полете',
   7: 'Во время запуска произошел частичный сбой',
@@ -22,8 +23,10 @@ const LAUNCH_STATUS = {
 
 const MapChart = ({ launches, flag, tableData }) => {
   let markers = []
-
-  if (flag) {
+  
+  if (launches == null && tableData == null) {
+    console.log('Markers not found!');
+  } else if (flag) {
     markers = tableData.map(el => ({
       RocketAndMissionNames: el.name,
       rocketName: el.rocketName,
@@ -50,11 +53,10 @@ const MapChart = ({ launches, flag, tableData }) => {
       longitude: el.location.pads.map(els => (els.longitude)),
     }))
   }
-
   return (
     <ComposableMap
       projection="geoMercator"
-      width="800"
+      width="1000"
       height="600"
       className="MapChartStyle"
     >
@@ -69,12 +71,9 @@ const MapChart = ({ launches, flag, tableData }) => {
             />
           ))
         }
-
       </Geographies>
       {markers.map(({ rocketName, status, coordinates, markerOffset, padsWikiURL, rocketwikiURL, latitude, longitude, RocketAndMissionNames }) => (
-        <Marker on coordinates={coordinates}
-          className="MarkersSryle"
-        >
+        <Marker on coordinates={coordinates}>
           <Tooltip
             overlayClassName="tooltipInMapChart"
             title={
@@ -88,15 +87,8 @@ const MapChart = ({ launches, flag, tableData }) => {
             placement="bottom"
             mouseLeaveDelay="0.3"
           >
-            <g
-              fill={LAUNCH_STATUS[status]}
-              transform="translate(-12, -24)"
-            >
-              <circle cx="12" cy="10" r="3" />
-              <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
-            </g>
+            <circle r={5} fill={LAUNCH_STATUS[status]} className='MarkersSryle'/>
           </Tooltip>
-
           <text
             textAnchor="middle"
             y={markerOffset}

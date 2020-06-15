@@ -1,0 +1,1274 @@
+{
+  "agencies": [
+    {
+      "id": 1,
+      "name": "Belarus Space Agency",
+      "countryCode": "BLR"
+    },
+    {
+      "id": 2,
+      "name": "Aeronautics and Space Research and Diffusion Center",
+      "countryCode": "URY"
+    },
+    {
+      "id": 3,
+      "name": "Mexican Space Agency",
+      "countryCode": "MEX"
+    },
+    {
+      "id": 4,
+      "name": "Algerian Space Agency",
+      "countryCode": "DZA"
+    },
+    {
+      "id": 5,
+      "name": "Asia Pacific Multilateral Cooperation in Space Technology and Applications",
+      "countryCode": "CHN,PAK,THA"
+    },
+    {
+      "id": 6,
+      "name": "Asia-Pacific Regional Space Agency Forum",
+      "countryCode": "AUS,BGD,BRN,BTN,CAN,KHM,CHN,FRA,DEU,IND,IDN,JPN,LAO,MYS,MNG,MMR,NPL,NZL,PAK,PHL,RUS,SGP,KOR,LKA,THA,USA,VNM"
+    },
+    {
+      "id": 7,
+      "name": "Asia-Pacific Space Cooperation Organization",
+      "countryCode": "BGD,CHN,IDN,IRNMNG,PAK,PER,THA,TUR"
+    },
+    {
+      "id": 8,
+      "name": "Austrian Space Agency",
+      "countryCode": "AUT"
+    },
+    {
+      "id": 9,
+      "name": "Azerbaijan National Aerospace Agency",
+      "countryCode": "AZE"
+    },
+    {
+      "id": 10,
+      "name": "Belgian Institute for Space Aeronomy",
+      "countryCode": "BEL"
+    },
+    {
+      "id": 11,
+      "name": "Bolivarian Agency for Space Activities",
+      "countryCode": "VEN"
+    },
+    {
+      "id": 12,
+      "name": "Brazilian Space Agency",
+      "countryCode": "BRA"
+    },
+    {
+      "id": 13,
+      "name": "UK Space Agency",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 14,
+      "name": "Bolivian Space Agency",
+      "countryCode": "BOL"
+    },
+    {
+      "id": 15,
+      "name": "Bulgarian Space Agency",
+      "countryCode": "BGR"
+    },
+    {
+      "id": 16,
+      "name": "Canadian Space Agency",
+      "countryCode": "CAN"
+    },
+    {
+      "id": 17,
+      "name": "China National Space Administration",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 18,
+      "name": "Colombian Space Commission",
+      "countryCode": "COL"
+    },
+    {
+      "id": 19,
+      "name": "Centre for Remote Imaging, Sensing and Processing",
+      "countryCode": "SGP"
+    },
+    {
+      "id": 20,
+      "name": "Commonwealth Scientific and Industrial Research Organisation",
+      "countryCode": "AUS"
+    },
+    {
+      "id": 21,
+      "name": "Consultative Committee for Space Data Systems",
+      "countryCode": "ITA,GBR,CAN,FRA,CHN,DEU,BRA,JPN,USA,RUS"
+    },
+    {
+      "id": 22,
+      "name": "Committee on Space Research",
+      "countryCode": "ARG,ARM,AUS,AUT,BEL,BGR,BRA,CAN,CHN,TWN,CZE,DNK,EGY,ESP,FIN,FRA,DEU,GRC,HUN,IND,IDN,IRN,ISR,ITA,JPN,MEX,NLD,NGA,NOR,PAK,POL,PRT,ROU,RUS,SVK,ZAF,SWE,CHE,THA,TUR,UKR,GBR,USA"
+    },
+    {
+      "id": 23,
+      "name": "Croatian Space Agency",
+      "countryCode": "HRV"
+    },
+    {
+      "id": 24,
+      "name": "Ministry of Transport of the Czech Republic - Space Technologies and Satellite Systems Department",
+      "countryCode": "CZE"
+    },
+    {
+      "id": 25,
+      "name": "Danish National Space Center",
+      "countryCode": "DNK"
+    },
+    {
+      "id": 26,
+      "name": "Technical University of Denmark - National Space Institute",
+      "countryCode": "DNK"
+    },
+    {
+      "id": 27,
+      "name": "European Space Agency",
+      "countryCode": "AUT,BEL,CZE,DNK,FIN,FRA,DEU,GRC,IRE,ITA,LUZ,NLD,NOR,POL,PRT,ROU,ESP,SWE,CHE,GBR"
+    },
+    {
+      "id": 28,
+      "name": "Geo-Informatics and Space Technology Development Agency",
+      "countryCode": "THA"
+    },
+    {
+      "id": 29,
+      "name": "German Aerospace Center",
+      "countryCode": "DEU"
+    },
+    {
+      "id": 30,
+      "name": "Hungarian Space Office",
+      "countryCode": "HUN"
+    },
+    {
+      "id": 31,
+      "name": "Indian Space Research Organization",
+      "countryCode": "IND"
+    },
+    {
+      "id": 32,
+      "name": "Institute for Space Applications and Remote Sensing",
+      "countryCode": "GRC"
+    },
+    {
+      "id": 33,
+      "name": "Instituto Nacional de T\u00c3\u00a9cnica Aeroespacial",
+      "countryCode": "ESP"
+    },
+    {
+      "id": 34,
+      "name": "Iranian Space Agency",
+      "countryCode": "IRN"
+    },
+    {
+      "id": 35,
+      "name": "Israeli Space Agency",
+      "countryCode": "ISR"
+    },
+    {
+      "id": 36,
+      "name": "Italian Space Agency",
+      "countryCode": "ITA"
+    },
+    {
+      "id": 37,
+      "name": "Japan Aerospace Exploration Agency",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 38,
+      "name": "National Space Agency (KazCosmos)",
+      "countryCode": "KAZ"
+    },
+    {
+      "id": 39,
+      "name": "Kazakh Space Research Institute",
+      "countryCode": "KAZ"
+    },
+    {
+      "id": 40,
+      "name": "Korean Committee of Space Technology",
+      "countryCode": "PRK"
+    },
+    {
+      "id": 41,
+      "name": "Korea Aerospace Research Institute",
+      "countryCode": "KOR"
+    },
+    {
+      "id": 42,
+      "name": "Lithuanian Space Association",
+      "countryCode": "LTU"
+    },
+    {
+      "id": 43,
+      "name": "Malaysian National Space Agency",
+      "countryCode": "MYS"
+    },
+    {
+      "id": 44,
+      "name": "National Aeronautics and Space Administration",
+      "countryCode": "USA"
+    },
+    {
+      "id": 45,
+      "name": "National Authority for Remote Sensing and Space Sciences",
+      "countryCode": "EGY"
+    },
+    {
+      "id": 46,
+      "name": "National Center of Space Research",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 47,
+      "name": "National Commission for Aerospace Research and Development",
+      "countryCode": "PER"
+    },
+    {
+      "id": 48,
+      "name": "National Commission for Space Research",
+      "countryCode": "ARG"
+    },
+    {
+      "id": 49,
+      "name": "National Space Activities Commission",
+      "countryCode": "ARG"
+    },
+    {
+      "id": 50,
+      "name": "National Institute of Aeronautics and Space",
+      "countryCode": "IDN"
+    },
+    {
+      "id": 51,
+      "name": "National Remote Sensing Center of Mongolia",
+      "countryCode": "MNG"
+    },
+    {
+      "id": 52,
+      "name": "National Remote Sensing Center of Tunisia",
+      "countryCode": "TUN"
+    },
+    {
+      "id": 53,
+      "name": "Uzbek State Space Research Agency (UzbekCosmos)",
+      "countryCode": "UZB"
+    },
+    {
+      "id": 54,
+      "name": "National Space Agency of Ukraine",
+      "countryCode": "UKR"
+    },
+    {
+      "id": 55,
+      "name": "National Space Organization",
+      "countryCode": "TWN"
+    },
+    {
+      "id": 56,
+      "name": "National Space Research and Development Agency",
+      "countryCode": "NGA"
+    },
+    {
+      "id": 57,
+      "name": "Netherlands Institute for Space Research",
+      "countryCode": "NLD"
+    },
+    {
+      "id": 58,
+      "name": "Norwegian Space Centre",
+      "countryCode": "NOR"
+    },
+    {
+      "id": 59,
+      "name": "Pakistan Space and Upper Atmosphere Research Commission",
+      "countryCode": "PAK"
+    },
+    {
+      "id": 60,
+      "name": "FCT Space Office",
+      "countryCode": "PRT"
+    },
+    {
+      "id": 61,
+      "name": "Romanian Space Agency",
+      "countryCode": "ROU"
+    },
+    {
+      "id": 62,
+      "name": "Royal Centre for Remote Sensing",
+      "countryCode": "MAR"
+    },
+    {
+      "id": 63,
+      "name": "Russian Federal Space Agency (ROSCOSMOS)",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 64,
+      "name": "Sri Lanka Space Agency",
+      "countryCode": "LKA"
+    },
+    {
+      "id": 65,
+      "name": "TUBITAK Space Technologies Research Institute",
+      "countryCode": "TUR"
+    },
+    {
+      "id": 66,
+      "name": "Soviet Space Program",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 67,
+      "name": "Space Research and Remote Sensing Organization",
+      "countryCode": "BGD"
+    },
+    {
+      "id": 68,
+      "name": "Space Research Centre",
+      "countryCode": "POL"
+    },
+    {
+      "id": 69,
+      "name": "South African National Space Agency",
+      "countryCode": "ZAF"
+    },
+    {
+      "id": 70,
+      "name": "Space Research Institute of Saudi Arabia",
+      "countryCode": "SAU"
+    },
+    {
+      "id": 71,
+      "name": "Swiss Space Office",
+      "countryCode": "CHE"
+    },
+    {
+      "id": 72,
+      "name": "Turkmenistan National Space Agency",
+      "countryCode": "TKM"
+    },
+    {
+      "id": 73,
+      "name": "United Nations Office for Outer Space Affairs",
+      "countryCode": "ALB,DZA,ARG,AUS,AUT,BEL,BEN,BOL,BRA,BGR,BFA,CMR,CAN,TDC,CHL,CHN,COL,CUB,CZE,ECU,EGY,FRA,HUN,DEU,GRC,IND,IDN,IRN,IRQ,ITA,JPN,KAZ,KEN,LBN,LBY,MYS,MEX,MNG,NLD,NIC,NER,NGA,PAK,PER,PHL,POL,PRT,KOR,ROU,RUS,SAU,SEN,SLE,SVK,ZAF,ESP,SDN,SWE,CHE,SYR,THA,TUR,GBR,USA,UKR,URY,VEN,VNM"
+    },
+    {
+      "id": 225,
+      "name": "1worldspace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 75,
+      "name": "United Nations Committee on the Peaceful Uses of Outer Space",
+      "countryCode": "ALB,DZA,ARG,AUS,AUT,BEL,BEN,BOL,BRA,BGR,BFA,CMR,CAN,TDC,CHL,CHN,COL,CUB,CZE,ECU,EGY,FRA,HUN,DEU,GRC,IND,IDN,IRN,IRQ,ITA,JPN,KAZ,KEN,LBN,LBY,MYS,MEX,MNG,NLD,NIC,NER,NGA,PAK,PER,PHL,POL,PRT,KOR,ROU,RUS,SAU,SEN,SLE,SVK,ZAF,ESP,SDN,SWE,CHE,SYR,THA,TUR,GBR,USA,UKR,URY,VEN,VNM"
+    },
+    {
+      "id": 76,
+      "name": "Swedish National Space Board",
+      "countryCode": "SWE"
+    },
+    {
+      "id": 77,
+      "name": "OHB System",
+      "countryCode": "DEU"
+    },
+    {
+      "id": 78,
+      "name": "Thales Alenia Space",
+      "countryCode": "FRA,ITA"
+    },
+    {
+      "id": 79,
+      "name": "JSC Information Satellite Systems",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 80,
+      "name": "Boeing",
+      "countryCode": "USA"
+    },
+    {
+      "id": 81,
+      "name": "Astrium Satellites",
+      "countryCode": "FRA,DEU,ESP,GBR"
+    },
+    {
+      "id": 82,
+      "name": "Lockheed Martin",
+      "countryCode": "USA"
+    },
+    {
+      "id": 83,
+      "name": "Space Systems\/Loral",
+      "countryCode": "USA"
+    },
+    {
+      "id": 84,
+      "name": "Amsat",
+      "countryCode": "USA,CAN,DEU,ITA,JPN,IND,GBR"
+    },
+    {
+      "id": 85,
+      "name": "Astronautic Technology Sdn Bhd",
+      "countryCode": "MYS"
+    },
+    {
+      "id": 86,
+      "name": "Ball Aerospace & Technologies Corp.",
+      "countryCode": "USA"
+    },
+    {
+      "id": 87,
+      "name": "British Aerospace",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 88,
+      "name": "China Aerospace Science and Technology Corporation",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 89,
+      "name": "Fairchild Space and Electronics Division",
+      "countryCode": "USA"
+    },
+    {
+      "id": 90,
+      "name": "Fokker Space & Systems",
+      "countryCode": "NLD"
+    },
+    {
+      "id": 91,
+      "name": "General Electric",
+      "countryCode": "USA"
+    },
+    {
+      "id": 92,
+      "name": "Hawker Siddeley Dynamics",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 93,
+      "name": "Hughes Aircraft",
+      "countryCode": "USA"
+    },
+    {
+      "id": 94,
+      "name": "IHI Corporation",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 95,
+      "name": "Israel Aerospace Industries",
+      "countryCode": "ISR"
+    },
+    {
+      "id": 96,
+      "name": "Khrunichev State Research and Production Space Center",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 97,
+      "name": "NPO Lavochkin",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 98,
+      "name": "Mitsubishi Heavy Industries",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 99,
+      "name": "Northrop Grumman Space Technology",
+      "countryCode": "USA"
+    },
+    {
+      "id": 100,
+      "name": "Orbital Sciences Corporation",
+      "countryCode": "USA"
+    },
+    {
+      "id": 101,
+      "name": "Philco Ford",
+      "countryCode": "USA"
+    },
+    {
+      "id": 102,
+      "name": "Rockwell International",
+      "countryCode": "USA"
+    },
+    {
+      "id": 103,
+      "name": "RKK Energiya",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 104,
+      "name": "SPAR Aerospace",
+      "countryCode": "CAN"
+    },
+    {
+      "id": 105,
+      "name": "SpaceDev",
+      "countryCode": "USA"
+    },
+    {
+      "id": 106,
+      "name": "General Dynamics",
+      "countryCode": "USA"
+    },
+    {
+      "id": 107,
+      "name": "Surrey Satellite Technology Ltd",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 108,
+      "name": "Swales Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 109,
+      "name": "Turkish Aerospace Industries",
+      "countryCode": "TUR"
+    },
+    {
+      "id": 110,
+      "name": "TRW",
+      "countryCode": "USA"
+    },
+    {
+      "id": 111,
+      "name": "Progress State Research and Production Rocket Space Center",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 112,
+      "name": "Yuzhnoye Design Bureau",
+      "countryCode": "UKR"
+    },
+    {
+      "id": 113,
+      "name": "INVAP",
+      "countryCode": "ARG"
+    },
+    {
+      "id": 184,
+      "name": "China Aerospace Science and Industry Corporation",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 115,
+      "name": "Arianespace",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 116,
+      "name": "EADS Astrium Space Transportation",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 117,
+      "name": "Eurockot Launch Services",
+      "countryCode": "FRA, RUS"
+    },
+    {
+      "id": 118,
+      "name": "International Launch Services",
+      "countryCode": "USA"
+    },
+    {
+      "id": 119,
+      "name": "ISC Kosmotras",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 120,
+      "name": "SpaceQuest, Ltd.",
+      "countryCode": "USA"
+    },
+    {
+      "id": 121,
+      "name": "SpaceX",
+      "countryCode": "USA"
+    },
+    {
+      "id": 122,
+      "name": "Sea Launch",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 123,
+      "name": "Starsem SA",
+      "countryCode": "FRA, RUS"
+    },
+    {
+      "id": 124,
+      "name": "United Launch Alliance",
+      "countryCode": "USA"
+    },
+    {
+      "id": 125,
+      "name": "A.M. Makarov Yuzhny Machine-Building Plant",
+      "countryCode": "UKR"
+    },
+    {
+      "id": 126,
+      "name": "Deep Space Industries",
+      "countryCode": "USA"
+    },
+    {
+      "id": 127,
+      "name": "Robotics Institute",
+      "countryCode": "USA"
+    },
+    {
+      "id": 128,
+      "name": "Planetary Resources",
+      "countryCode": "USA"
+    },
+    {
+      "id": 129,
+      "name": "Tethers Unlimited, Inc.",
+      "countryCode": "USA"
+    },
+    {
+      "id": 130,
+      "name": "RUAG Space",
+      "countryCode": "CHE"
+    },
+    {
+      "id": 131,
+      "name": "Andrews Space",
+      "countryCode": "USA"
+    },
+    {
+      "id": 132,
+      "name": "Kongsberg Defence & Aerospace",
+      "countryCode": "NOR"
+    },
+    {
+      "id": 133,
+      "name": "Aerojet",
+      "countryCode": "USA"
+    },
+    {
+      "id": 134,
+      "name": "American Rocket Company",
+      "countryCode": "USA"
+    },
+    {
+      "id": 135,
+      "name": "Rocketdyne",
+      "countryCode": "USA"
+    },
+    {
+      "id": 136,
+      "name": "Ad Astra Rocket Company",
+      "countryCode": "USA"
+    },
+    {
+      "id": 137,
+      "name": "Reaction Engines Ltd.",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 138,
+      "name": "Snecma",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 139,
+      "name": "Armadillo Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 140,
+      "name": "Bigelow Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 141,
+      "name": "Blue Origin",
+      "countryCode": "USA"
+    },
+    {
+      "id": 142,
+      "name": "Copenhagen Suborbitals",
+      "countryCode": "DNK"
+    },
+    {
+      "id": 143,
+      "name": "PlanetSpace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 144,
+      "name": "Scaled Composites",
+      "countryCode": "USA"
+    },
+    {
+      "id": 145,
+      "name": "XCOR  Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 146,
+      "name": "Canadian Arrow",
+      "countryCode": "CAN"
+    },
+    {
+      "id": 147,
+      "name": "Rocket Lab Ltd",
+      "countryCode": "USA"
+    },
+    {
+      "id": 148,
+      "name": "Scorpius Space Launch Company",
+      "countryCode": "USA"
+    },
+    {
+      "id": 149,
+      "name": "Interorbital Systems",
+      "countryCode": "USA"
+    },
+    {
+      "id": 150,
+      "name": "Masten Space Systems",
+      "countryCode": "USA"
+    },
+    {
+      "id": 151,
+      "name": "Swedish Space Corp",
+      "countryCode": "SWE"
+    },
+    {
+      "id": 152,
+      "name": "UP Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 153,
+      "name": "McDonnell Douglas",
+      "countryCode": "USA"
+    },
+    {
+      "id": 154,
+      "name": "Production Corporation Polyot",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 156,
+      "name": "Alliant Techsystems",
+      "countryCode": "USA"
+    },
+    {
+      "id": 157,
+      "name": "Bristol Aerospace Company",
+      "countryCode": "CAN"
+    },
+    {
+      "id": 158,
+      "name": "Chrysler",
+      "countryCode": "USA"
+    },
+    {
+      "id": 159,
+      "name": "Avio S.p.A",
+      "countryCode": "ITA"
+    },
+    {
+      "id": 160,
+      "name": "Royal Australian Air Force",
+      "countryCode": "AUS"
+    },
+    {
+      "id": 161,
+      "name": "United States Air Force",
+      "countryCode": "USA"
+    },
+    {
+      "id": 162,
+      "name": "People's Liberation Army",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 163,
+      "name": "Russian Aerospace Defence Forces",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 165,
+      "name": "US Army",
+      "countryCode": "USA"
+    },
+    {
+      "id": 166,
+      "name": "US Navy",
+      "countryCode": "USA"
+    },
+    {
+      "id": 167,
+      "name": "Space Florida",
+      "countryCode": "USA"
+    },
+    {
+      "id": 175,
+      "name": "Ministry of Defence of the Russian Federation",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 177,
+      "name": "China Great Wall Industry Corporation",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 178,
+      "name": "Airbus Defence and Space",
+      "countryCode": "FRA, GER"
+    },
+    {
+      "id": 179,
+      "name": "Orbital ATK",
+      "countryCode": "USA"
+    },
+    {
+      "id": 181,
+      "name": "National Reconnaissance Office",
+      "countryCode": "USA"
+    },
+    {
+      "id": 182,
+      "name": "National Space Agency of the Republic of Kazakhstan",
+      "countryCode": "KAZ"
+    },
+    {
+      "id": 183,
+      "name": "Unknown",
+      "countryCode": "UNK"
+    },
+    {
+      "id": 186,
+      "name": "Polish Space Agency",
+      "countryCode": "POL"
+    },
+    {
+      "id": 187,
+      "name": "GK Launch Services",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 188,
+      "name": "Gilmour Space Technologies",
+      "countryCode": "AUS\/SIN"
+    },
+    {
+      "id": 273,
+      "name": "Gazprom Space Systems",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 190,
+      "name": "Antrix Corporation Limited",
+      "countryCode": "IND"
+    },
+    {
+      "id": 191,
+      "name": "United Space Alliance",
+      "countryCode": "USA"
+    },
+    {
+      "id": 192,
+      "name": "Lockheed Space Operations Company",
+      "countryCode": "USA"
+    },
+    {
+      "id": 193,
+      "name": "Russian Space Forces",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 194,
+      "name": "ExPace",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 195,
+      "name": "Sandia National Laboratories",
+      "countryCode": "USA"
+    },
+    {
+      "id": 196,
+      "name": "Land Launch",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 197,
+      "name": "Lockheed Martin Space Operations",
+      "countryCode": "USA"
+    },
+    {
+      "id": 198,
+      "name": "Mohammed bin Rashid Space Centre",
+      "countryCode": "UAE"
+    },
+    {
+      "id": 199,
+      "name": "Virgin Orbit",
+      "countryCode": "USA"
+    },
+    {
+      "id": 201,
+      "name": "Vector",
+      "countryCode": "USA"
+    },
+    {
+      "id": 202,
+      "name": "Iridium Communications",
+      "countryCode": "USA"
+    },
+    {
+      "id": 203,
+      "name": "SES",
+      "countryCode": "LUX"
+    },
+    {
+      "id": 204,
+      "name": "Globalstar",
+      "countryCode": "USA"
+    },
+    {
+      "id": 205,
+      "name": "Inmarsat",
+      "countryCode": "ENG"
+    },
+    {
+      "id": 206,
+      "name": "Intelsat",
+      "countryCode": "LUX"
+    },
+    {
+      "id": 207,
+      "name": "Arab Satellite Communications Organization",
+      "countryCode": "SAU"
+    },
+    {
+      "id": 208,
+      "name": "Telesat",
+      "countryCode": "CA"
+    },
+    {
+      "id": 224,
+      "name": "GeoOptics",
+      "countryCode": "USA"
+    },
+    {
+      "id": 226,
+      "name": "PanAmSat",
+      "countryCode": "USA"
+    },
+    {
+      "id": 210,
+      "name": "National Oceanic and Atmospheric Administration",
+      "countryCode": "USA"
+    },
+    {
+      "id": 211,
+      "name": "National Security Agency",
+      "countryCode": "USA"
+    },
+    {
+      "id": 212,
+      "name": "Digital Globe",
+      "countryCode": "USA"
+    },
+    {
+      "id": 213,
+      "name": "Missile Defense Agency",
+      "countryCode": "USA"
+    },
+    {
+      "id": 214,
+      "name": "Spire Global",
+      "countryCode": "USA"
+    },
+    {
+      "id": 227,
+      "name": "UK Ministry Of Defence",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 228,
+      "name": "National Space Development Agency of Japan",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 229,
+      "name": "Eutelsat",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 230,
+      "name": "Broadcasting Satellite System Corporation",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 231,
+      "name": "SKY Perfect JSAT Group",
+      "countryCode": "JPN"
+    },
+    {
+      "id": 232,
+      "name": "European Organisation for the Exploitation of Meteorological Satellites",
+      "countryCode": "AUT,BEL,BGR,HRV,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,IRL,ISL,ITA,LVA,LTU,LUX,NLD,NOR,POL,PRT,ROU,SVK,SVN,ESP,SWE,CHE,TUR,GBR"
+    },
+    {
+      "id": 233,
+      "name": "Direction g\u00c3\u00a9n\u00c3\u00a9rale de l'armement",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 234,
+      "name": "XTAR LLC",
+      "countryCode": "USA"
+    },
+    {
+      "id": 235,
+      "name": "Thaicom",
+      "countryCode": "THA"
+    },
+    {
+      "id": 236,
+      "name": "DirecTV",
+      "countryCode": "USA"
+    },
+    {
+      "id": 237,
+      "name": "PT Telkom",
+      "countryCode": "IDN"
+    },
+    {
+      "id": 238,
+      "name": "Hisdesat",
+      "countryCode": "ESP"
+    },
+    {
+      "id": 239,
+      "name": "Satmex",
+      "countryCode": "MEX"
+    },
+    {
+      "id": 240,
+      "name": "Optus",
+      "countryCode": "AUS"
+    },
+    {
+      "id": 241,
+      "name": "WildBlue",
+      "countryCode": "USA"
+    },
+    {
+      "id": 242,
+      "name": "Paradigm Secure Communications",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 243,
+      "name": "Hughes",
+      "countryCode": "USA"
+    },
+    {
+      "id": 244,
+      "name": "Star One",
+      "countryCode": "BRA"
+    },
+    {
+      "id": 245,
+      "name": "Regional African Satellite Communication Organization",
+      "countryCode": "MUS"
+    },
+    {
+      "id": 246,
+      "name": "Vietnam Posts and Telecommunications Group",
+      "countryCode": "VNM"
+    },
+    {
+      "id": 247,
+      "name": "T\u00c3\u00bcrksat",
+      "countryCode": "TUR"
+    },
+    {
+      "id": 248,
+      "name": "ProtoStar",
+      "countryCode": "BMU"
+    },
+    {
+      "id": 249,
+      "name": "Echostar",
+      "countryCode": "USA"
+    },
+    {
+      "id": 250,
+      "name": "HispaSat",
+      "countryCode": "ESP"
+    },
+    {
+      "id": 251,
+      "name": "AlYahSat",
+      "countryCode": "ARE"
+    },
+    {
+      "id": 252,
+      "name": "MEASAT Satellite Systems",
+      "countryCode": "MYS"
+    },
+    {
+      "id": 253,
+      "name": "French Armed Forces",
+      "countryCode": "FRA"
+    },
+    {
+      "id": 254,
+      "name": "British Satellite Broadcasting",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 255,
+      "name": "Avanti Communications",
+      "countryCode": "GBR"
+    },
+    {
+      "id": 256,
+      "name": "Mexican Satellite System",
+      "countryCode": "MEX"
+    },
+    {
+      "id": 257,
+      "name": "Northrop Grumman Innovation Systems",
+      "countryCode": "USA"
+    },
+    {
+      "id": 259,
+      "name": "LandSpace",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 260,
+      "name": "Planet",
+      "countryCode": "USA"
+    },
+    {
+      "id": 261,
+      "name": "Korean Astronaut Program",
+      "countryCode": "KOR"
+    },
+    {
+      "id": 265,
+      "name": "Firefly Aerospace",
+      "countryCode": "USA"
+    },
+    {
+      "id": 272,
+      "name": "Chinarocket Co., Ltd.",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 263,
+      "name": "OneSpace",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 264,
+      "name": "Vietnam National Space Center",
+      "countryCode": "VNM"
+    },
+    {
+      "id": 266,
+      "name": "Relativity Space",
+      "countryCode": "USA"
+    },
+    {
+      "id": 267,
+      "name": "PT Pasifik Satelit Nusantara",
+      "countryCode": "IDN"
+    },
+    {
+      "id": 268,
+      "name": "SpaceIL",
+      "countryCode": "ISR"
+    },
+    {
+      "id": 269,
+      "name": "Defence Research and Development Organisation",
+      "countryCode": "IND"
+    },
+    {
+      "id": 270,
+      "name": "Strategic Missile Troops",
+      "countryCode": "RUS"
+    },
+    {
+      "id": 271,
+      "name": "Army Ballistic Missile Agency",
+      "countryCode": "USA"
+    },
+    {
+      "id": 274,
+      "name": "iSpace",
+      "countryCode": "CHN"
+    },
+    {
+      "id": 275,
+      "name": "Republic of Korea Army",
+      "countryCode": "KOR"
+    },
+    {
+      "id": 276,
+      "name": "KT Corporation",
+      "countryCode": "KOR"
+    },
+    {
+      "id": 278,
+      "name": "ICEYE",
+      "countryCode": "FIN"
+    },
+    {
+      "id": 279,
+      "name": "BlackSky",
+      "countryCode": "USA"
+    },
+    {
+      "id": 280,
+      "name": "United Arab Emirates Armed Forces",
+      "countryCode": "ARE"
+    },
+    {
+      "id": 282,
+      "name": "Aevum",
+      "countryCode": "USA"
+    },
+    {
+      "id": 283,
+      "name": "Intuitive Machines",
+      "countryCode": "USA"
+    },
+    {
+      "id": 285,
+      "name": "Astra Space",
+      "countryCode": "USA"
+    }
+  ]
+}

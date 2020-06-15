@@ -9,6 +9,7 @@ import Stars from './stars.svg'
 import Cloud from './cloud.svg'
 import Upi from './moon.svg'
 import Spaceship from './spaceship.svg'
+import RocketButton from './rocket.svg'
 
 
 
@@ -16,4 +17,4 @@ import Spaceship from './spaceship.svg'
 
 
 
-export {Earth, Satellite2, Alien, Mars, Comet, Meteor, Satellite4, Stars, Cloud, Upi, Spaceship}
+export {Earth, Satellite2, Alien, Mars, Comet, Meteor, Satellite4, Stars, Cloud, Upi, Spaceship, RocketButton}

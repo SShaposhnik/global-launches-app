@@ -1,46 +1,78 @@
 import React, { Component } from 'react'
 
-import { Layout, Menu } from 'antd'
-import { HomeOutlined, RocketOutlined, AreaChartOutlined } from '@ant-design/icons'
+import { Layout, Menu, Button } from 'antd'
+import { HomeOutlined, RocketOutlined, AreaChartOutlined, UpOutlined } from '@ant-design/icons'
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { Route, NavLink } from "react-router-dom"
-// import 'antd/dist/antd.css'
-import 'antd/dist/antd.dark.css'
+import { animateScroll as scroll } from 'react-scroll'
+import 'antd/dist/antd.css'
+import Header from './Header/Header';
+import HeaderLinks from './Header/HeaderLinks';
+// import 'antd/dist/antd.dark.css'
 
 import '../css/index.css' // стандарт
 import MapLaunches from './Launches'
 import Static from './testComponents/Static'
 import HomePage from './HomePage'
 
+function scrollFunction() {
+  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+    document.getElementById("myBtn").style.display = "block"
 
+  } else {
+    document.getElementById("myBtn").style.display = "none"
 
-const { Header, Footer } = Layout
+  }
+}
+
+window.onscroll = function () { scrollFunction() };
+
+// const { Header, Footer } = Layout
 
 class LayoutContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
+    this.scrollToTop = this.scrollToTop.bind(this);
+  }
+
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
+  func(params) {
+    console.log('check')
+    
   }
 
   render() {
     return (
       <div>
         <Layout id="layout" >
-
-          <Header style={{ backgroundColor: '#253237' }} >
-            <Menu defaultSelectedKeys={['1']} theme='dark' mode="horizontal" style={{ textAlign: 'right', backgroundColor: '#253237' }}>
-              <Menu.Item key="1" icon={<HomeOutlined />}>     <NavLink to="/">          Приветсвие    </NavLink></Menu.Item>
-              <Menu.Item key="2" icon={<AreaChartOutlined />}><NavLink to="/static">    Cтатистика    </NavLink></Menu.Item>
-              <Menu.Item key="3" icon={<RocketOutlined />}>   <NavLink to="/launches">  Запуски       </NavLink></Menu.Item>
-            </Menu>
-          </Header>
-
+          {/* <Header
+            brand={<p><GitHubIcon /> GitHub</p>}
+            onClick={this.func}
+            rightLinks={<HeaderLinks />}
+            fixed
+            color="transparent"
+            changeColorOnScroll={{
+              height: 400,
+              color: "white"
+            }}
+          /> */}
           <Layout className='layout-content'>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/static' component={Static} />
+            {/* <Route exact path='/static' component={Static} /> */}
             <Route exact path='/launches' component={MapLaunches} />
 
+            <Button
+              type="primary"
+              shape="circle"
+              icon={<UpOutlined />}
+              onClick={scroll.scrollToTop}
+              id="myBtn"
+              title="Наверх!"
+            />
             {/* <Footer>
               Design © 2020 <br></br>
               <GithubOutlined />

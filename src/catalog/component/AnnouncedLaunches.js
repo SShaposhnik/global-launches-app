@@ -5,10 +5,25 @@ import moment from 'moment'
 import 'moment/locale/ru'
 
 import Timer from './Timer'
+import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../assets/images/index'
 import '../css/index.css'
 
 moment.locale()
 const { Column, ColumnGroup } = Table;
+
+const COUNTRY_FLAG = {
+  USA: usaFlag,
+  CHN: chinaFlag,
+  KAZ: kazakhstanFlag,
+  IRN: iranFlag,
+  RUS: russiaFlag,
+  FRA: franceFlag,
+  JPN: japanFlag,
+  NZL: newzealandFlag,
+  IND: indiaFlag,
+  UNK: ukFlag,
+
+}
 
 const launchStatus = {
   1: 'Запланированы точные дата и время запуска',
@@ -24,7 +39,7 @@ const columns = [
     title: 'Название запуска',
     dataIndex: 'RocketAndMissionName',
     width: '30%',
-    align: 'center',
+    align: 'left',
   },
   {
     title: 'Дата запуска',
@@ -55,13 +70,13 @@ export default ({ launches }) => {
       {el.location.name.split(',')[0]}
     </div>,
     missionsName: el.missions.map(els => (els.name)),
-    RocketAndMissionName: el.name,
+  RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{width: '10%', marginRight: '10px'}}/> {el.name}</span>,
     pads: el.location.pads.map(p => (p.name)),
     net: <Tooltip title={<div><p style={{ textAlign: 'center' }}>Локальное время</p> <p style={{ textAlign: 'center' }}>{moment(el.net).locale('ru').format('LLL')}</p></div>}>{moment(el.net).utc(0).locale('ru').format('LLL z')}</Tooltip>,
     status: launchStatus[el.status],
     timer: <Timer timeTillLaunch={el.net} />
   }))
-
+  
   return (
     <div>
       <Table
@@ -70,7 +85,7 @@ export default ({ launches }) => {
         pagination={false}
         size="small"
         columns={columns}
-        bordered="true"
+        // bordered="true"
       />
     </div>
   )

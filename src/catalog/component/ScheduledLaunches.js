@@ -5,6 +5,7 @@ import moment from 'moment'
 import 'moment/locale/ru'
 import { LoadingOutlined } from '@ant-design/icons'
 
+import {usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag} from '../../assets/images/index'
 import '../css/index.css'
 moment.locale()
 
@@ -18,13 +19,25 @@ const launchStatus = {
   6: 'В полете',
   7: 'Во время запуска произошел частичный сбой',
 }
+const COUNTRY_FLAG = {
+  USA: usaFlag,
+  CHN: chinaFlag,
+  KAZ: kazakhstanFlag,
+  IRN: iranFlag,
+  RUS: russiaFlag,
+  FRA: franceFlag,
+  JPN: japanFlag,
+  NZL: newzealandFlag,
+  IND: indiaFlag,
+  UNK: ukFlag,
 
+}
 const columns = [
   {
     title: 'Название запуска',
     dataIndex: 'RocketAndMissionName',
     width: '30%',
-    align: 'center',
+    align: 'left',
     className: 'launch-name-nextlaunch'
   },
   {
@@ -43,7 +56,8 @@ const columns = [
 
 export default ({ launches }) => {
   const launchesWithTimer = launches.map(el => ({
-    RocketAndMissionName: <p className='launchText'>{el.name}</p>,
+    RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{width: '10%', marginRight: '10px'}}/> {el.name}</span>,
+    // `${<img src={usaFlag} style={{width: '7%'}}/>}  ${{el.name}}`
     location: <div>
       {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
       {el.location.name.split(',')[0]}
@@ -65,7 +79,8 @@ export default ({ launches }) => {
       }}
       size="small"
       columns={columns}
-      bordered="false"
+      style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}
+      // bordered="false"
     />
   )
 }

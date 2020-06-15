@@ -5,17 +5,16 @@ import './catalog/css/index.scss'
 
 
 function App() {
-  const [preload, setPreload] = useState(false)
-  console.log(preload);
 
-  function func () {
-    setPreload(true)
-  }
-  setTimeout(func, 3000)
-  
+  // const [preload, setPreload] = useState(false)
+
+  // function func () {
+  //   setPreload(true)
+  // }
+  // setTimeout(func, 3000)
   return (
     <div className="App">
-      {preload
+      {true
         ? <div>
           <LayoutContainer />
         </div>
