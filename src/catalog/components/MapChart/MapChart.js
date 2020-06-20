@@ -15,18 +15,19 @@ const LAUNCH_STATUS = {
   2: 'Дата и время будут объявлены позже',
   3: '#36d325',
   4: '#791a1f',
+  'Успешно': '#36d325',
+  'Неудача': '#791a1f',
   5: 'Незапланированная задержка',
   6: 'В полете',
   7: 'Во время запуска произошел частичный сбой',
 }
 
-const MapChart = ({ launches, flag, tableData }) => {
+const MapChart = ({ data, whereData }) => {
   let markers = []
-  
-  if (launches == null && tableData == null) {
-    console.log('Markers not found!');
-  } else if (flag) {
-    markers = tableData.map(el => ({
+  console.log(whereData, data);
+  switch (whereData) {
+    case 'launchLibrary':
+    markers = data.map(el => ({
       RocketAndMissionNames: el.name,
       rocketName: el.rocketName,
       status: el.statusNumber,
@@ -38,20 +39,18 @@ const MapChart = ({ launches, flag, tableData }) => {
       latitude: el.latitude,
       longitude: el.longitude,
     }))
-  } else {
-    markers = launches.map(el => ({
-      RocketAndMissionNames: el.name,
-      rocketName: el.rocket.name,
-      status: el.status,
-      markerOffset: MARKER_OF_SET,
-      coordinates: [el.location.pads.map(els => (els.longitude)), el.location.pads.map(els => (els.latitude))],
-      padsMapURL: el.location.pads.map(els => (els.mapURL)),
-      padsWikiURL: el.location.pads.map(els => (els.wikiURL)),
-      rocketwikiURL: el.rocket.wikiURL,
-      latitude: el.location.pads.map(els => (els.latitude)),
-      longitude: el.location.pads.map(els => (els.longitude)),
-    }))
+    break
+
+    case 'roscosmosAPI':
+      markers = data.map(el  => ({
+        RocketAndMissionNames: el.name,
+        coordinates: el.coordinates,
+        markerOffset: MARKER_OF_SET,
+        status: el.statusText,
+      }))
+      break
   }
+
   return (
     <ComposableMap
       projection="geoMercator"

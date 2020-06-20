@@ -37,16 +37,26 @@ class Timer extends Component {
 
   render() {
     const { days, seconds, hours, minutes, time_up } = this.state
-    return (
-      <div>
-        {(seconds < 10)
-          ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
-          : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>
-        }
-        <strong>{time_up}</strong>
-      </div>
-    )
+    if (time_up) {
+      return <strong>{time_up}</strong>
+    } else {
+            return (
+              <div>
+              {(seconds < 10)
+                ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
+                : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>
+              }
+            </div>
+            )
+    }
   }
 }
 
 export default Timer
+
+{/* <div>
+  {(seconds < 10)
+    ? <p>{days}д: {hours}ч: {minutes}м: 0{seconds}с</p>
+    : <p>{days}д: {hours}ч: {minutes}м: {seconds}с</p>
+  }
+</div> */}

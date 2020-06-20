@@ -1,0 +1,141 @@
+{
+  "launches": [
+    {
+      "id": 1321,
+      "name": "Vega | SSMS POC",
+      "windowstart": "June 21, 2020 01:51:10 UTC",
+      "windowend": "June 21, 2020 01:51:10 UTC",
+      "net": "June 18, 2020 13:08:00 UTC",
+      "wsstamp": 1592704270,
+      "westamp": 1592704270,
+      "netstamp": 1592704270,
+      "isostart": "20200621T015110Z",
+      "isoend": "20200621T015110Z",
+      "isonet": "20200621T015110Z",
+      "status": 1,
+      "inhold": 0,
+      "tbdtime": 0,
+      "vidURLs": [],
+      "vidURL": null,
+      "infoURLs": [],
+      "infoURL": null,
+      "holdreason": null,
+      "failreason": null,
+      "tbddate": 0,
+      "probability": -1,
+      "hashtag": null,
+      "changed": "2020-06-17 22:15:17",
+      "location": {
+        "pads": [
+          {
+            "id": 18,
+            "name": "Ariane Launch Area 1, Kourou",
+            "infoURL": "http:\/\/www.esa.int\/Our_Activities\/Launchers\/Europe_s_Spaceport\/Europe_s_Spaceport2",
+            "wikiURL": "https:\/\/en.wikipedia.org\/wiki\/ELA-1",
+            "mapURL": "https:\/\/www.google.com\/maps\/?q=5.239,-52.775",
+            "latitude": 5.236,
+            "longitude": -52.775,
+            "agencies": [
+              {
+                "id": 115,
+                "name": "Arianespace",
+                "abbrev": "ASA",
+                "countryCode": "FRA",
+                "type": 3,
+                "infoURL": null,
+                "wikiURL": "http:\/\/en.wikipedia.org\/wiki\/Arianespace",
+                "changed": "2017-02-21 00:00:00",
+                "infoURLs": [
+                  "http:\/\/www.arianespace.com",
+                  "https:\/\/www.youtube.com\/channel\/UCRn9F2D9j-t4A-HgudM7aLQ",
+                  "https:\/\/www.facebook.com\/ArianeGroup",
+                  "https:\/\/twitter.com\/arianespace",
+                  "https:\/\/www.instagram.com\/arianespace"
+                ]
+              }
+            ]
+          }
+        ],
+        "id": 3,
+        "name": "Kourou, French Guiana",
+        "infoURL": "",
+        "wikiURL": "",
+        "countryCode": "GUF"
+      },
+      "rocket": {
+        "id": 18,
+        "name": "Vega",
+        "configuration": "",
+        "familyname": "Vega",
+        "agencies": [],
+        "wikiURL": "http:\/\/en.wikipedia.org\/wiki\/Vega_rocket",
+        "infoURLs": [],
+        "imageURL": "https:\/\/launchlibrary1.nyc3.digitaloceanspaces.com\/RocketImages\/placeholder_1920.png",
+        "imageSizes": [
+          320,
+          480,
+          640,
+          720,
+          768,
+          800,
+          960,
+          1024,
+          1080,
+          1280,
+          1440,
+          1920
+        ]
+      },
+      "missions": [
+        {
+          "id": 1235,
+          "name": "SSMS POC",
+          "description": "The Vega POC (Proof Of Concept) flight will be the first mission of the SSMS (Small Spacecraft Mission Service), a modular carbon fiber dispenser, a program initiated by ESA in 2016, with the contribution of the European Commission. For all the European partners involved, its purpose is to address the burgeoning institutional and commercial small spacecraft market with a new rideshare concept.\n\nPayload includes dozens of satellites: Athena, ION CubeSat Carrier, ESAIL, NEMO-HD, GHGSat C1, six Flock-v cubesats, several Lemur-2 cubesats, twelve SpaceBEE nanosats, FSSCat A & B, RTAF-Sat, DIDO 3, IGOSat, PICASSO, PINO, PIXL, QARMAN, SIMBA, TRISAT, Casaa-Sat, TT\u00c3\u0153100, and more.",
+          "type": 14,
+          "wikiURL": "",
+          "typeName": "Dedicated Rideshare",
+          "agencies": [
+            {
+              "id": 115,
+              "name": "Arianespace",
+              "abbrev": "ASA",
+              "countryCode": "FRA",
+              "type": 3,
+              "infoURL": null,
+              "wikiURL": "http:\/\/en.wikipedia.org\/wiki\/Arianespace",
+              "changed": "2017-02-21 00:00:00",
+              "infoURLs": [
+                "http:\/\/www.arianespace.com",
+                "https:\/\/www.youtube.com\/channel\/UCRn9F2D9j-t4A-HgudM7aLQ",
+                "https:\/\/www.facebook.com\/ArianeGroup",
+                "https:\/\/twitter.com\/arianespace",
+                "https:\/\/www.instagram.com\/arianespace"
+              ]
+            }
+          ],
+          "payloads": []
+        }
+      ],
+      "lsp": {
+        "id": 115,
+        "name": "Arianespace",
+        "abbrev": "ASA",
+        "countryCode": "FRA",
+        "type": 3,
+        "infoURL": null,
+        "wikiURL": "http:\/\/en.wikipedia.org\/wiki\/Arianespace",
+        "changed": "2017-02-21 00:00:00",
+        "infoURLs": [
+          "http:\/\/www.arianespace.com",
+          "https:\/\/www.youtube.com\/channel\/UCRn9F2D9j-t4A-HgudM7aLQ",
+          "https:\/\/www.facebook.com\/ArianeGroup",
+          "https:\/\/twitter.com\/arianespace",
+          "https:\/\/www.instagram.com\/arianespace"
+        ]
+      }
+    }
+  ],
+  "total": 1,
+  "offset": 0,
+  "count": 1
+}

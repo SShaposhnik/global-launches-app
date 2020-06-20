@@ -22,11 +22,6 @@
     margin-left: 95%;
 }
 
-.background-parallax {
-  background-color: #253237;
-  background-image: url('../images/stars.svg');
-}
-
 
 .Alien {
   transform: rotate(-45deg);

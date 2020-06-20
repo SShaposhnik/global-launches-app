@@ -5,11 +5,11 @@ import { UpOutlined, LoadingOutlined, InfoCircleOutlined, GithubOutlined } from 
 import moment from 'moment'
 import { animateScroll as scroll, scroller } from 'react-scroll'
 
-import { Earth, Satellite2, Alien, Mars, Comet, Meteor, Satellite4, Stars, Cloud, Upi, Spaceship, RocketButton } from '../../images'
 import FinishedTable from '../FinishedLaunches/FinishedLaunches'
 import AnnouncedTable from "../AnnouncedLaunches/AnnouncedLaunches"
 import ScheduledTable from '../ScheduledLaunches/ScheduledLaunches'
 import { FetchData } from '../testComponents/FetchData'
+// import proxy from '../setupProxy/setupProxy'
 
 import MapChart from '../MapChart/MapChart'
 import 'antd/dist/antd.css'
@@ -21,14 +21,16 @@ const { RangePicker } = DatePicker
 const THIS_YEAR = moment().format('YYYY')
 
 // следующие запуски с временем и датой
-export const URL_FOR_ANNOUNCED = 'https://launchlibrary.net/1.4/launch/next/1000?status=1,2'
-// export const URL_FOR_ANNOUNCED = 'https://launchlibrary.net/1.4/launch//1000?status=1,2'
+export const URL_FOR_ANNOUNCED = 'https://launchlibrary.net/1.4/launch/next/1000?status=1'
 
 // следующие запуски с датой(без времени)
 export const URL_FOR_SCHEDULED_LAUNCHES = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
 
 // старые запуски
 export let URLForFinishedLaunch = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(THIS_YEAR).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,lsp'
+
+// roscosmosApi
+export const ROSCOSMOS_API= 'http://roscosmos.xyz/api/launches/?format=json'
 
 const URL = (name, wrap = false) => `${wrap ? 'URL(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const notificationForInvalidDate = (placement) => {
@@ -42,17 +44,6 @@ function disabledDate(current) {
   return ((current && current > moment().endOf('day')) || (current && current < moment('1961-01-01').endOf('day')))
 }
 
-
-// function scrollFunction() {
-//   if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-//     document.getElementById("myBtn").style.display = "block"
-
-//   } else {
-//     document.getElementById("myBtn").style.display = "none"
-
-//   }
-// }
-
 export default class LaunchesTables extends Component {
   constructor(props) {
     super(props)
@@ -65,8 +56,7 @@ export default class LaunchesTables extends Component {
       disabledSlider: false,
       dataArrayForMarkers: [],
       show: false,
-      testArr: [777],
-
+      roscosmosData: null,
     }
     this.launchDateButtonOnChange = this.launchDateButtonOnChange.bind(this)
     this.timeBeforeToShowMarkers = this.timeBeforeToShowMarkers.bind(this)
@@ -95,6 +85,13 @@ export default class LaunchesTables extends Component {
       .then(data => this.setState({ ScheduledData: data }))
   }
 
+  fetchRosCosData(url) {
+    this.setState({ loading: true })
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.setState({ roscosmosData: data,  loading: false, }))
+  }
+
   fetchFinished(url) {
     this.setState({ loading: true })
     fetch(url)
@@ -102,11 +99,23 @@ export default class LaunchesTables extends Component {
       .then(data => this.setState({ FinishedData: data, loading: false, }))
   }
 
+  fethData = (url, finalObjProp) => {
+    let finalObj = {}
+    fetch(url)
+      .then(res => res.json())
+      .then((res) => {
+          finalObj[finalObjProp] = res
+          this.setState(finalObj)
+        }
+      )
+  }
 
   componentDidMount() {
-    this.fetchAnnounced(URL_FOR_ANNOUNCED)
+    // this.fetchAnnounced(URL_FOR_ANNOUNCED)
     this.fetchScheduled(URL_FOR_SCHEDULED_LAUNCHES)
     this.fetchFinished(URLForFinishedLaunch)
+    this.fethData(URL_FOR_ANNOUNCED, 'AnnouncedData')
+    this.fetchRosCosData(ROSCOSMOS_API)
   }
 
 
@@ -178,35 +187,32 @@ export default class LaunchesTables extends Component {
   }
 
   render() {
-    const { AnnouncedData, ScheduledData, FinishedData, loading, dataArrayForMarkers } = this.state
+    const { AnnouncedData, ScheduledData, FinishedData, loading, dataArrayForMarkers, testArr, roscosmosData } = this.state
     console.log(FinishedData);
-    
-
     return (
       <div  >
-        {ScheduledData && FinishedData
+        {ScheduledData && FinishedData && roscosmosData
           ?
           <div>
             <br />
+
+
             {AnnouncedData
               ? <div>
-                <Divider >
-                  <h1 style={{
-                    textAlign: 'center',
-                    fontSize: "4.2rem",
-                    fontWeight: "600",
-                    display: "inline-block",
-                    position: "relative",
-                  }}
-                  >Обьявленные запуски</h1></Divider>
-                <AnnouncedTable launches={AnnouncedData.launches} /></div>
-              : <Alert className='alert-if-no-launch'
-                message="Ближайших запусков не найдено!"
-                description="Похоже, вам придётся зайти в другое время!"
-                type="warning"
-                showIcon
-              />
+                  <Divider >
+                    <h1 >Объявленные запуски</h1></Divider>
+                  <AnnouncedTable launches={AnnouncedData.launches} whoseData={'launchLibrary'}/>
+                </div>
+              : <Alert
+                  className='alert-if-no-launch'
+                  message="Ближайших запусков не найдено!"
+                  description="Похоже, вам придётся зайти в другое время!"
+                  type="error"
+                  showIcon
+                />
             }
+
+
             <br /><br />
             <Divider>
               <h1 style={{
@@ -217,7 +223,7 @@ export default class LaunchesTables extends Component {
                 position: "relative",
               }}
               >Запланированные запуски</h1></Divider>
-            <ScheduledTable launches={ScheduledData.launches} />
+            <ScheduledTable launches={ScheduledData.launches} whoseData={'launchLibrary'}/>
 
             <Divider>
               <h1 style={{
@@ -244,7 +250,22 @@ export default class LaunchesTables extends Component {
               >
                 <InfoCircleOutlined style={{ marginLeft: '10px' }} />
               </Tooltip>
-              <FinishedTable launches={FinishedData.launches} loading={loading} />
+
+              <FinishedTable launches={FinishedData.launches} loading={loading} whoseData={'launchLibrary'}/>
+
+
+              <Divider>
+              <h1 style={{
+                textAlign: 'center',
+                fontSize: "4.2rem",
+                fontWeight: "600",
+                display: "inline-block",
+                position: "relative",
+              }}>Запуски Роскосмоса</h1></Divider>
+
+              <FinishedTable launches={roscosmosData} loading={loading} whoseData={'roscosmosAPI'}/>
+
+
             </div>
 
 
