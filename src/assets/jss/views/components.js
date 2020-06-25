@@ -11,7 +11,7 @@ const componentsStyle = {
     fontWeight: "600",
     display: "inline-block",
     position: "relative",
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   },
   subtitle: {
     fontSize: "1.313rem",

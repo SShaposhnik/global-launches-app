@@ -7,7 +7,8 @@ import 'moment/locale/ru'
 import Timer from '../Timer/Timer'
 import { usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag } from '../../../assets/images/index'
 import '../../css/index.css'
-import nextLaunch from '../../nextLaunch.json'
+// import nextLaunch from '../../nextLaunch.json'
+// import nextLaunch2 from '../../nextLaunch2.json'
 
 
 moment.locale()
@@ -88,6 +89,7 @@ export default ({ launches,  whoseData}) => {
               </Tooltip>,
         timer: <Timer timeTillLaunch={el.net} />
       }))
+        break;
       case 'another API name': // some code
   }
   return (

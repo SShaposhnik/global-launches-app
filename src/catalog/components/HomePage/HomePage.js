@@ -22,8 +22,8 @@ export default function HomePage (props) {
 
       <div className='homepage'>
         {/* <Header
-            brand="Material Kit React"
-            rightLinks={<HeaderLinks />}
+            // brand="Космические запуски"
+            // rightLinks={<HeaderLinks />}
             fixed
             color="transparent"
             changeColorOnScroll={{
@@ -36,10 +36,10 @@ export default function HomePage (props) {
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
-                <h1 className={classes.title}>Actual info</h1>
-                <h3 className={classes.subtitle}>
+              <h1 className={classes.title}>Космические <br /><br />запуски</h1>
+                {/* <h3 className={classes.subtitle}>
                   about space launches
-                </h3>
+                </h3> */}
               </div>
             </GridItem>
           </GridContainer>

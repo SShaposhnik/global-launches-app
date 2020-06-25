@@ -70,11 +70,9 @@ export default ({ launches }) => {
       dataSource={launchesWithTimer}
       pagination={{
         position: ['bottomCenter'],
-        showSizeChanger: false,
         defaultCurrent: 1,
-        // simple:"true",
-        showQuickJumper: false,
-        hideOnSinglePage: "true",
+        simple: "true",
+        pageSizeOptions: ['10', '50', '100'],
       }}
       // size="small"
       columns={columns}

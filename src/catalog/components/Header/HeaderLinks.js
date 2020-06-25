@@ -12,7 +12,8 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Route, NavLink } from "react-router-dom"
 // @material-ui/icons
-import { Apps, CloudDownload } from '@material-ui/icons';
+import { Apps, StorageRounded, EqualizerRounded } from '@material-ui/icons';
+import {RocketOutlined } from '@ant-design/icons';
 import MapLaunches from '../LaunhcesTable/LaunchesTables'
 
 // core components
@@ -37,7 +38,7 @@ export default function HeaderLinks(props) {
           to="/"
           className={classes.navLink}
         >
-          <CloudDownload className={classes.icons} /> Вариант 1
+          <StorageRounded className={classes.icons} /> Запуски
         </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -45,7 +46,7 @@ export default function HeaderLinks(props) {
           to="/launches"
           className={classes.navLink}
         >
-          <CloudDownload className={classes.icons} /> Вариант 2
+          <EqualizerRounded className={classes.icons} /> Статистика
         </NavLink>
       </ListItem>
       <Route exact path='/launches' component={MapLaunches} /> 

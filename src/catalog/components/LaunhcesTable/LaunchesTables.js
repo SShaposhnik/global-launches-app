@@ -111,11 +111,11 @@ export default class LaunchesTables extends Component {
   }
 
   componentDidMount() {
-    // this.fetchAnnounced(URL_FOR_ANNOUNCED)
+    this.fetchAnnounced(URL_FOR_ANNOUNCED)
     this.fetchScheduled(URL_FOR_SCHEDULED_LAUNCHES)
     this.fetchFinished(URLForFinishedLaunch)
-    this.fethData(URL_FOR_ANNOUNCED, 'AnnouncedData')
-    this.fetchRosCosData(ROSCOSMOS_API)
+    // this.fethData(URL_FOR_ANNOUNCED, 'AnnouncedData')
+    // this.fetchRosCosData(ROSCOSMOS_API)
   }
 
 
@@ -188,19 +188,22 @@ export default class LaunchesTables extends Component {
 
   render() {
     const { AnnouncedData, ScheduledData, FinishedData, loading, dataArrayForMarkers, testArr, roscosmosData } = this.state
-    console.log(FinishedData);
     return (
       <div  >
-        {ScheduledData && FinishedData && roscosmosData
+        {ScheduledData && FinishedData
           ?
           <div>
             <br />
-
-
             {AnnouncedData
               ? <div>
                   <Divider >
-                    <h1 >Объявленные запуски</h1></Divider>
+                    <h1 style={{
+                textAlign: 'center',
+                fontSize: "4.2rem",
+                fontWeight: "600",
+                display: "inline-block",
+                position: "relative",
+              }}>Объявленные запуски</h1></Divider>
                   <AnnouncedTable launches={AnnouncedData.launches} whoseData={'launchLibrary'}/>
                 </div>
               : <Alert
@@ -211,9 +214,9 @@ export default class LaunchesTables extends Component {
                   showIcon
                 />
             }
-
-
-            <br /><br />
+            <br />
+            <br />
+            <br />
             <Divider>
               <h1 style={{
                 textAlign: 'center',
@@ -223,8 +226,10 @@ export default class LaunchesTables extends Component {
                 position: "relative",
               }}
               >Запланированные запуски</h1></Divider>
-            <ScheduledTable launches={ScheduledData.launches} whoseData={'launchLibrary'}/>
-
+                <ScheduledTable launches={ScheduledData.launches} whoseData={'launchLibrary'}/>
+              <br />
+              <br />
+              <br />
             <Divider>
               <h1 style={{
                 textAlign: 'center',
@@ -253,7 +258,7 @@ export default class LaunchesTables extends Component {
 
               <FinishedTable launches={FinishedData.launches} loading={loading} whoseData={'launchLibrary'}/>
 
-
+              <br />
               <Divider>
               <h1 style={{
                 textAlign: 'center',
@@ -263,7 +268,7 @@ export default class LaunchesTables extends Component {
                 position: "relative",
               }}>Запуски Роскосмоса</h1></Divider>
 
-              <FinishedTable launches={roscosmosData} loading={loading} whoseData={'roscosmosAPI'}/>
+              <FinishedTable launches={roscosmosData} whoseData={'roscosmosAPI'}/>
 
 
             </div>

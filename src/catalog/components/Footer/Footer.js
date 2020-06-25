@@ -35,14 +35,14 @@ export default function Footer(props) {
               <a href="https://github.com/SShaposhnik/global-launches-app" target="_blank"> Github</a>
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
+            {/* <ListItem className={classes.inlineBlock}>
               <a
                 className={classes.block}
                 target="_blank"
               >
                 About us
               </a>
-            </ListItem>
+            </ListItem> */}
 
           </List>
         </div>

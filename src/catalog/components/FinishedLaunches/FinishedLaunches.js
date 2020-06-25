@@ -11,6 +11,7 @@ import MapChart from '../MapChart/MapChart'
 
 import { usaFlag, chinaFlag, franceFlag, indiaFlag, iranFlag, japanFlag, kazakhstanFlag, newzealandFlag, russiaFlag, ukFlag } from '../../../assets/images/index'
 import agencies from '../../agency.json'
+import launches_roscos from '../../roscomosAPI.json'
 import '../../css/index.css'
 
 moment.locale()
@@ -52,6 +53,7 @@ const RoscosmosAPI = {
   "Франция": "GUF",
 
 }
+
 
 let listIDandCountryCode = {}
 let count = 0
@@ -158,9 +160,22 @@ class FinishedTable extends Component {
     let oldLaunch = []
     switch (this.props.whoseData) {
       case 'launchLibrary':
+        oldLaunch = []
         oldLaunch = this.props.launches.map(el => ({
           key: el.id,
-          RocketAndMissionName: <span><img src={COUNTRY_FLAG[listIDandCountryCode[el.lsp]]} style={{ width: '10%', marginRight: '10px' }} /> <a>{el.name}</a></span>,
+          RocketAndMissionName: <span>
+                                  <img
+                                  //   src={el.name.split(' ')[0] == 'Soyuz'
+                                  //         ? COUNTRY_FLAG['RUS']
+                                  //         : COUNTRY_FLAG[listIDandCountryCode[el.lsp]]
+                                  // }
+                                  src = {
+                                    COUNTRY_FLAG[listIDandCountryCode[el.lsp]]
+                                  }
+                                    style={{ width: '10%', marginRight: '10px' }}
+                                  />
+                                  <a>{el.name}</a>
+                                </span>,
           name: el.name,
           rocket: el.rocket.name,
           net: <Tooltip title={
@@ -188,7 +203,8 @@ class FinishedTable extends Component {
         break;
 
         case 'roscosmosAPI':
-          oldLaunch = this.props.launches.map(el => ({
+          oldLaunch = []
+          oldLaunch = launches_roscos.map(el => ({
             name: el.name,
             RocketAndMissionName: <span><img src={COUNTRY_FLAG['RUS']} style={{ width: '10%', marginRight: '10px' }} /> <a>{el.name}</a></span>,
             net: <Tooltip title={
@@ -205,9 +221,26 @@ class FinishedTable extends Component {
           }))
           break;
     }
-
+    
+    // oldLaunch = {
+    //   name:
+    //   RocketAndMissionName:
+    //   net: 
+    //   statusText:
+    //   location:
+    //   coordinates: ,
+    //   countryCode:
+    // }
     // переверачиваем дату, не особо важно. Влияет только на вывод
     oldLaunch.reverse()
+// const dataSource = {
+//   RocketAndMissionName: 'Союз МС-07’
+//   net: '17.12.2017, 3:21 UTC'
+//   statusText: 'Успешно’
+//   location: 'Байконур’,
+//   coordinates: ['63.34', '45.92'],
+//   countryCode: 'RUS’,
+// }
 
     const columns = [
       {
@@ -304,7 +337,6 @@ class FinishedTable extends Component {
         onFilter: (value, record) => { return record.countryCode.indexOf(value) === 0 },
       },
     ]
-
     return (
       <div >
 
