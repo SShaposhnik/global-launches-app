@@ -56,14 +56,14 @@ const columns = [
 
 export default ({ launches }) => {
   const launchesWithTimer = launches.map(el => ({
-    RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{width: '9%', marginRight: '10px'}}/> {el.name}</span>,
+    RocketAndMissionName: <span><img src={COUNTRY_FLAG[el.pad.location.country_code]} style={{width: '9%', marginRight: '10px'}}/> {el.name}</span>,
     location: <div>
-      {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
-      {el.location.name.split(',')[0]}
+      {el.pad.name}<br />
+      {el.pad.location.name}
     </div>,
     net: moment(el.net).locale('ru').format('MMMM YYYY'),
     status: launchStatus[el.status],
-    pads: el.location.pads.map(els => (els.name)),
+    pads: el.pad.name,
   }))
   return (
     <Table

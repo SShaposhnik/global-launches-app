@@ -21,13 +21,15 @@ const { RangePicker } = DatePicker
 const THIS_YEAR = moment().format('YYYY')
 
 // следующие запуски с временем и датой
-export const URL_FOR_ANNOUNCED = 'https://launchlibrary.net/1.4/launch/next/1000?status=1'
+export const URL_FOR_ANNOUNCED = 'https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?status=1&is_crewed=false&include_suborbital=true&related=false&hide_recent_previous=false'
 
 // следующие запуски с датой(без времени)
-export const URL_FOR_SCHEDULED_LAUNCHES = 'https://launchlibrary.net/1.4/launch/next/1000?status=2'
+export const URL_FOR_SCHEDULED_LAUNCHES = 'https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?status=2&is_crewed=false&include_suborbital=true&related=false&hide_recent_previous=false'
 
 // старые запуски
-export let URLForFinishedLaunch = 'https://launchlibrary.net/1.4/launch?startdate=' + moment(THIS_YEAR).format('YYYY-MM-DD') + '&enddate=' + moment().format('YYYY-MM-DD') + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,lsp'
+export let URLForFinishedLaunch = 'https://lldev.thespacedevs.com/2.2.0/launch/previous?window_start__lt=' + moment(THIS_YEAR).format('YYYY-MM-DD') + '&window_end__lt=' + moment().format('YYYY-MM-DD') + '&limit=' + LIMIT + '&fields=name,net,location,status,rocket,lsp'
+
+console.log('URLForFinishedLaunch', URLForFinishedLaunch);
 
 // roscosmosApi
 export const ROSCOSMOS_API= 'http://roscosmos.xyz/api/launches/?format=json'
@@ -70,13 +72,8 @@ export default class LaunchesTables extends Component {
 
   fetchAnnounced(url) {
     fetch(url)
-      .then((res) => {
-        if (res.ok) {
-          fetch(url)
-            .then(res => res.json())
-            .then(res => this.setState({ AnnouncedData: res }))
-        }
-      })
+    .then(res => res.json())
+    .then(res => this.setState({ AnnouncedData: res }))
   }
 
   fetchScheduled(url) {
@@ -114,8 +111,6 @@ export default class LaunchesTables extends Component {
     this.fetchAnnounced(URL_FOR_ANNOUNCED)
     this.fetchScheduled(URL_FOR_SCHEDULED_LAUNCHES)
     this.fetchFinished(URLForFinishedLaunch)
-    // this.fethData(URL_FOR_ANNOUNCED, 'AnnouncedData')
-    // this.fetchRosCosData(ROSCOSMOS_API)
   }
 
 
@@ -188,6 +183,8 @@ export default class LaunchesTables extends Component {
 
   render() {
     const { AnnouncedData, ScheduledData, FinishedData, loading, dataArrayForMarkers, testArr, roscosmosData } = this.state
+
+    console.log('FinishedData', FinishedData?.results);
     return (
       <div  >
         {ScheduledData && FinishedData
@@ -204,7 +201,7 @@ export default class LaunchesTables extends Component {
                 display: "inline-block",
                 position: "relative",
               }}>Объявленные запуски</h1></Divider>
-                  <AnnouncedTable launches={AnnouncedData.launches} whoseData={'launchLibrary'}/>
+                  <AnnouncedTable launches={AnnouncedData.results} whoseData={'launchLibrary'}/>
                 </div>
               : <Alert
                   className='alert-if-no-launch'
@@ -226,7 +223,7 @@ export default class LaunchesTables extends Component {
                 position: "relative",
               }}
               >Запланированные запуски</h1></Divider>
-                <ScheduledTable launches={ScheduledData.launches} whoseData={'launchLibrary'}/>
+                <ScheduledTable launches={ScheduledData.results} whoseData={'launchLibrary'}/>
               <br />
               <br />
               <br />
@@ -256,7 +253,7 @@ export default class LaunchesTables extends Component {
                 <InfoCircleOutlined style={{ marginLeft: '10px' }} />
               </Tooltip>
 
-              <FinishedTable launches={FinishedData.launches} loading={loading} whoseData={'launchLibrary'}/>
+              <FinishedTable launches={FinishedData.results} loading={loading} whoseData={'launchLibrary'}/>
 
               <br />
               <Divider>

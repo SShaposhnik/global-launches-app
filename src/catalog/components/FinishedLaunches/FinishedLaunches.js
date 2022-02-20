@@ -165,19 +165,15 @@ class FinishedTable extends Component {
           key: el.id,
           RocketAndMissionName: <span>
                                   <img
-                                  //   src={el.name.split(' ')[0] == 'Soyuz'
-                                  //         ? COUNTRY_FLAG['RUS']
-                                  //         : COUNTRY_FLAG[listIDandCountryCode[el.lsp]]
-                                  // }
                                   src = {
-                                    COUNTRY_FLAG[listIDandCountryCode[el.lsp]]
+                                    COUNTRY_FLAG[el.pad.location.country_code]
                                   }
                                     style={{ width: '10%', marginRight: '10px' }}
                                   />
                                   <a>{el.name}</a>
                                 </span>,
           name: el.name,
-          rocket: el.rocket.name,
+          rocket: el.rocket.configuration.name,
           net: <Tooltip title={
             <div>
               <p style={{ textAlign: 'center' }}>Локальное время</p>
@@ -185,20 +181,20 @@ class FinishedTable extends Component {
             </div>}>
             {moment(el.net).utc(0).locale('ru').format('LLL z')}
           </Tooltip>,
-          statusText: LAUNCH_STATUS[el.status],
-          statusNumber: el.status,
+          statusText: LAUNCH_STATUS[el.status.id],
+          statusNumber: el.status.id,
           location: <div>
-            {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
-            {el.location.name.split(',')[0]}
+            {el.pad.name}<br />
+            {el.pad.location.name}
           </div>,
-          locationWithoutPads: el.location.name,
-          spaceortName: el.location.name.split(',')[0],
-          longitude: el.location.pads.map(els => (els.longitude)),
-          latitude: el.location.pads.map(els => (els.latitude)),
-          PadsMapURL: el.location.pads.map(url => (url.mapURL)),
-          PadsWikiURL: el.location.pads.map(url => (url.wikiURL)),
-          RocketWikiURL: el.rocket.wikiURL,
-          countryCode: el.location.countryCode,
+          locationWithoutPads: el.pad.location.name,
+          spaceortName: el.pad.location.name,
+          longitude: el.pad.longitude,
+          latitude: el.pad.latitude,
+          PadsMapURL: el.pad.map_url,
+          PadsWikiURL: el.pad.wiki_url,
+          RocketWikiURL: '',
+          countryCode: el.pad.location.country_code,
         }))
         break;
 
@@ -220,27 +216,12 @@ class FinishedTable extends Component {
             countryCode: RoscosmosAPI[el.launch_pad.location.split(',')[0]]
           }))
           break;
+        default:
+          break;
     }
-    
-    // oldLaunch = {
-    //   name:
-    //   RocketAndMissionName:
-    //   net: 
-    //   statusText:
-    //   location:
-    //   coordinates: ,
-    //   countryCode:
-    // }
+
     // переверачиваем дату, не особо важно. Влияет только на вывод
-    oldLaunch.reverse()
-// const dataSource = {
-//   RocketAndMissionName: 'Союз МС-07’
-//   net: '17.12.2017, 3:21 UTC'
-//   statusText: 'Успешно’
-//   location: 'Байконур’,
-//   coordinates: ['63.34', '45.92'],
-//   countryCode: 'RUS’,
-// }
+    // oldLaunch.reverse()
 
     const columns = [
       {

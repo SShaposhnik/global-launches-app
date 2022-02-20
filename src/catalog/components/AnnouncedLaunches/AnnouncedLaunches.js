@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Table, Tooltip, Modal, Button, Space, notification } from 'antd'
+import { Table, Tooltip } from 'antd'
 import moment from 'moment'
 import 'moment/locale/ru'
 
@@ -70,11 +70,11 @@ export default ({ launches,  whoseData}) => {
     case 'launchLibrary':
       launchesWithTimer = launches.map(el => ({
         location: <div>
-                    {el.location.pads.map(els => (els.name.split(',')[0]))}<br />
-                    {el.location.name.split(',')[0]}
+                    {el.pad.name}<br />
+                    {el.pad.location.name}
                   </div>,
         RocketAndMissionName: <span>
-                                <img src={COUNTRY_FLAG[el.lsp.countryCode]} style={{ width: '10%', marginRight: '10px' }} />
+                                <img src={COUNTRY_FLAG[el.pad.location.country_code]} style={{ width: '10%', marginRight: '10px' }} />
                                 {el.name}
                               </span>,
         net: <Tooltip
@@ -90,7 +90,8 @@ export default ({ launches,  whoseData}) => {
         timer: <Timer timeTillLaunch={el.net} />
       }))
         break;
-      case 'another API name': // some code
+      default:
+        break; // some code
   }
   return (
     <div>
